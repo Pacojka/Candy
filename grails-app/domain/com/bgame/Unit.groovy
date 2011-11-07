@@ -100,8 +100,12 @@ class Unit {
         if (this.maxhp != maxihp)this.maxhp = maxihp;
         if (this.curhp > this.maxhp) this.curhp = this.maxhp
         if (this.curhp < 0) this.curhp = 0
-
-        this.curhppr = this.curhp/(this.maxhp /100)
+        if (this.curhp <= 0){
+            this.curhppr = 0
+        }
+        else{
+            this.curhppr = this.curhp/(this.maxhp /100)
+        }
     }
     String toString(){
         return "${name}"

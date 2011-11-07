@@ -128,8 +128,8 @@ class UnitController {
                                 result +=  userteam[i].name +" gets "+expgain+" Exp on Magie. <br>"
                             }
                             t2exppool -= expgain
-                            userteam[i].recalcUnit()
-                            userteam[i].save(flush: true)
+                            //userteam[i].recalcUnit()
+                            //userteam[i].save(flush: true)
                         }
 
                         if (enemyteam[rand].curhp < 1){
@@ -160,7 +160,7 @@ class UnitController {
                         }else{
                             userteam[rand].curhp -= enemyteam[i].str
                         }
-                        userteam[rand].save(flush: true)
+                        //userteam[rand].save(flush: true)
 
 
 
@@ -191,8 +191,8 @@ class UnitController {
                                 result +=  enemyteam[i].name +" gets "+expgain+" Exp on Magie. <br>"
                             }
                             t1exppool -= expgain
-                            enemyteam[i].recalcUnit()
-                            enemyteam[i].save(flush: true)
+                            //enemyteam[i].recalcUnit()
+                            //enemyteam[i].save(flush: true)
                             //System.out.println(result+"\n\n\n\nDes noch ok\n\n\n")
                         }
 
@@ -229,8 +229,8 @@ class UnitController {
                         it.magexp += expgain
                     }
 
-                    it.recalcUnit()
-                    it.save(flush: true)
+                    //it.recalcUnit()
+                    //it.save(flush: true)
                 }
             }
             result += "All alive Units from "+ userteam[0].user.username+ " get "+expgain+"Exp"
@@ -247,13 +247,21 @@ class UnitController {
                         it.magexp += expgain
                     }
 
-                    it.recalcUnit()
-                    it.save(flush: true)
+                    //it.recalcUnit()
+                    //it.save(flush: true)
                 }
             }
             result += "All alive Units from "+ enemyteam[0].user.username+ " get "+expgain+"Exp"
         }else{
             result += "something is wrong here: t1usercount:"+t1count+" t2enemycount:"+t2count
+        }
+        enemyteam.each{
+            it.recalcUnit()
+            it.save()
+        }
+        userteam.each{
+            it.recalcUnit()
+            it.save()
         }
 
         //System.out.println(result+"\n\n\n")
