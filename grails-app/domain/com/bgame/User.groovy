@@ -11,7 +11,7 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
         int unitcount = 0
-        static hasMany = [useritem:UserItem]
+        static hasMany = [useritem:UserItem,units:Unit]
 
         String toString(){
             return "${username}"
