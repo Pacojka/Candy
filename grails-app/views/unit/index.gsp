@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Welcome to Xiconis da Game</title>
+    <title>Welcome to Xiconis da Game CheckCheck</title>
     <meta name="layout" content="main" />
 
   </head>
