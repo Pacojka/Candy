@@ -33,6 +33,12 @@ class UnitController {
         def usrunits = getUserUnits(lookupUser())
         healteam(usrunits)
     }
+    
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def unitview = {
+        def thisunit = getUserUnit(params.unitid)
+        [unit: thisunit]
+    }
 
     def healteam (userteam) {
         userteam.each {it.curhp = it.maxhp
@@ -412,6 +418,20 @@ class UnitController {
         //System.out.println("ergebnis ende")
         units
     }
+    
+    
+    
+    
+    
+    
+      private getUserUnit(name){
+        def curunit = Unit.findById(name) 
+        curunit   
+    }
+    
+    
+    
+    
 
     private getEnemyUsers(User usr){
         //System.out.println("\n\n\n1geht")

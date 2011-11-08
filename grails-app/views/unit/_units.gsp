@@ -1,6 +1,7 @@
 
 <div id="tablehead">
-  <h2>${unit.name}</h2>
+  <h2><td><g:link action="unitview" params="[unitid:unit.id]">${unit.name}</g:link></td></h2>
+  
 </div>
 
 <div id="hpbalken">
@@ -10,6 +11,20 @@
 <div id="hp">
   ${unit.curhp}/${unit.maxhp}
  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div id="table">
