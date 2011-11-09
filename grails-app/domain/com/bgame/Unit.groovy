@@ -5,8 +5,8 @@ class Unit {
     User user
     boolean main = false
     MyEnum wtyp = "nah"
-    //UserItem weapon
-    //UserItem armor
+    Usritm weapon = null
+    Usritm armor = null
     int ferexp = 150
     int nahexp = 150
     int magexp = 150
@@ -33,6 +33,8 @@ class Unit {
     static belongsTo = User
     static constraints = {
         name blank: false, unique: true
+        weapon nullable:true
+        armor nullable:true
     }
 
 
