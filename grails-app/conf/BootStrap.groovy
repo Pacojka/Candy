@@ -17,12 +17,18 @@ class BootStrap {
         testUser2.save(flush: true)
         testUser2.units.each { it.recalcUnit() }
 
-		def item1 = new Item(name: 'Stumpfer Dolch',item_type: 'nah', dmgmin: 3,dmgmax:5,defens:0,gold:5)
-		item1.save()
-		
+        def item1 = new Item(itemname: 'Stumpfer Dolch',item_type: 'nah', dmgmin: 3,dmgmax:5,defens:0,gold:5)
+	item1.save()
+        def item2 = new Item(itemname: 'Spielzeug bogen',item_type: 'fer', dmgmin: 2,dmgmax:6,defens:0,gold:5)
+	item2.save()
+        def i2 = Item.findByItemname('Spielzeug bogen')
         def testUser3 = new User(username: 'paco', enabled: true, password: 'p')
         testUser3.save(flush: true)
-        .save(flush: true)
+        def u3 = User.findByUsername('paco')
+
+        def ua1 = new com.bgame.Usritm()
+        ua1.link(i2,u3).save()
+
         testUser3.addToUnits(new Unit(name: 'Paco', main: true,ferexp: 12000, nahexp: 800, magexp : 150,wtyp: 'fer'))
         testUser3.addToUnits(new Unit(name: 'Cora', main: false,ferexp: 150, nahexp: 150, magexp : 13000,wtyp: 'mag'))
         testUser3.unitcount = 2

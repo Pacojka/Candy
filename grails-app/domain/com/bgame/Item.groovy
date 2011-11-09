@@ -1,17 +1,23 @@
 package com.bgame
 
 class Item {
-    String item_name
-    ItemEnum item_type
-    int dmgmin
-    int dmgmax
-    int defens
-    int gold
-    static hasMany = [useritem:UserItem]
+    String itemname = "boooom"
+    //ItemEnum item_type = "nah"
+    int dmgmin = 1
+    int dmgmax = 2
+    int defens = 0
+    int gold = 3
+    static hasMany = [useritems:Usritm]
 
+    String toString(){
+        return "${itemname}"
+    }
     static constraints = {
     }
-        public enum ItemEnum {
+
+
+
+    public enum ItemEnum {
 
         nah("Nahkampf"),
         fer("Fernkampf"),
@@ -24,4 +30,7 @@ class Item {
         String toString() { value }
         String getKey() { name() }
     }
+
+
+
 }
