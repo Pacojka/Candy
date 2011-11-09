@@ -2,7 +2,7 @@ package com.bgame
 
 class Item {
     String itemname = "boooom"
-    //ItemEnum item_type = "nah"
+    ItemEnum item_type = "nah"
     int dmgmin = 1
     int dmgmax = 2
     int defens = 0

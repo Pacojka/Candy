@@ -415,35 +415,15 @@ class UnitController {
         items
     }
     private getUserUnits(User usr){
-        def units = Unit.withCriteria {
-            user {
-                eq 'username', usr.username
-            }
-            //maxResults 10
-            //order 'asc'
-        }
-        // def usera = User.findByUsername('xian')
-        //System.out.println(usera.username)
-        //units.each { println it.unitname }
-        //Userunit.each {System.out.println(it.gold) }
-        //System.out.println("ergebnis ende")
+        def units = usr.units.collect{it}
         units
     }
-    
-    
-    
-    
-    
     
       private getUserUnit(name){
         def curunit = Unit.findById(name) 
         curunit   
     }
     
-    
-    
-    
-
     private getEnemyUsers(User usr){
         //System.out.println("\n\n\n1geht")
         def enemys = User.withCriteria {
