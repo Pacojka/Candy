@@ -40,6 +40,14 @@ class UnitController {
         [unit: thisunit]
     }
 
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def items = {
+        def hisitems = getUserItems(lookupUser())
+        [items: hisitems]
+    }
+
+
+
     def healteam (userteam) {
         userteam.each {it.curhp = it.maxhp
         it.recalcUnit()}
@@ -402,7 +410,10 @@ class UnitController {
             redirect(action: "list")
         }
     }
-
+    private getUserItems(User usr){
+        def items = usr.useritems.collect{it.item}
+        items
+    }
     private getUserUnits(User usr){
         def units = Unit.withCriteria {
             user {
