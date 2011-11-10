@@ -3,7 +3,8 @@ package com.bgame
 class Usritm {
     User user = null
     Item item = null
-    Unit unit = null
+    int anz = 0
+    int ausger = 0
 
     //static belongsTo = [user:User,item:Item]
     String toString(){
@@ -19,7 +20,6 @@ class Usritm {
     }
     
     static constraints = {
-        unit nullable:true
     }
 
     static Usritm link(item, user) {
@@ -29,8 +29,10 @@ class Usritm {
             u = new Usritm()
             item?.addToUseritems(u)
             user?.addToUseritems(u)
+            u.anz = 1
             u.save()
         }
+        else u.anz ++
         return u
     }
 
@@ -38,9 +40,12 @@ class Usritm {
         def u = Usritm.findByItemAndUser(item, user)
         if (u)
         {
-            item?.removeFromUseritems(u)
-            user?.removeFromUseritems(u)
-            u.delete()
+            if(u.anz <= 1){
+                item?.removeFromUseritems(u)
+                user?.removeFromUseritems(u)
+                u.delete()
+            }
+            else u.anz--
         }
     }
 

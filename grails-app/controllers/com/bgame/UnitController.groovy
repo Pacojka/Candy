@@ -50,7 +50,7 @@ class UnitController {
 
     def healteam (userteam) {
         userteam.each {it.curhp = it.maxhp
-        it.recalcUnit()}
+            it.recalcUnit()}
 
 
     }
@@ -70,9 +70,7 @@ class UnitController {
         def t2exppool = 1
         def t1hppool = 1
         def t2hppool = 1
-        // nicht von curr hp abhängig machen von max und dann um curr verkleinern!
-        // MACHEN!!!!!!
-        // nicht von curr hp abhängig machen von max und dann um curr verkleinern!
+
         userteam.each {
             if (it.curhp > 0){
                 t1exppool += (int)(it.exp/(it.maxhp/it.curhp))
@@ -83,32 +81,25 @@ class UnitController {
 
         enemyteam.each {
             if (it.curhp > 0){
-               t2exppool += (int)(it.exp/(it.maxhp/it.curhp))
+                t2exppool += (int)(it.exp/(it.maxhp/it.curhp))
                 t2hppool += it.curhp
             }
         }
         def t2dpexp = (int)(t2hppool/t2exppool)
-
-        //System.out.println("\nt1exppool: "+t1exppool+"\nt1hppool: "+t1hppool+"\n 1exp fuer"+(int)(t1hppool/t1exppool)+" dmg")
-        //System.out.println("\nt2exppool: "+t2exppool+"\nt2hppool: "+t2hppool+"\n 1exp fuer"+(int)(t2hppool/t2exppool)+" dmg")
         while (t1count > 0 && t2count > 0){
             roundcount++
             result += "Round."+roundcount+" begins:<br>"
 
             for (int i = 0; i < unitcount;++i){
-                //  System.out.println(roundcount+".Runde "+i+"ter durchgang in For Schleife")
                 def rand = -1
                 if (userteam.size() >= i+1 && t2count > 0 && t1count > 0){
                     if(userteam[i].curhp >0){
-                        //System.out.println(roundcount+".Runde "+i+"ter durchgang in For Schleife. t1count:"+t1count+" t2count:"+t2count)
                         result += userteam[i].name +"["+userteam[i].curhp+"/"+userteam[i].maxhp+ "] attaks enemy "
 
                         rand = random.nextInt(enemyteam.size())
                         while(enemyteam[rand].curhp <=0){
                             rand = random.nextInt(enemyteam.size())
-                            //System.out.println(rand+" in userteam mit "+ userteam.size()+" leuten im team")
                         }
-
                         result += enemyteam[rand].name +"["+enemyteam[rand].curhp+"/"+enemyteam[rand].maxhp+ "] dealing " + userteam[i].str +" dmg.<br>"
                         if(enemyteam[rand].curhp < userteam[i].str){
                             enemyteam[rand].curhp = 0
@@ -118,26 +109,20 @@ class UnitController {
                         enemyteam[rand].save(flush: true)
 
                         if (t2exppool > 0){
-                            //System.out.println("drinne")
                             def expgain = 0
-                            //hier anschauen! und das ganze für team2 einfügen :D
                             if (t2dpexp <= userteam[i].str){
                                 expgain = (int)(userteam[i].str/t2dpexp)
                             }
                             else{
                                 expgain = 1
                             }
-                            //System.out.println("davor wtyp: "+userteam[i].wtyp)
                             if(userteam[i].wtyp.value == "Nahkampf"){
-                                //System.out.println("nahdrinne")
                                 userteam[i].nahexp += expgain
                                 result +=  userteam[i].name +" gets "+expgain+" Exp on Nahkampf. <br>"
                             }else if(userteam[i].wtyp.value == "Fernkampf"){
-                                //System.out.println("ferdrinne")
                                 userteam[i].ferexp += expgain
                                 result +=  userteam[i].name +" gets "+expgain+" Exp on Fernkampf. <br>"
                             }else if(userteam[i].wtyp.value == "Magie"){
-                                //System.out.println("magdrinne")
                                 userteam[i].magexp += expgain
                                 result +=  userteam[i].name +" gets "+expgain+" Exp on Magie. <br>"
                             }
@@ -152,22 +137,16 @@ class UnitController {
                         }
                         else{
                             result += "<br><br>"
-                            //  result += enemyteam[rand].name +"["+enemyteam[rand].curhp+"/"+enemyteam[rand].maxhp+ "] survived.<br><br>"
                         }
                     }
                 }
-
                 if (enemyteam.size() >= i+1 && t2count > 0 && t1count > 0){
                     if(enemyteam[i].curhp >0){
                         result += "Enemy " + enemyteam[i].name +"["+enemyteam[i].curhp+"/"+enemyteam[i].maxhp+ "] attaks "
-
                         rand = random.nextInt(userteam.size())
                         while(userteam[rand].curhp <=0){
                             rand = random.nextInt(userteam.size())
-                            //System.out.println(rand+" in userteam mit "+ userteam.size()+" leuten im team")
                         }
-
-
                         result += userteam[rand].name +"["+userteam[rand].curhp+"/"+userteam[rand].maxhp+ "] dealing " + enemyteam[i].str +" dmg.<br>"
                         if(userteam[rand].curhp < enemyteam[i].str){
                             userteam[rand].curhp = 0
@@ -175,61 +154,39 @@ class UnitController {
                             userteam[rand].curhp -= enemyteam[i].str
                         }
                         //userteam[rand].save(flush: true)
-
-
-
-
-
                         if (t1exppool > 0){
-                            //System.out.println("drinne")
                             def expgain = 0
-                            //hier anschauen! und das ganze für team2 einfügen :D
                             if (t1dpexp <= enemyteam[i].str){
                                 expgain = (int)(enemyteam[i].str/t1dpexp)
                             }
                             else{
                                 expgain = 1
                             }
-                            //System.out.println("davor wtyp: "+userteam[i].wtyp)
                             if(enemyteam[i].wtyp.value == "Nahkampf"){
-                                //System.out.println("nahdrinne")
                                 enemyteam[i].nahexp += expgain
                                 result +=  enemyteam[i].name +" gets "+expgain+" Exp on Nahkampf. <br>"
                             }else if(enemyteam[i].wtyp.value == "Fernkampf"){
-                                //System.out.println("ferdrinne")
                                 enemyteam[i].ferexp += expgain
                                 result +=  enemyteam[i].name +" gets "+expgain+" Exp on Fernkampf. <br>"
                             }else if(enemyteam[i].wtyp.value == "Magie"){
-                                //System.out.println("magdrinne")
                                 enemyteam[i].magexp += expgain
                                 result +=  enemyteam[i].name +" gets "+expgain+" Exp on Magie. <br>"
                             }
                             t1exppool -= expgain
                             //enemyteam[i].recalcUnit()
                             //enemyteam[i].save(flush: true)
-                            //System.out.println(result+"\n\n\n\nDes noch ok\n\n\n")
                         }
-
-
-
-
-
                         if (userteam[rand].curhp < 1){
                             result += userteam[rand].name +"["+userteam[rand].curhp+"/"+userteam[rand].maxhp+ "] died.<br><br>"
                             t1count--
                         }
                         else{
                             result += "<br><br>"
-                            //     result += userteam[rand].name +"["+userteam[rand].curhp+"/"+userteam[rand].maxhp+ "] survived.<br><br>"
                         }
                     }
                 }
-                //System.out.println("InForRound."+roundcount+" endss: t1count:"+t1count+" t2count:"+t2count+" unitcount immer"+unitcount+"\n\n")
             }
-            //System.out.println("NachForRound."+roundcount+" endss: t1count:"+t1count+" t2count:"+t2count+" unitcount immer"+unitcount+"\n\n")
-            //System.out.println(result)
         }
-        //System.out.println(result+"\n\n\n\nJOJOJOJOJOJOJOJO\n\n\n")
         if (t2count < 1){
             result += "Attacker "+ userteam[0].user.username+ " wins.<br>"
             def expgain =(int)(t2exppool/t1count)
@@ -242,9 +199,7 @@ class UnitController {
                     }else if(it.wtyp.value == "Magie"){
                         it.magexp += expgain
                     }
-
                     //it.recalcUnit()
-                    //it.save(flush: true)
                 }
             }
             result += "All alive Units from "+ userteam[0].user.username+ " get "+expgain+"Exp"
@@ -260,9 +215,7 @@ class UnitController {
                     }else if(it.wtyp.value == "Magie"){
                         it.magexp += expgain
                     }
-
                     //it.recalcUnit()
-                    //it.save(flush: true)
                 }
             }
             result += "All alive Units from "+ enemyteam[0].user.username+ " get "+expgain+"Exp"
@@ -277,8 +230,6 @@ class UnitController {
             it.recalcUnit()
             it.save()
         }
-
-        //System.out.println(result+"\n\n\n")
         return result
     }
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -410,6 +361,7 @@ class UnitController {
             redirect(action: "list")
         }
     }
+
     private getUserItems(User usr){
         def items = usr.useritems.collect{it.item}
         items
@@ -419,7 +371,7 @@ class UnitController {
         units
     }
     
-      private getUserUnit(name){
+    private getUserUnit(name){
         def curunit = Unit.findById(name) 
         curunit   
     }
@@ -433,11 +385,6 @@ class UnitController {
             //maxResults 10
             //order 'asc'
         }
-        // def usera = User.findByUsername('xian')
-        //System.out.println(usera.username)
-        //units.each { println it.unitname }
-        //Userunit.each {System.out.println(it.gold) }
-        //System.out.println("ergebnis ende")
         enemys
     }
 

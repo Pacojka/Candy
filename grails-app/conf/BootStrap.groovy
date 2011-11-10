@@ -33,8 +33,9 @@ class BootStrap {
         ua11.link(i1,xian).save()
         def ua12 = new com.bgame.Usritm()
         ua12.link(i3,xian).save()
+        ua12.ausger ++
     /*Units*/
-        testUser2.addToUnits(new Unit(name: 'Xian', main: true,ferexp: 150, nahexp: 9000, magexp : 150,wtyp: 'nah'))
+        testUser2.addToUnits(new Unit(name: 'Xian', main: true, weapon:i3,ferexp: 150, nahexp: 9000, magexp : 150,wtyp: 'nah'))
         testUser2.addToUnits(new Unit(name: 'mongo', main: false,ferexp: 6523, nahexp: 150, magexp : 150,wtyp: 'fer'))
         testUser2.unitcount = 2
         testUser2.save(flush: true)
@@ -49,14 +50,16 @@ class BootStrap {
     /*Items*/
         def ua21 = new com.bgame.Usritm()
         ua21.link(i1,paco).save()
-        def ua22 = new com.bgame.Usritm()
+        def ua22 = new com.bgame.Usritm()//UNITS MIT EINBEZIEHEN!!!!!
         ua22.link(i2,paco).save()
+        ua22.ausger ++
     /*Units*/
-        testUser3.addToUnits(new Unit(name: 'Paco', main: true,ferexp: 12000, nahexp: 800, magexp : 150,wtyp: 'fer'))
+        testUser3.addToUnits(new Unit(name: 'Paco', main: true, weapon:i2,ferexp: 12000, nahexp: 800, magexp : 150,wtyp: 'fer'))
         testUser3.addToUnits(new Unit(name: 'Cora', main: false,ferexp: 150, nahexp: 150, magexp : 13000,wtyp: 'mag'))
         testUser3.unitcount = 2
         testUser3.save(flush: true)
-        testUser3.units.each { it.recalcUnit() } 
+        testUser3.units.each { it.recalcUnit() }
+
 /*User Role zuweisung UNTEN!*/
 
 
@@ -69,8 +72,9 @@ class BootStrap {
         ua31.link(i1,janis).save()
         def ua32 = new com.bgame.Usritm()
         ua32.link(i4,janis).save()
+        ua32.ausger++
     /*Units*/
-        testUser4.addToUnits(new Unit(name: 'Janis', main: true,ferexp: 750, nahexp: 9000, magexp : 150,wtyp: 'nah'))
+        testUser4.addToUnits(new Unit(name: 'Janis', main: true,weapon:i4,ferexp: 750, nahexp: 9000, magexp : 150,wtyp: 'nah'))
         testUser4.addToUnits(new Unit(name: 'Jizzalot', main: false,ferexp: 8000, nahexp: 150, magexp : 150,wtyp: 'fer'))
         testUser4.unitcount = 2
         testUser4.save(flush: true)

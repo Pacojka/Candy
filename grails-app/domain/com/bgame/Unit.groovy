@@ -5,7 +5,7 @@ class Unit {
     User user
     boolean main = false
     MyEnum wtyp = "nah"
-    Usritm weapon = null
+    Item weapon = null
     Usritm armor = null
     int ferexp = 150
     int nahexp = 150
