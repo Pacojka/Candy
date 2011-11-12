@@ -5,7 +5,8 @@
   </head>
   <body>
     <div id="body1">
-      <g:render template="item" collection="${useritems}" var="useritem"/>
+      Was willste kaufen?
+      <g:render template="shopitem" collection="${items}" var="item"/>
     </div>
   </body>
 </html>

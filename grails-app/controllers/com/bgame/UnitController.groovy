@@ -21,6 +21,13 @@ class UnitController {
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def fightquestion = {
+        def usr = lookupUser()
+        def enemy = User.get(params.enemyid)
+        [user: usr,enemy: enemy ]
+    }
+
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def fight = {
         def usrunits = getUserUnits(lookupUser())
         def enemyunits = getUserUnits(User.get(params.enemyid))
@@ -28,12 +35,46 @@ class UnitController {
         [result: result]
 
     }
+        @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def sellquestion = {
+        def ui = Usritm.findById(params.usritemid)
+        [useritem: ui ]
+    }
+        @Secured(['ROLE_ADMIN','ROLE_USER'])
+        def sell = {
+        def usr = lookupUser()
+        def ui = new Usritm()
+        ui.unlink(params.usritemid,usr)
+        redirect(action: "items")
+
+    }
+
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+        def shop = {
+        def allitems = getShopItems()
+        [items: allitems ]
+
+    }
+
+        @Secured(['ROLE_ADMIN','ROLE_USER'])
+        def shopbuy = {
+        def allitems = getShopItems()
+
+        def usr = lookupUser()
+        def i = Item.findById(params.itemid)
+        def ui = new Usritm()
+        ui.link(i,usr)
+        redirect(action: "items")
+
+    }
+
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def heal = {
         def usrunits = getUserUnits(lookupUser())
         healteam(usrunits)
     }
-    
+
+
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def unitview = {
         def thisunit = getUserUnit(params.unitid)
@@ -42,8 +83,8 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def items = {
-        def hisitems = getUserItems(lookupUser())
-        [items: hisitems]
+        def hisuseritems = getUserItems(lookupUser())
+        [useritems: hisuseritems]
     }
 
 
@@ -232,12 +273,6 @@ class UnitController {
         }
         return result
     }
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
-    def fightquestion = {
-        def usr = lookupUser()
-        def enemy = User.get(params.enemyid)
-        [user: usr,enemy: enemy ]
-    }
 
     @Secured(['ROLE_ADMIN'])
     def list = {
@@ -363,9 +398,17 @@ class UnitController {
     }
 
     private getUserItems(User usr){
-        def items = usr.useritems.collect{it.item}
+        def items = usr.useritems.collect{it}
         items
     }
+
+    private getShopItems(){
+        def items = Item.withCriteria {
+            like ('itemname', '%%')
+        }
+        items
+    }
+
     private getUserUnits(User usr){
         def units = usr.units.collect{it}
         units

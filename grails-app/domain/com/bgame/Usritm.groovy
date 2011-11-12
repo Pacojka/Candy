@@ -3,8 +3,7 @@ package com.bgame
 class Usritm {
     User user = null
     Item item = null
-    int anz = 0
-    int ausger = 0
+    Unit unit = null
 
     //static belongsTo = [user:User,item:Item]
     String toString(){
@@ -20,34 +19,39 @@ class Usritm {
     }
     
     static constraints = {
+        unit(nullable: true)
     }
 
-    static Usritm link(item, user) {
-        def u = Usritm.findByItemAndUser(item, user)
-        if (!u)
-        {
-            u = new Usritm()
-            item?.addToUseritems(u)
-            user?.addToUseritems(u)
-            u.anz = 1
-            u.save()
-        }
-        else u.anz ++
+    static Usritm link(item, user) {        
+        def u = new Usritm()
+        item?.addToUseritems(u)
+        user?.addToUseritems(u)
+        u.save()
         return u
     }
-
-    static void unlink(item, user) {
-        def u = Usritm.findByItemAndUser(item, user)
+    /*
+    static void linkunit(id,unit) {
+        def u = Usritm.findByIdAndUser(id)
         if (u)
         {
-            if(u.anz <= 1){
-                item?.removeFromUseritems(u)
+                unit?.addToUseritems(u)
                 user?.removeFromUseritems(u)
+                if (u.unit != null) u.unit?.removeFromUserItem
                 u.delete()
             }
-            else u.anz--
         }
     }
+*/
+    static void unlink(id,user) {
+        def u = Usritm.findByIdAndUser(id,user)
+        if (u)
+        {
+                u.item?.removeFromUseritems(u)
+                user?.removeFromUseritems(u)
+                if (u.unit != null) u.unit?.removeFromUserItem
+                u.delete()
+            }  
+        }
 
 
 
