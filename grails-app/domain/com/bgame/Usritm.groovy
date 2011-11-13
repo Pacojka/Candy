@@ -29,29 +29,40 @@ class Usritm {
         u.save()
         return u
     }
-    /*
-    static void linkunit(id,unit) {
-        def u = Usritm.findByIdAndUser(id)
+
+    static Usritm linkunit(id,giveunit) {
+        def u = Usritm.findById(id)       
+        if (u)
+        {           
+            if (u.unit != null) {
+                u.unit?.removeFromUseritems(u)
+            }
+            giveunit?.addToUseritems(u)
+            u.save()
+        }
+        return u
+    }
+    
+
+    static void unlinkunit(id) {
+        def u = Usritm.findById(id)
         if (u)
         {
-                unit?.addToUseritems(u)
-                user?.removeFromUseritems(u)
-                if (u.unit != null) u.unit?.removeFromUserItem
-                u.delete()
-            }
+            if (u.unit != null) u.unit?.removeFromUseritems(u)
+            u.save()
         }
     }
-*/
+
     static void unlink(id,user) {
         def u = Usritm.findByIdAndUser(id,user)
         if (u)
         {
-                u.item?.removeFromUseritems(u)
-                user?.removeFromUseritems(u)
-                if (u.unit != null) u.unit?.removeFromUserItem
-                u.delete()
-            }  
+            u.item?.removeFromUseritems(u)
+            user?.removeFromUseritems(u)
+            if (u.unit != null) u.unit?.removeFromUseritems(u)
+            u.delete()
         }
+    }
 
 
 

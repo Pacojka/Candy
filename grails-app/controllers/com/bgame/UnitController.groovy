@@ -35,29 +35,36 @@ class UnitController {
         [result: result]
 
     }
-        @Secured(['ROLE_ADMIN','ROLE_USER'])
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def sellquestion = {
         def ui = Usritm.findById(params.usritemid)
         [useritem: ui ]
     }
-        @Secured(['ROLE_ADMIN','ROLE_USER'])
-        def sell = {
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def sell = {
         def usr = lookupUser()
         def ui = new Usritm()
         ui.unlink(params.usritemid,usr)
         redirect(action: "items")
 
     }
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def unequipt = {
+        def ui = new Usritm()
+        ui.unlinkunit(params.usritemid)
+        redirect(action: "items")
+
+    }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
-        def shop = {
+    def shop = {
         def allitems = getShopItems()
         [items: allitems ]
 
     }
 
-        @Secured(['ROLE_ADMIN','ROLE_USER'])
-        def shopbuy = {
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def shopbuy = {
         def allitems = getShopItems()
 
         def usr = lookupUser()
@@ -78,7 +85,8 @@ class UnitController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def unitview = {
         def thisunit = getUserUnit(params.unitid)
-        [unit: thisunit]
+        def items = thisunit.useritems.collect{it}
+        [unit: thisunit,items: items]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -399,18 +407,21 @@ class UnitController {
 
     private getUserItems(User usr){
         def items = usr.useritems.collect{it}
+        items = items.sort {it.item.itemname}
         items
     }
 
     private getShopItems(){
         def items = Item.withCriteria {
             like ('itemname', '%%')
+            order "gold", "asc"
         }
         items
     }
 
     private getUserUnits(User usr){
         def units = usr.units.collect{it}
+        units = units.sort {it.dateCreated}
         units
     }
     
@@ -420,7 +431,6 @@ class UnitController {
     }
     
     private getEnemyUsers(User usr){
-        //System.out.println("\n\n\n1geht")
         def enemys = User.withCriteria {
             ne ('username', usr.username)
             gt("unitcount",0)

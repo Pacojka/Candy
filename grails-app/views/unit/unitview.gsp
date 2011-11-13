@@ -67,19 +67,9 @@ ${unit.curhp}/${unit.maxhp}
           </tr>
         </table>
       </div>
-      Waffe: <g:if test="${unit.weapon != null}">
-${unit.weapon.itemname} [|Schaden: ${unit.weapon.dmgmin}-${unit.weapon.dmgmax}| |Waffen Typ: ${unit.weapon.item_type}| |Goldwert: ${unit.weapon.gold}|]
-      </g:if>
-      <g:else>
-        nicht ausgerüstet
-      </g:else>
+      alle Items <br>
+      <g:render template="unititem" collection="${items}" var="useritem"/>
       <br>
-      Rüstung: <g:if test="${unit.armor != null}">
-${unit.armor.itemname} [|Schaden: ${unit.armor.dmgmin}-${unit.armor.dmgmax}| |Waffen Typ: ${unit.armor.item_type}| |Goldwert: ${unit.armor.gold}|]
-      </g:if>
-      <g:else>
-        nicht ausgerüstet
-      </g:else>
 
     </div>
   </body>

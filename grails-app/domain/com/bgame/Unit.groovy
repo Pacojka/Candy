@@ -4,9 +4,8 @@ class Unit {
     String name
     User user
     boolean main = false
+    Date dateCreated
     MyEnum wtyp = "nah"
-    Item weapon = null
-    Usritm armor = null
     int ferexp = 150
     int nahexp = 150
     int magexp = 150
@@ -29,12 +28,11 @@ class Unit {
     int curhppr = 1
     int maxhp = 999
     
-
+    static hasMany = [useritems:Usritm]
     static belongsTo = User
     static constraints = {
         name blank: false, unique: true
-        weapon nullable:true
-        armor nullable:true
+
     }
 
 
