@@ -10,8 +10,19 @@
 ${useritem.unit.name}
     </g:if>
     <g:else>
-      <g:select name="user.id" from="${com.bgame.User.list()}" optionKey="id" value="${unitInstance?.user?.id}"  />
-    </g:else></td>
+      <g:set var="nowpnunits" value="${useritem.user.nowpnunis()}" />
+      <g:form action="equipt">        
+        <g:hiddenField name="useritemid" value="${useritem.id}" />
+        <g:select name="unit" from="${nowpnunits}" optionKey="id" value="${nowpnunits.name}"  />
+        <span class="button"><g:submitButton name="equipt" class="test" value="Ausruesten" /></span>
+      </g:form>
+
+
+
+
+    </g:else></td>            
+                                    
+                              
 
     <td bgcolor="#1C1C1C"><g:link action="sellquestion" params="[usritemid:useritem.id]">Verkaufen</g:link></td>
     </tr>

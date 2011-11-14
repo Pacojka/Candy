@@ -52,6 +52,13 @@ class User {
     def items(){
         return this.useritems.collect{it}.sort{it.item.itemname}
     }
+    
+    def nowpnunis(){
+      def result = []
+      units().each{if(!it.haswpn())result << it}
+      return result
+    }
+    
 
 
 }

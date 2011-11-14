@@ -46,6 +46,15 @@ class UnitController {
         redirect(action: "items")
 
     }
+
+    def equipt = {
+        def ui = new Usritm()
+        def unit = Unit.get(params.unit)       
+        ui.linkunit(params.useritemid,unit).save()
+        redirect(action: "items")
+
+    }
+ 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def unequipt = {
         def ui = new Usritm()
@@ -91,7 +100,7 @@ class UnitController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def items = {
         def hisuseritems = lookupUser().items()
-        [useritems: hisuseritems]
+       [useritems: hisuseritems]
     }
 
 

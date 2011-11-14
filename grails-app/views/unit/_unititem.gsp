@@ -8,9 +8,8 @@
       <td width="80px" bgcolor="#1C1C1C">${useritem.item.dmgmin}-${useritem.item.dmgmax}</td>
       <td width="80px" bgcolor="#1C1C1C">${useritem.item.item_type}</td>
       <td width="80px" bgcolor="#1C1C1C">${useritem.item.gold}</td>
- 
+      <td bgcolor="#1C1C1C"><g:link action="unequipt" params="[usritemid:useritem.id]">ablegen</g:link></td>
   
-   
     </tr>
   </table>
   </br>

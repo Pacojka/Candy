@@ -58,9 +58,9 @@ class Unit {
     }
 
     def haswpn(){
-        def rueckgabe = 0
+        def rueckgabe = false
         this.items().each{if ((it.item.item_type.getKey() == "nah") || (it.item.item_type.getKey() == "fer")|| (it.item.item_type.getKey() == "mag")){
-                rueckgabe = 1
+                rueckgabe = true
             }
         }
         rueckgabe
