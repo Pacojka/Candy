@@ -3,17 +3,15 @@ import grails.plugins.springsecurity.Secured
 class UnitController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
-    def springSecurityService
-
+	def springSecurityService
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def index = {
-        def usrunits = getUserUnits(lookupUser())
+        def usrunits = lookupUser().units()
         [userunits: usrunits]
 
         //redirect(action: "userunits", params: params)
     }
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
+   @Secured(['ROLE_ADMIN','ROLE_USER'])
     def enemys = {
         def usrenemys = getEnemyUsers(lookupUser())
 
@@ -29,8 +27,8 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def fight = {
-        def usrunits = getUserUnits(lookupUser())
-        def enemyunits = getUserUnits(User.get(params.enemyid))
+        def usrunits = lookupUser().units()
+        def enemyunits = User.get(params.enemyid).units()
         def result = fightsim(usrunits, enemyunits)
         [result: result]
 
@@ -77,8 +75,9 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def heal = {
-        def usrunits = getUserUnits(lookupUser())
+        def usrunits = lookupUser().units()
         healteam(usrunits)
+        redirect(action: "index")
     }
 
 
@@ -91,7 +90,7 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def items = {
-        def hisuseritems = getUserItems(lookupUser())
+        def hisuseritems = lookupUser().items()
         [useritems: hisuseritems]
     }
 
@@ -287,13 +286,74 @@ class UnitController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [unitInstanceList: Unit.list(params), unitInstanceTotal: Unit.count()]
     }
-    @Secured(['ROLE_ADMIN'])
+	@Secured(['ROLE_ADMIN'])
     def create = {
         def unitInstance = new Unit()
         unitInstance.properties = params
         return [unitInstance: unitInstance]
     }
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
+	@Secured(['ROLE_ADMIN'])
+    def save = {
+        def unitInstance = new Unit(params)
+        if (unitInstance.save(flush: true)) {
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'unit.label', default: 'Unit'), unitInstance.id])}"
+            redirect(action: "show", id: unitInstance.id)
+        }
+        else {
+            render(view: "create", model: [unitInstance: unitInstance])
+        }
+    }
+	@Secured(['ROLE_ADMIN'])
+    def show = {
+        def unitInstance = Unit.get(params.id)
+        if (!unitInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'unit.label', default: 'Unit'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            [unitInstance: unitInstance]
+        }
+    }
+	@Secured(['ROLE_ADMIN'])
+    def edit = {
+        def unitInstance = Unit.get(params.id)
+        if (!unitInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'unit.label', default: 'Unit'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            return [unitInstance: unitInstance]
+        }
+    }
+	@Secured(['ROLE_ADMIN'])
+    def update = {
+        def unitInstance = Unit.get(params.id)
+        if (unitInstance) {
+            if (params.version) {
+                def version = params.version.toLong()
+                if (unitInstance.version > version) {
+                    
+                    unitInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'unit.label', default: 'Unit')] as Object[], "Another user has updated this Unit while you were editing")
+                    render(view: "edit", model: [unitInstance: unitInstance])
+                    return
+                }
+            }
+            unitInstance.properties = params
+            if (!unitInstance.hasErrors() && unitInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'unit.label', default: 'Unit'), unitInstance.id])}"
+                redirect(action: "show", id: unitInstance.id)
+            }
+            else {
+                render(view: "edit", model: [unitInstance: unitInstance])
+            }
+        }
+        else {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'unit.label', default: 'Unit'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+	
+	    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def createUnit = {
         def unitInstance = new Unit()
         unitInstance.properties = params
@@ -323,69 +383,10 @@ class UnitController {
             render(view: "createUnit", model: [unitInstance: unitInstance])
         }
     }
-
-
-
-    def save = {
-        def unitInstance = new Unit(params)
-        if (unitInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'unit.label', default: 'Unit'), unitInstance.id])}"
-            redirect(action: "show", id: unitInstance.id)
-        }
-        else {
-            render(view: "create", model: [unitInstance: unitInstance])
-        }
-    }
-    @Secured(['ROLE_ADMIN'])
-    def show = {
-        def unitInstance = Unit.get(params.id)
-        if (!unitInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'unit.label', default: 'Unit'), params.id])}"
-            redirect(action: "list")
-        }
-        else {
-            [unitInstance: unitInstance]
-        }
-    }
-    @Secured(['ROLE_ADMIN'])
-    def edit = {
-        def unitInstance = Unit.get(params.id)
-        if (!unitInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'unit.label', default: 'Unit'), params.id])}"
-            redirect(action: "list")
-        }
-        else {
-            return [unitInstance: unitInstance]
-        }
-    }
-
-    def update = {
-        def unitInstance = Unit.get(params.id)
-        if (unitInstance) {
-            if (params.version) {
-                def version = params.version.toLong()
-                if (unitInstance.version > version) {
-
-                    unitInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'unit.label', default: 'Unit')] as Object[], "Another user has updated this Unit while you were editing")
-                    render(view: "edit", model: [unitInstance: unitInstance])
-                    return
-                }
-            }
-            unitInstance.properties = params
-            if (!unitInstance.hasErrors() && unitInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'unit.label', default: 'Unit'), unitInstance.id])}"
-                redirect(action: "show", id: unitInstance.id)
-            }
-            else {
-                render(view: "edit", model: [unitInstance: unitInstance])
-            }
-        }
-        else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'unit.label', default: 'Unit'), params.id])}"
-            redirect(action: "list")
-        }
-    }
-
+	
+	
+	
+	@Secured(['ROLE_ADMIN'])
     def delete = {
         def unitInstance = Unit.get(params.id)
         if (unitInstance) {
@@ -404,12 +405,7 @@ class UnitController {
             redirect(action: "list")
         }
     }
-
-    private getUserItems(User usr){
-        def items = usr.useritems.collect{it}
-        items = items.sort {it.item.itemname}
-        items
-    }
+	
 
     private getShopItems(){
         def items = Item.withCriteria {
@@ -418,15 +414,9 @@ class UnitController {
         }
         items
     }
-
-    private getUserUnits(User usr){
-        def units = usr.units.collect{it}
-        units = units.sort {it.dateCreated}
-        units
-    }
     
-    private getUserUnit(name){
-        def curunit = Unit.findById(name) 
+    private getUserUnit(id){
+        def curunit = Unit.findById(id)
         curunit   
     }
     
@@ -445,5 +435,4 @@ class UnitController {
     private lookupUser(){
         User.get(springSecurityService.principal.id)
     }
-
 }

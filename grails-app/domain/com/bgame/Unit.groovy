@@ -6,26 +6,27 @@ class Unit {
     boolean main = false
     Date dateCreated
     MyEnum wtyp = "nah"
+
     int ferexp = 150
     int nahexp = 150
     int magexp = 150
     int exp = 1
     int ferlvl = 1
-    int ferToNext = 100
+    int ferToNext = 10
     int nahlvl = 1
-    int nahToNext = 100
+    int nahToNext = 10
     int maglvl = 1
-    int magToNext = 100
+    int magToNext = 10
     
     int str = 10
     int strToNext = 1
     int ges = 10
-    int gesToNext = 100
+    int gesToNext = 10
     int inz = 10
-    int inzToNext = 100
+    int inzToNext = 10
 
     int curhp = 999
-    int curhppr = 1
+    int curhppr = 100
     int maxhp = 999
     
     static hasMany = [useritems:Usritm]
@@ -52,7 +53,18 @@ class Unit {
     }
 
 
+    def items(){
+        return this.useritems.collect{it}.sort{it.item.itemname}
+    }
 
+    def haswpn(){
+        def rueckgabe = 0
+        this.items().each{if ((it.item.item_type.getKey() == "nah") || (it.item.item_type.getKey() == "fer")|| (it.item.item_type.getKey() == "mag")){
+                rueckgabe = 1
+            }
+        }
+        rueckgabe
+    }
 
 
     def getlvl(exp){

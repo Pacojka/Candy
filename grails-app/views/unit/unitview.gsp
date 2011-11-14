@@ -12,8 +12,7 @@
 
 
       <div id="tablehead">
-        <h2><td><g:link action="unitview" params="[unitid:unit.id]">${unit.name}</g:link></td></h2>
-
+        <h2><td><g:link action="unitview" params="[unitid:unit.id]">${unit.name} has wpn ${unit.haswpn()}</g:link></td></h2>
       </div>
 
       <div id="hpbalken">

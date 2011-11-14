@@ -28,11 +28,11 @@
                         
                             <g:sortableColumn property="curhp" title="${message(code: 'unit.curhp.label', default: 'Curhp')}" />
                         
+                            <g:sortableColumn property="curhppr" title="${message(code: 'unit.curhppr.label', default: 'Curhppr')}" />
+                        
+                            <g:sortableColumn property="dateCreated" title="${message(code: 'unit.dateCreated.label', default: 'Date Created')}" />
+                        
                             <g:sortableColumn property="exp" title="${message(code: 'unit.exp.label', default: 'Exp')}" />
-                        
-                            <g:sortableColumn property="main" title="${message(code: 'unit.main.label', default: 'Main')}" />
-                        
-                            <g:sortableColumn property="maxhp" title="${message(code: 'unit.maxhp.label', default: 'Maxhp')}" />
                         
                         </tr>
                     </thead>
@@ -46,11 +46,11 @@
                         
                             <td>${fieldValue(bean: unitInstance, field: "curhp")}</td>
                         
+                            <td>${fieldValue(bean: unitInstance, field: "curhppr")}</td>
+                        
+                            <td><g:formatDate date="${unitInstance.dateCreated}" /></td>
+                        
                             <td>${fieldValue(bean: unitInstance, field: "exp")}</td>
-                        
-                            <td><g:formatBoolean boolean="${unitInstance.main}" /></td>
-                        
-                            <td>${fieldValue(bean: unitInstance, field: "maxhp")}</td>
                         
                         </tr>
                     </g:each>

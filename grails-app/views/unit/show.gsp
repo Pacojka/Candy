@@ -44,9 +44,93 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.curhppr.label" default="Curhppr" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "curhppr")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.dateCreated.label" default="Date Created" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${unitInstance?.dateCreated}" /></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="unit.exp.label" default="Exp" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "exp")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.ferToNext.label" default="Fer To Next" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "ferToNext")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.ferexp.label" default="Ferexp" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "ferexp")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.ferlvl.label" default="Ferlvl" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "ferlvl")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.ges.label" default="Ges" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "ges")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.gesToNext.label" default="Ges To Next" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "gesToNext")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.inz.label" default="Inz" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "inz")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.inzToNext.label" default="Inz To Next" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "inzToNext")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.magToNext.label" default="Mag To Next" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "magToNext")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.magexp.label" default="Magexp" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "magexp")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.maglvl.label" default="Maglvl" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "maglvl")}</td>
                             
                         </tr>
                     
@@ -65,9 +149,64 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.nahToNext.label" default="Nah To Next" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "nahToNext")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.nahexp.label" default="Nahexp" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "nahexp")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.nahlvl.label" default="Nahlvl" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "nahlvl")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="unit.str.label" default="Str" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "str")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.strToNext.label" default="Str To Next" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: unitInstance, field: "strToNext")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.user.label" default="User" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="user" action="show" id="${unitInstance?.user?.id}">${unitInstance?.user?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.useritems.label" default="Useritems" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${unitInstance.useritems}" var="u">
+                                    <li><g:link controller="usritm" action="show" id="${u.id}">${u?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="unit.wtyp.label" default="Wtyp" /></td>
+                            
+                            <td valign="top" class="value">${unitInstance?.wtyp?.encodeAsHTML()}</td>
                             
                         </tr>
                     

@@ -8,7 +8,7 @@
 ${useritem.unit.name}
     </g:if>
     <g:else>
-      keine
+      <g:select name="user.id" from="${com.bgame.User.list()}" optionKey="id" value="${unitInstance?.user?.id}"  />
     </g:else></td>
     <td><g:link action="sellquestion" params="[usritemid:useritem.id]">Verkaufen für ${useritem.item.gold} Gold.</g:link></td>
     </tr>
