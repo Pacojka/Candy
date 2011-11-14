@@ -6,10 +6,13 @@
   </head>
   <body>
     <div id="body1">
-      Hey here's the result of the battle:
-      <br>
+      Und so siehts aus Boy:
+      </br>
 ${result}
-
+</br>
+</br>
+</br>
+</br>
     </div>
   </body>
 </html>

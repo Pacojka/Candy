@@ -7,9 +7,14 @@
   <body>
     <div id="body1">
       <g:render template="units" collection="${userunits}" var="unit"/>
-      <g:link controller='unit' action='createUnit'>Create new Unit</g:link>
+      <g:link controller='unit' action='createUnit'>Neue Einheit</g:link>
       </br>
-      <g:link controller='unit' action='heal'>Heal your team</g:link>
+      <g:link controller='unit' action='heal'>Einheiten heilen</g:link>
+   </br>
+    </br>
+    </br>
+    </br>
     </div>
+    
   </body>
 </html>

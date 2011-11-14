@@ -66,7 +66,21 @@ ${unit.curhp}/${unit.maxhp}
           </tr>
         </table>
       </div>
-      alle Items <br>
+      
+      
+      
+      </br>
+      <table cellspacing="0">
+        <tr>
+          <td width="150px"><h2>Item</h2></td>
+          <td width="80px">Schaden</td>
+          <td width="80px">Waffen Typ</td>
+          <td width="80px">Goldwert</td>
+          
+        </tr>
+      </table> 
+      </br>
+     
       <g:render template="unititem" collection="${items}" var="useritem"/>
       <br>
 

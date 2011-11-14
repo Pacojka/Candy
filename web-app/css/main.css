@@ -256,17 +256,21 @@ td.errors textarea {
     float: right;
     font-size: 8px;
     margin-top: 0px;
+    margin-left: 650px;
 }
 
 
 #header {
     background: url(../images/banner.jpg); 
     background-repeat: no-repeat;
+    background-color: black;
     padding: 2em 1em 2em 1em; 
     margin-bottom: 1em;
+    margin-top: 0px;
     height: 143px;
     text-align: right;
-
+    position:fixed;
+    z-index: 10;
 
 } 
 
@@ -276,23 +280,28 @@ a.header-main:link, a.header-main:visited {
     color: #fff; 
     font-size: 3em; 
     font-weight: bold;
+    position: absolute;
 } 
 
 .header-sub {
     color: #fff; 
     font-size: 1.25em; 
     font-style: italic;
+    position: absolute;
 }
 
 
 
 #nav {
-    margin-top:5px;
+    margin-top:190px;
     margin-left:30px;
     width:150px;
     height:100px;
     float:left;
     background-color: transparent;
+    position: fixed;
+    
+    
 
 }
 
@@ -303,14 +312,18 @@ a.header-main:link, a.header-main:visited {
     bottom:0px;
     color: white;
     text-align:center;
+    z-index: 10;
 }
 
 #body1 { 
-    margin-top: 0px;
+    margin-top: 190px;
     margin-left: 245px;
     color: white;
     text-align: left;
     margin-bottom: 15px;
+    position: absolute;
+    z-index: 1;
+    
     
 }
 

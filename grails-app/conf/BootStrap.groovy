@@ -9,14 +9,17 @@ class BootStrap {
         def item1 = new Item(itemname: 'Stumpfer Dolch',item_type: 'nah', dmgmin: 3,dmgmax:5,defens:0,gold:5).save()
         def i1 = Item.findByItemname('Stumpfer Dolch')
 
-        def item2 = new Item(itemname: 'Spielzeug bogen',item_type: 'fer', dmgmin: 2,dmgmax:6,defens:0,gold:5).save()
-        def i2 = Item.findByItemname('Spielzeug bogen')
+        def item2 = new Item(itemname: 'Spielzeugbogen',item_type: 'fer', dmgmin: 2,dmgmax:6,defens:0,gold:5).save()
+        def i2 = Item.findByItemname('Spielzeugbogen')
 
         def item3 = new Item(itemname: 'Damenhandtasche',item_type: 'nah', dmgmin: 2,dmgmax:2,defens:0,gold:15).save()
         def i3 = Item.findByItemname('Damenhandtasche')
 
         def item4 = new Item(itemname: 'Holzbein',item_type: 'nah', dmgmin: 2,dmgmax:2,defens:0,gold:1).save()
         def i4 = Item.findByItemname('Holzbein')
+        
+        def item5 = new Item(itemname: 'Doppelrammler',item_type: 'nah', dmgmin: 6,dmgmax:10,defens:2,gold:20).save()
+        def i5 = Item.findByItemname('Doppelrammler')
 /*ITEMS*/
 
 /*ADMIN*/
