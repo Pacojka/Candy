@@ -311,10 +311,11 @@ a.header-main:link, a.header-main:visited {
     color: white;
     text-align: left;
     margin-bottom: 15px;
+    
 }
 
 #table { 
-    width: 350px;
+    width: 400px;
     margin-top: 16px;
     margin-left: 0px;
     color: #848484;
