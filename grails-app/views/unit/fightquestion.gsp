@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="body1">
-      Hey ${user.username}, willst du wiirklich ${enemy.username} auf den Sack geben?
+      Hey ${user.username}, willst du wirklich ${enemy.username} auf den Sack geben?
       <br>
       <g:link action="fight" params="[enemyid:enemy.id]">DO IT!!!</g:link>
 

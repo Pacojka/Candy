@@ -5,7 +5,24 @@
 
   </head>
   <body>
+    
+     
+    
+    
     <div id="body1">
+      
+      
+      
+      <table cellspacing="0">
+        <tr>
+          <td width="150px"><h2>Einheit</h2></td>
+          <td width="80px">HP</td>
+          
+          
+        </tr>
+      </table>
+      
+      
       <g:render template="units" collection="${userunits}" var="unit"/>
       <g:link controller='unit' action='createUnit'>Neue Einheit</g:link>
       </br>
