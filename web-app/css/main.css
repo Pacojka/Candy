@@ -40,12 +40,14 @@ h1 {
     font-weight: normal;
     font-size: 16px;
     margin: .8em 0 .3em 0;
+    color:#848484;
 }
 
 h2 {
     color: #D8D8D8;
     font-weight: normal;
     font-size: 14px;
+    color:#848484;
 
 }
 
@@ -323,6 +325,7 @@ a.header-main:link, a.header-main:visited {
     margin-bottom: 15px;
     position: absolute;
     z-index: 1;
+    color:#848484;
     
     
 }
@@ -333,7 +336,7 @@ a.header-main:link, a.header-main:visited {
     margin-left: 0px;
     
     text-align: left;
-   
+   color:#848484;
     margin-bottom: 15px;
     
 
@@ -380,7 +383,7 @@ th.asc a, th.desc a {
     background-color: #000000;
     border:1px ;
     border-style: solid;
-    border-color:#848484;
+    border-color:#2E2E2E;
     width:100px;
     height:13px;
     margin-left:auto;
@@ -397,7 +400,7 @@ th.asc a, th.desc a {
     border:2px ;
     border-style: solid;
     border-color:#1C1C1C;
-    width:346px;
+    width:338px;
     height:13px;
     margin-left:0px;
     margin-top:0px;

@@ -4,7 +4,6 @@
   <table cellspacing="0" >
     <tr>
       <td width="150px" bgcolor="#440000" ><h2>${item.itemname}</h2></td>
-
       <td width="80px" bgcolor="#1C1C1C">${item.dmgmin}-${item.dmgmax}</td>
       <td width="80px" bgcolor="#1C1C1C">${item.item_type}</td>
       <td width="80px" bgcolor="#1C1C1C">${item.gold}</td>

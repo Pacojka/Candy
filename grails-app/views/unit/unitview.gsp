@@ -10,11 +10,16 @@
     <div id="body1">
 
 
-
-      <div id="tablehead">
-        <h2><td><g:link action="unitview" params="[unitid:unit.id]">${unit.name} has wpn ${unit.haswpn()}</g:link></td></h2>
-      </div>
-
+      <table cellspacing="0">
+        <tr>
+          <td width="150px"><h2>${unit.name} der Zerstöhrer</h2></td>
+          
+          
+          
+        </tr>
+      </table>
+     
+        </br>
       <div id="hpbalken">
         <div style="background-color:#440000; z-index:1; width:${unit.curhppr}%;face="Arial">&nbsp</font> </div>
       </div>
@@ -23,23 +28,23 @@
 ${unit.curhp}/${unit.maxhp}
       </div>
 
-      <div id="table">
-        <table>
+      <div id="table" >
+        <table cellspacing="0">
 
           <tr>
-            <td>St&auml;rke
+            <td bgcolor="#1C1C1C">St&auml;rke
               <div id="balken">
                 <div style="background-color:#440000; width:${unit.strToNext}%;face="Arial"> ${unit.str}</font></div> </div>
             </td>
 
 
-            <td>Geschick
+            <td bgcolor="#1C1C1C">Geschick
               <div id="balken">
                 <div style="background-color:#440000; width:${unit.gesToNext}%;face="Arial">${unit.ges}</font></div> </div>
             </td>
 
 
-            <td>Intelligenz
+            <td bgcolor="#1C1C1C">Intelligenz
               <div id="balken">
                 <div style="background-color:#440000; width:${unit.inzToNext}%;face="Arial">  ${unit.inz}</font></div> </div>
             </td>
@@ -47,18 +52,18 @@ ${unit.curhp}/${unit.maxhp}
           </tr>
 
           <tr>
-            <td>Nahkampf
+            <td bgcolor="#1C1C1C">Nahkampf
 
               <div id="balken">
                 <div style="background-color:#440000; width:${unit.nahToNext}%;face="Arial"> ${unit.nahlvl}</font></div> </div>
 
             </td>
-            <td>Fernkampf
+            <td bgcolor="#1C1C1C">Fernkampf
 
               <div id="balken">
                 <div style="background-color:#440000; width:${unit.ferToNext}%;face="Arial">${unit.ferlvl}</font></div> </div>
             </td>
-            <td>Magie
+            <td bgcolor="#1C1C1C">Magie
               <div id="balken">
                 <div style="background-color:#440000; width:${unit.magToNext}%;face="Arial">${unit.maglvl}</font></div> </div>
 

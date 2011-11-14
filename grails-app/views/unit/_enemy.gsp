@@ -1,6 +1,4 @@
 
-
-
 <div id="table">  
   <table cellspacing="0">
     <tr>
