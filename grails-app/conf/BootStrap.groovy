@@ -20,6 +20,9 @@ class BootStrap {
         
         def item5 = new Item(itemname: 'Doppelrammler',item_type: 'nah', dmgmin: 6,dmgmax:10,defens:2,gold:20).save()
         def i5 = Item.findByItemname('Doppelrammler')
+        
+        def item6 = new Item(itemname: 'Periode',item_type: 'nah', dmgmin: 70,dmgmax:100,defens:2,gold:999).save()
+        def i6 = Item.findByItemname('Periode')
 /*ITEMS*/
 
 /*ADMIN*/
@@ -50,20 +53,25 @@ class BootStrap {
         def testUser3 = new User(username: 'paco', enabled: true, password: 'p').save()
         def paco = User.findByUsername('paco')
     /*Items*/
+
         def ua21 = new com.bgame.Usritm()
-        ua21.link(i1,paco).save()
+        ua21.link(i2,paco).save()
         def ua22 = new com.bgame.Usritm()//UNITS MIT EINBEZIEHEN!!!!!
-        ua22.link(i2,paco).save()
+        ua22 = ua22.link(i1,paco).save()
+
         def ua23 = new com.bgame.Usritm()
-        ua23 = ua23.link(i2,paco).save()       
+        ua23 = ua23.link(i6,paco).save()
     /*Units*/
         testUser3.addToUnits(new Unit(name: 'Paco', main: true, ferexp: 12000, nahexp: 800, magexp : 150,wtyp: 'fer'))
         testUser3.addToUnits(new Unit(name: 'Cora', main: false,ferexp: 150, nahexp: 150, magexp : 13000,wtyp: 'mag'))
         testUser3.unitcount = 2
         testUser3.save(flush: true)
         def upaco = Unit.findByName('Paco')
-        ua23 = ua23.linkunit(ua23.id,upaco)
+        ua22 = ua22.linkunit(ua22.id,upaco)
+        def ucora = Unit.findByName('Cora')
+        ua23 = ua23.linkunit(ua23.id,ucora)
         testUser3.units.each { it.recalcUnit() }
+
 
 /*User Role zuweisung UNTEN!*/
 

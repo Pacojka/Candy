@@ -167,18 +167,18 @@ class UnitController {
                         while(enemyteam[rand].curhp <=0){
                             rand = random.nextInt(enemyteam.size())
                         }
-                        result += enemyteam[rand].name +"["+enemyteam[rand].curhp+"/"+enemyteam[rand].maxhp+ "] dealing " + userteam[i].str +" dmg.<br>"
-                        if(enemyteam[rand].curhp < userteam[i].str){
+                        result += enemyteam[rand].name +"["+enemyteam[rand].curhp+"/"+enemyteam[rand].maxhp+ "] dealing " + userteam[i].dmg() +" dmg.<br>"
+                        if(enemyteam[rand].curhp < userteam[i].dmg()){
                             enemyteam[rand].curhp = 0
                         }else{
-                            enemyteam[rand].curhp -= userteam[i].str
+                            enemyteam[rand].curhp -= userteam[i].dmg()
                         }
                         enemyteam[rand].save(flush: true)
 
                         if (t2exppool > 0){
                             def expgain = 0
-                            if (t2dpexp <= userteam[i].str){
-                                expgain = (int)(userteam[i].str/t2dpexp)
+                            if (t2dpexp <= userteam[i].dmg()){
+                                expgain = (int)(userteam[i].dmg()/t2dpexp)
                             }
                             else{
                                 expgain = 1
@@ -214,17 +214,17 @@ class UnitController {
                         while(userteam[rand].curhp <=0){
                             rand = random.nextInt(userteam.size())
                         }
-                        result += userteam[rand].name +"["+userteam[rand].curhp+"/"+userteam[rand].maxhp+ "] dealing " + enemyteam[i].str +" dmg.<br>"
-                        if(userteam[rand].curhp < enemyteam[i].str){
+                        result += userteam[rand].name +"["+userteam[rand].curhp+"/"+userteam[rand].maxhp+ "] dealing " + enemyteam[i].dmg() +" dmg.<br>"
+                        if(userteam[rand].curhp < enemyteam[i].dmg()){
                             userteam[rand].curhp = 0
                         }else{
-                            userteam[rand].curhp -= enemyteam[i].str
+                            userteam[rand].curhp -= enemyteam[i].dmg()
                         }
                         //userteam[rand].save(flush: true)
                         if (t1exppool > 0){
                             def expgain = 0
-                            if (t1dpexp <= enemyteam[i].str){
-                                expgain = (int)(enemyteam[i].str/t1dpexp)
+                            if (t1dpexp <= enemyteam[i].dmg()){
+                                expgain = (int)(enemyteam[i].dmg()/t1dpexp)
                             }
                             else{
                                 expgain = 1

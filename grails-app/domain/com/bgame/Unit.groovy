@@ -57,6 +57,24 @@ class Unit {
         return this.useritems.collect{it}.sort{it.item.itemname}
     }
 
+    def dmg(){
+        def dmg = this.str
+        def min = 0
+        def max = 0
+        def random = new Random()
+
+        items().each{
+            min += it.item.dmgmin
+            max += it.item.dmgmax  
+        }
+        if ((min+max)>0){
+        System.out.println("\n\n dmgmin:"+min+" dmgmax:"+max+"\n\n")
+        dmg += min
+        dmg += random.nextInt((max-min))
+        }
+        return dmg
+    }
+
     def haswpn(){
         def rueckgabe = false
         this.items().each{if ((it.item.item_type.getKey() == "nah") || (it.item.item_type.getKey() == "fer")|| (it.item.item_type.getKey() == "mag")){
