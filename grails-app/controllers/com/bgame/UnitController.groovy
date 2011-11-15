@@ -3,7 +3,7 @@ import grails.plugins.springsecurity.Secured
 class UnitController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-	def springSecurityService
+    def springSecurityService
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def index = {
         def usrunits = lookupUser().units()
@@ -11,7 +11,7 @@ class UnitController {
 
         //redirect(action: "userunits", params: params)
     }
-   @Secured(['ROLE_ADMIN','ROLE_USER'])
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def enemys = {
         def usrenemys = getEnemyUsers(lookupUser())
 
@@ -49,9 +49,9 @@ class UnitController {
 
     def equipt = {
         if (params.unit.id != "null"){
-        def ui = new Usritm()
-        def unit = Unit.get(params.unit.id)
-        ui.linkunit(params.useritemid,unit).save()
+            def ui = new Usritm()
+            def unit = Unit.get(params.unit.id)
+            ui.linkunit(params.useritemid,unit).save()
         }
         redirect(action: "items")
 
@@ -110,7 +110,7 @@ class UnitController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def items = {
         def hisuseritems = lookupUser().items()
-       [useritems: hisuseritems]
+        [useritems: hisuseritems]
     }
 
 
@@ -193,7 +193,11 @@ class UnitController {
                                 userteam[i].magexp += expgain
                                 result +=  userteam[i].name +" gets "+expgain+" Exp on Magie. <br>"
                             }
-                            t2exppool -= expgain
+                            if(t2exppool >= expgain){
+                                t2exppool -= expgain
+                            }else t2exppool = 0
+
+
                             //userteam[i].recalcUnit()
                             //userteam[i].save(flush: true)
                         }
@@ -239,7 +243,10 @@ class UnitController {
                                 enemyteam[i].magexp += expgain
                                 result +=  enemyteam[i].name +" gets "+expgain+" Exp on Magie. <br>"
                             }
-                            t1exppool -= expgain
+                            if(t1exppool >= expgain){
+                                t1exppool -= expgain
+                            }else t1exppool = 0
+
                             //enemyteam[i].recalcUnit()
                             //enemyteam[i].save(flush: true)
                         }
@@ -256,22 +263,26 @@ class UnitController {
         }
         if (t2count < 1){
             result += "Attacker "+ userteam[0].user.username+ " wins.<br>"
-            def expgain =(int)(t2exppool/t1count)
-            userteam.each{
-                if(it.curhp >0){
-                    if(it.wtyp.value == "Nahkampf"){
-                        it.nahexp += expgain
-                    }else if(it.wtyp.value == "Fernkampf"){
-                        it.ferexp += expgain
-                    }else if(it.wtyp.value == "Magie"){
-                        it.magexp += expgain
+            if(t2exppool >= t1count){
+                def expgain =(int)(t2exppool/t1count)
+                userteam.each{
+                    if(it.curhp >0){
+                        if(it.wtyp.value == "Nahkampf"){
+                            it.nahexp += expgain
+                        }else if(it.wtyp.value == "Fernkampf"){
+                            it.ferexp += expgain
+                        }else if(it.wtyp.value == "Magie"){
+                            it.magexp += expgain
+                        }
+                        //it.recalcUnit()
                     }
-                    //it.recalcUnit()
                 }
+                result += "All alive Units from "+ userteam[0].user.username+ " get "+expgain+"Exp"                
             }
-            result += "All alive Units from "+ userteam[0].user.username+ " get "+expgain+"Exp"
+
         }else if(t1count < 1){
             result += "Enemy "+ enemyteam[0].user.username+ " wins."
+            if(t1exppool >= t2count){
             def expgain =(int)(t1exppool/t2count)
             enemyteam.each{
                 if(it.curhp >0){
@@ -286,6 +297,7 @@ class UnitController {
                 }
             }
             result += "All alive Units from "+ enemyteam[0].user.username+ " get "+expgain+"Exp"
+            }
         }else{
             result += "something is wrong here: t1usercount:"+t1count+" t2enemycount:"+t2count
         }
@@ -305,13 +317,13 @@ class UnitController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [unitInstanceList: Unit.list(params), unitInstanceTotal: Unit.count()]
     }
-	@Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN'])
     def create = {
         def unitInstance = new Unit()
         unitInstance.properties = params
         return [unitInstance: unitInstance]
     }
-	@Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN'])
     def save = {
         def unitInstance = new Unit(params)
         if (unitInstance.save(flush: true)) {
@@ -322,7 +334,7 @@ class UnitController {
             render(view: "create", model: [unitInstance: unitInstance])
         }
     }
-	@Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN'])
     def show = {
         def unitInstance = Unit.get(params.id)
         if (!unitInstance) {
@@ -333,7 +345,7 @@ class UnitController {
             [unitInstance: unitInstance]
         }
     }
-	@Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN'])
     def edit = {
         def unitInstance = Unit.get(params.id)
         if (!unitInstance) {
@@ -344,7 +356,7 @@ class UnitController {
             return [unitInstance: unitInstance]
         }
     }
-	@Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN'])
     def update = {
         def unitInstance = Unit.get(params.id)
         if (unitInstance) {
@@ -372,7 +384,7 @@ class UnitController {
         }
     }
 	
-	    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def createUnit = {
         def unitInstance = new Unit()
         unitInstance.properties = params
@@ -405,7 +417,7 @@ class UnitController {
 	
 	
 	
-	@Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN'])
     def delete = {
         def unitInstance = Unit.get(params.id)
         if (unitInstance) {

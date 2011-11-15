@@ -67,8 +67,7 @@ class Unit {
             min += it.item.dmgmin
             max += it.item.dmgmax  
         }
-        if ((min+max)>0){
-            System.out.println("\n\n dmgmin:"+min+" dmgmax:"+max+"\n\n")
+        if ((min+max)>0){           
             dmg += min
             dmg += random.nextInt((max-min))
         }

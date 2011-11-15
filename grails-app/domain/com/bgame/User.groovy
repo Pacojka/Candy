@@ -102,22 +102,22 @@ class User {
         switch ( type ) {
 
             case "hlm":
-            result = norustunits()
+            result = nohlmunits()
             break
             case "amu":
-            result = norustunits()
+            result = noamuunits()
             break
             case "rust":
             result = norustunits()
             break
             case "hnd":
-            result = norustunits()
+            result = nohndunits()
             break
             case "bns":
-            result = norustunits()
+            result = nobnsunits()
             break
             case "stf":
-            result = norustunits()
+            result = nostfunits()
             break
 
             default:

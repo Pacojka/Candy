@@ -22,12 +22,12 @@ class Item {
         nah("Nahkampf"),
         fer("Fernkampf"),
         mag("Magie"),
-        hlm("HELM"),
-        amu("AMULET"),
-        rust("RÜSTUNG"),
-        hnd("HANDSCHUH"),
-        bns("BEINSCHUTZ"),
-        stf("STIEFEL")       
+        hlm("Helm"),
+        amu("Amulett"),
+        rust("Rüstung"),
+        hnd("Handschuhe"),
+        bns("Beinschutz"),
+        stf("Stiefel")
 
 
         final String value
