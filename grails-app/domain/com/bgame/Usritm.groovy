@@ -4,6 +4,7 @@ class Usritm {
     User user = null
     Item item = null
     Unit unit = null
+    Date dateCreated
 
     //static belongsTo = [user:User,item:Item]
     String toString(){
@@ -62,6 +63,12 @@ class Usritm {
             if (u.unit != null) u.unit?.removeFromUseritems(u)
             u.delete()
         }
+    }
+
+    def isequipted(){
+        def result = false
+        if(this.unit)result = true
+        result
     }
 
 

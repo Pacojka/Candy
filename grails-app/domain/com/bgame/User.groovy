@@ -50,12 +50,18 @@ class User {
 
 
     def items(){
-        return this.useritems.collect{it}.sort{it.item.itemname}
+        return this.useritems.collect{it}.sort{it.id}
     }
     
     def nowpnunis(){
       def result = []
       units().each{if(!it.haswpn())result << it}
+      return result
+    }
+
+    def uneqitems(){       
+      def result = []
+      items().each{if(!it.isequipted())result << it}
       return result
     }
     

@@ -48,9 +48,11 @@ class UnitController {
     }
 
     def equipt = {
+        if (params.unit.id != "null"){
         def ui = new Usritm()
-        def unit = Unit.get(params.unit)       
+        def unit = Unit.get(params.unit.id)
         ui.linkunit(params.useritemid,unit).save()
+        }
         redirect(action: "items")
 
     }
@@ -60,6 +62,14 @@ class UnitController {
         def ui = new Usritm()
         ui.unlinkunit(params.usritemid)
         redirect(action: "items")
+
+    }
+
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def unequiptuv = {
+        def ui = new Usritm()
+        ui.unlinkunit(params.usritemid)
+        redirect(action: "unitview", params:[unitid:params.unitid])
 
     }
 

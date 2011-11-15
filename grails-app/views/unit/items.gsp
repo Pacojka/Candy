@@ -10,8 +10,8 @@
           <td width="150px"><h2>Item</h2></td>
           <td width="80px">Schaden</td>
           <td width="80px">Waffen Typ</td>
-          <td width="80px">Goldwert</td>
-          <td width="85px">Ausrüsten für:</td>
+          <td width="60px">Goldwert</td>
+          <td width="120px">Ausrüsten für:</td>
         </tr>
       </table> 
       </br>

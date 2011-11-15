@@ -70,9 +70,20 @@ input, select, textarea {
     margin: 2px 0;
     padding: 2px 4px;
 }
-select {
-    padding: 2px 2px 2px 0;
-}
+select  {
+    font: 11px verdana, arial, helvetica, sans-serif;
+    background-color: #fcfcfc;
+    color: #1C1C1C;
+    padding: 0px;
+    border:0px;
+    width: 8em;
+    }
+
+option  {
+   padding: 11px  33px;
+   background-color: green;
+   background-position:  left;
+   background-repeat: no-repeat   }
 textarea {
     width: 250px;
     height: 150px;
