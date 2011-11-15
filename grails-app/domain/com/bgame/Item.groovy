@@ -22,7 +22,14 @@ class Item {
         nah("Nahkampf"),
         fer("Fernkampf"),
         mag("Magie"),
-        rust("Ruestung")
+        hlm("HELM"),
+        amu("AMULET"),
+        rust("RÜSTUNG"),
+        hnd("HANDSCHUH"),
+        bns("BEINSCHUTZ"),
+        stf("STIEFEL")       
+
+
         final String value
         ItemEnum (String value) {
             this.value = value

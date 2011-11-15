@@ -68,22 +68,82 @@ class Unit {
             max += it.item.dmgmax  
         }
         if ((min+max)>0){
-        System.out.println("\n\n dmgmin:"+min+" dmgmax:"+max+"\n\n")
-        dmg += min
-        dmg += random.nextInt((max-min))
+            System.out.println("\n\n dmgmin:"+min+" dmgmax:"+max+"\n\n")
+            dmg += min
+            dmg += random.nextInt((max-min))
         }
         return dmg
     }
 
     def haswpn(){
         def rueckgabe = false
-        this.items().each{if ((it.item.item_type.getKey() == "nah") || (it.item.item_type.getKey() == "fer")|| (it.item.item_type.getKey() == "mag")){
+        this.items().each{
+            if ((it.item.item_type.getKey() == "nah") || (it.item.item_type.getKey() == "fer")|| (it.item.item_type.getKey() == "mag")){
                 rueckgabe = true
             }
         }
         rueckgabe
     }
 
+    def hashlm(){
+        def rueckgabe = false
+        this.items().each{
+            if (it.item.item_type.getKey() == "hlm"){
+                rueckgabe = true
+            }
+        }
+        rueckgabe
+    }
+
+        def hasamu(){
+        def rueckgabe = false
+        this.items().each{
+            if (it.item.item_type.getKey() == "amu"){
+                rueckgabe = true
+            }
+        }
+        rueckgabe
+    }
+
+    def hasrust(){
+        def rueckgabe = false
+        this.items().each{
+            if (it.item.item_type.getKey() == "rust"){
+                rueckgabe = true
+            }
+        }
+        rueckgabe
+    }
+
+        def hashnd(){
+        def rueckgabe = false
+        this.items().each{
+            if (it.item.item_type.getKey() == "hnd"){
+                rueckgabe = true
+            }
+        }
+        rueckgabe
+    }
+
+        def hasbns(){
+        def rueckgabe = false
+        this.items().each{
+            if (it.item.item_type.getKey() == "bns"){
+                rueckgabe = true
+            }
+        }
+        rueckgabe
+    }
+
+        def hasstf(){
+        def rueckgabe = false
+        this.items().each{
+            if (it.item.item_type.getKey() == "stf"){
+                rueckgabe = true
+            }
+        }
+        rueckgabe
+    }
 
     def getlvl(exp){
         def expToNextlvl = 100

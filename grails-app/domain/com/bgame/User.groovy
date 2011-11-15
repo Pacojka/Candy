@@ -53,16 +53,85 @@ class User {
         return this.useritems.collect{it}.sort{it.id}
     }
     
-    def nowpnunis(){
-      def result = []
-      units().each{if(!it.haswpn())result << it}
-      return result
+    def nowpnunits(){
+        def result = []
+        units().each{if(!it.haswpn())result << it}
+        return result
     }
 
+    def nohlmunits(){
+        def result = []
+        units().each{if(!it.hashlm())result << it}
+        return result
+    }
+
+    def noamuunits(){
+        def result = []
+        units().each{if(!it.hasamu())result << it}
+        return result
+    }
+
+    def norustunits(){
+        def result = []
+        units().each{if(!it.hasrust())result << it}
+        return result
+    }
+
+    def nohndunits(){
+        def result = []
+        units().each{if(!it.hashnd())result << it}
+        return result
+    }
+
+    def nobnsunits(){
+        def result = []
+        units().each{if(!it.hasbns())result << it}
+        return result
+    }
+
+    def nostfunits(){
+        def result = []
+        units().each{if(!it.hasstf())result << it}
+        return result
+    }
+
+
+    def getitemunits(type){
+        def result = []
+
+        switch ( type ) {
+
+            case "hlm":
+            result = norustunits()
+            break
+            case "amu":
+            result = norustunits()
+            break
+            case "rust":
+            result = norustunits()
+            break
+            case "hnd":
+            result = norustunits()
+            break
+            case "bns":
+            result = norustunits()
+            break
+            case "stf":
+            result = norustunits()
+            break
+
+            default:
+            result = nowpnunits()
+        }
+        result
+    }
+
+
+
     def uneqitems(){       
-      def result = []
-      items().each{if(!it.isequipted())result << it}
-      return result
+        def result = []
+        items().each{if(!it.isequipted())result << it}
+        return result
     }
     
 

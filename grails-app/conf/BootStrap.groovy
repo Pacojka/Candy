@@ -18,11 +18,14 @@ class BootStrap {
         def item4 = new Item(itemname: 'Holzbein',item_type: 'nah', dmgmin: 2,dmgmax:2,defens:0,gold:1).save()
         def i4 = Item.findByItemname('Holzbein')
         
-        def item5 = new Item(itemname: 'Doppelrammler',item_type: 'nah', dmgmin: 6,dmgmax:10,defens:2,gold:20).save()
+        def item5 = new Item(itemname: 'Doppelrammler',item_type: 'nah', dmgmin: 6,dmgmax:10,defens:0,gold:20).save()
         def i5 = Item.findByItemname('Doppelrammler')
         
-        def item6 = new Item(itemname: 'Periode',item_type: 'nah', dmgmin: 70,dmgmax:100,defens:2,gold:999).save()
+        def item6 = new Item(itemname: 'Periode',item_type: 'nah', dmgmin: 70,dmgmax:100,defens:0,gold:999).save()
         def i6 = Item.findByItemname('Periode')
+
+        def item7 = new Item(itemname: 'Propellermuetze',item_type: 'rust', dmgmin: 0,dmgmax:0,defens:3,gold:5).save()
+        def i7 = Item.findByItemname('Propellermuetze')
 /*ITEMS*/
 
 /*ADMIN*/
@@ -58,7 +61,7 @@ class BootStrap {
         ua21.link(i2,paco).save()
         def ua22 = new com.bgame.Usritm()//UNITS MIT EINBEZIEHEN!!!!!
         ua22 = ua22.link(i1,paco).save()
-
+        
         def ua23 = new com.bgame.Usritm()
         ua23 = ua23.link(i6,paco).save()
     /*Units*/
