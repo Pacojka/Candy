@@ -89,8 +89,8 @@ ${unit.curhp}/${unit.maxhp}
       <g:render template="unititem" collection="${items}" var="useritem"/>
       <br>
 
-      ignorieeeeeeren!
-      <g:set var="uneqitems" value="${unit.user.uneqitems()}" />
+      Ausrüsten:
+      <g:set var="uneqitems" value="${unit.notequipteditemtypes()}" />
  <g:form action="equipt">
         <g:hiddenField name="unit.id" value="${unit.id}" />
         <g:select name="useritemid" noSelection="${['null':'Select One...']}" from="${uneqitems}" optionKey="id" />

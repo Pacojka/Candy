@@ -8,7 +8,16 @@ class Item {
     int defens = 0
     int gold = 3
     static hasMany = [useritems:Usritm]
-
+/*itemname
+Itemtyp
+dmgmin
+dmgmax
+defens
+gold
+str
+ges
+inz
+*/
     String toString(){
         return "${itemname}"
     }

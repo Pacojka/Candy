@@ -34,10 +34,9 @@ class BootStrap {
         def i9 = Item.findByItemname('Jute Handschuh')
 
         def item10 = new Item(itemname: 'Hölzerne Schienbeinschoner',item_type: 'bns', dmgmin: 0,dmgmax:0,defens:3,gold:5).save()
-        def i10 = Item.findByItemname('Hölzerne Schienbeinschoner')
+
 
         def item11 = new Item(itemname: 'Sneakers',item_type: 'stf', dmgmin: 0,dmgmax:0,defens:2,gold:4).save()
-        def i11 = Item.findByItemname('Sneakers')
 
         def item12 = new Item(itemname: 'Stoffmantel',item_type: 'stf', dmgmin: 0,dmgmax:0,defens:2,gold:4).save()
         def i12 = Item.findByItemname('Stoffmantel')

@@ -8,14 +8,7 @@ class Usritm {
 
     //static belongsTo = [user:User,item:Item]
     String toString(){
-        def ergebnis = "wuut"
-        if((user != null) && (item != null)){
-            ergebnis = this.user.username+" besitzt " + this.item.itemname
-        }else if((user = null) && (item != null)){
-            ergebnis = "user null und item " + this.item.itemname
-        }else if((user != null) && (item = null)){
-            ergebnis = "item null und user " + this.user.username
-        }else ergebnis = "beide nulll"
+        def ergebnis = item.itemname+": Dmg:"+item.dmgmin+"-"+item.dmgmax+",Vert.:"+item.defens
         return ergebnis
     }
     
@@ -70,12 +63,5 @@ class Usritm {
         if(this.unit)result = true
         result
     }
-
-
-
-
-
-
-
 
 }

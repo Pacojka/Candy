@@ -52,11 +52,6 @@ class Unit {
         String getKey() { name() }
     }
 
-
-    def items(){
-        return this.useritems.collect{it}.sort{it.item.itemname}
-    }
-
     def dmg(){
         def dmg = this.str
         def min = 0
@@ -65,15 +60,57 @@ class Unit {
 
         items().each{
             min += it.item.dmgmin
-            max += it.item.dmgmax  
+            max += it.item.dmgmax
         }
-        if ((min+max)>0){           
+        if ((min+max)>0){
             dmg += min
             dmg += random.nextInt((max-min))
         }
         return dmg
     }
 
+
+    def items(){
+        return this.useritems.collect{it}.sort{it.item.itemname}
+    }
+    def notequipteditemtypes(){
+        def haswpn = haswpn()
+        def hashlm = hashlm()
+        def hasamu = hasamu()
+        def hasrust = hasrust()
+        def hashnd = hashnd()
+        def hasbns = hasbns()
+        def hasstf = hasstf()
+        def result = []
+        user.uneqitems().each{
+            switch ( it.item.item_type.getKey() ) {
+
+                case "hlm":
+                if(!hashlm)result << it
+                break
+                case "amu":
+                if(!hasamu)result << it
+                break
+                case "rust":
+                if(!hasrust)result << it
+                break
+                case "hnd":
+                if(!hashnd)result << it
+                break
+                case "bns":
+                if(!hasbns)result << it
+                break
+                case "stf":
+                if(!hasstf)result << it
+                break
+
+                default:
+                if(!haswpn)result << it
+            }
+        }
+        result
+    }
+  
     def haswpn(){
         def rueckgabe = false
         this.items().each{
@@ -94,7 +131,7 @@ class Unit {
         rueckgabe
     }
 
-        def hasamu(){
+    def hasamu(){
         def rueckgabe = false
         this.items().each{
             if (it.item.item_type.getKey() == "amu"){
@@ -114,7 +151,7 @@ class Unit {
         rueckgabe
     }
 
-        def hashnd(){
+    def hashnd(){
         def rueckgabe = false
         this.items().each{
             if (it.item.item_type.getKey() == "hnd"){
@@ -124,7 +161,7 @@ class Unit {
         rueckgabe
     }
 
-        def hasbns(){
+    def hasbns(){
         def rueckgabe = false
         this.items().each{
             if (it.item.item_type.getKey() == "bns"){
@@ -134,7 +171,7 @@ class Unit {
         rueckgabe
     }
 
-        def hasstf(){
+    def hasstf(){
         def rueckgabe = false
         this.items().each{
             if (it.item.item_type.getKey() == "stf"){
