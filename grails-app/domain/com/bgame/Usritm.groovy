@@ -30,9 +30,12 @@ class Usritm {
         {           
             if (u.unit != null) {
                 u.unit?.removeFromUseritems(u)
+                u.unit.setwtype("nah")
             }
             giveunit?.addToUseritems(u)
+            giveunit.setwtype(u.item.item_type.getKey())
             u.save()
+
         }
         return u
     }
@@ -42,8 +45,11 @@ class Usritm {
         def u = Usritm.findById(id)
         if (u)
         {
-            if (u.unit != null) u.unit?.removeFromUseritems(u)
-            u.save()
+            if (u.unit != null) {
+                u.unit.setwtype("nah")
+                u.unit?.removeFromUseritems(u)
+                u.save()
+            }
         }
     }
 

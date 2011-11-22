@@ -1,23 +1,18 @@
 package com.bgame
 
 class Item {
-    String itemname = "boooom"
+    String itemname = "NAMENVERgaeeeeben"
     ItemEnum item_type = "nah"
-    int dmgmin = 1
-    int dmgmax = 2
+    int dmgmin = 0
+    int dmgmax = 0
     int defens = 0
-    int gold = 3
+    int gold = 99999
+    int str = 0
+    int ges = 0
+    int inz = 0
+//    int spd = 0
     static hasMany = [useritems:Usritm]
-/*itemname
-Itemtyp
-dmgmin
-dmgmax
-defens
-gold
-str
-ges
-inz
-*/
+
     String toString(){
         return "${itemname}"
     }

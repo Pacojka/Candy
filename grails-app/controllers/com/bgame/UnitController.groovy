@@ -47,10 +47,20 @@ class UnitController {
 
     }
 
-    def equipt = {
-        if (params.unit.id != "null"){
+    def uvequipt = {
+        if (params.useritemid != "null"){
             def ui = new Usritm()
-            def unit = Unit.get(params.unit.id)
+            def unit = Unit.get(params.unitid)
+            ui.linkunit(params.useritemid,unit).save()
+        }
+        redirect(action: "unitview", params:[unitid:params.unitid])
+
+    }
+
+    def equipt = {
+        if (params.unitid != "null"){
+            def ui = new Usritm()
+            def unit = Unit.get(params.unitid)
             ui.linkunit(params.useritemid,unit).save()
         }
         redirect(action: "items")
@@ -88,7 +98,7 @@ class UnitController {
         def i = Item.findById(params.itemid)
         def ui = new Usritm()
         ui.link(i,usr)
-        redirect(action: "items")
+        redirect(action: "shop")
 
     }
 
@@ -116,11 +126,12 @@ class UnitController {
 
 
     def healteam (userteam) {
-        userteam.each {it.curhp = it.maxhp
-            it.recalcUnit()}
-
-
+        userteam.each {
+            it.curhp = it.maxhp
+            it.calchppr()
+        }
     }
+
     def fightsim(userteam, enemyteam) {
         def result = "" //rueckgabewert
         def roundcount = 0
@@ -183,16 +194,33 @@ class UnitController {
                             else{
                                 expgain = 1
                             }
-                            if(userteam[i].wtyp.value == "Nahkampf"){
+                            
+                            switch(userteam[i].wtyp.value){
+                                case "Nahkampf":
                                 userteam[i].nahexp += expgain
-                                result +=  userteam[i].name +" gets "+expgain+" Exp on Nahkampf. <br>"
-                            }else if(userteam[i].wtyp.value == "Fernkampf"){
+                                break
+                                case "Fernkampf":
                                 userteam[i].ferexp += expgain
-                                result +=  userteam[i].name +" gets "+expgain+" Exp on Fernkampf. <br>"
-                            }else if(userteam[i].wtyp.value == "Magie"){
+                                break
+                                case "Magie":
                                 userteam[i].magexp += expgain
-                                result +=  userteam[i].name +" gets "+expgain+" Exp on Magie. <br>"
+                                break
                             }
+                            result +=  userteam[i].name +" gets "+expgain+" Exp on "+userteam[i].wtyp.value+". <br>"
+                            /*
+                            if(userteam[i].wtyp.value == "Nahkampf"){
+                            userteam[i].nahexp += expgain
+                            result +=  userteam[i].name +" gets "+expgain+" Exp on Nahkampf. <br>"
+                            }else if(userteam[i].wtyp.value == "Fernkampf"){
+                            userteam[i].ferexp += expgain
+                            result +=  userteam[i].name +" gets "+expgain+" Exp on Fernkampf. <br>"
+                            }else if(userteam[i].wtyp.value == "Magie"){
+                            userteam[i].magexp += expgain
+                            result +=  userteam[i].name +" gets "+expgain+" Exp on Magie. <br>"
+                            }
+                             */
+
+
                             if(t2exppool >= expgain){
                                 t2exppool -= expgain
                             }else t2exppool = 0
@@ -283,20 +311,20 @@ class UnitController {
         }else if(t1count < 1){
             result += "Enemy "+ enemyteam[0].user.username+ " wins."
             if(t1exppool >= t2count){
-            def expgain =(int)(t1exppool/t2count)
-            enemyteam.each{
-                if(it.curhp >0){
-                    if(it.wtyp.value == "Nahkampf"){
-                        it.nahexp += expgain
-                    }else if(it.wtyp.value == "Fernkampf"){
-                        it.ferexp += expgain
-                    }else if(it.wtyp.value == "Magie"){
-                        it.magexp += expgain
+                def expgain =(int)(t1exppool/t2count)
+                enemyteam.each{
+                    if(it.curhp >0){
+                        if(it.wtyp.value == "Nahkampf"){
+                            it.nahexp += expgain
+                        }else if(it.wtyp.value == "Fernkampf"){
+                            it.ferexp += expgain
+                        }else if(it.wtyp.value == "Magie"){
+                            it.magexp += expgain
+                        }
+                        //it.recalcUnit()
                     }
-                    //it.recalcUnit()
                 }
-            }
-            result += "All alive Units from "+ enemyteam[0].user.username+ " get "+expgain+"Exp"
+                result += "All alive Units from "+ enemyteam[0].user.username+ " get "+expgain+"Exp"
             }
         }else{
             result += "something is wrong here: t1usercount:"+t1count+" t2enemycount:"+t2count

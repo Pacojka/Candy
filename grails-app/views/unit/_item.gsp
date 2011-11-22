@@ -22,7 +22,7 @@ ${useritem.unit.name}
 <g:set var="avunits" value="${useritem.user.getitemunits(unittype)}" />
       <g:form action="equipt">
         <g:hiddenField name="useritemid" value="${useritem.id}" />
-        <g:select name="unit.id" noSelection="${['null':'Select One...']}" from="${avunits}" optionKey="id" />
+        <g:select name="unitid" noSelection="${['null':'Select One...']}" from="${avunits}" optionKey="id" />
         <span class="button"><g:submitButton name="equipt" class="test" value="+" /></span>
       </g:form>
 
