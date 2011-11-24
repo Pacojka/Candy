@@ -7,7 +7,7 @@ class UnitController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def index = {
         def usrunits = lookupUser().units()
-        [userunits: usrunits]
+        [userunits: usrunits,usergold:lookupUser().getGold() ]
 
         //redirect(action: "userunits", params: params)
     }

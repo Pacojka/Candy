@@ -11,6 +11,7 @@ class User {
     boolean accountLocked
     boolean passwordExpired
     int unitcount = 0
+    int gold = 100
     static hasMany = [useritems:Usritm, units:Unit]
 
     String toString(){
@@ -63,6 +64,10 @@ class User {
         def result = []
         units().each{if(!it.hashlm())result << it}
         return result
+    }
+
+    def getGold(){
+        this.gold
     }
 
     def noamuunits(){

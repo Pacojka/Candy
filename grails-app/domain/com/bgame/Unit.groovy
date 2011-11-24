@@ -5,6 +5,7 @@ class Unit {
     User user
     boolean main = false
     Date dateCreated
+    int gold = 25
     MyEnum wtyp = "nah"
 
     int ferexp = 125
