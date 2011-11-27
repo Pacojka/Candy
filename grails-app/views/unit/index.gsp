@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="body1">
-      <h2>Gold: ${user.gold}</h2>
+      <h2>Gold: ${gold}</h2>
       <table cellspacing="0">
         <tr>
           <td width="150px"><h2>Einheit</h2></td>

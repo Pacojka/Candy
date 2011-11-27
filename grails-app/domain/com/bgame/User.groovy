@@ -12,13 +12,14 @@ class User {
     boolean accountLocked
     boolean passwordExpired
     int unitcount = 0
-    int gold
+    Value gold
     static hasMany = [useritems:Usritm, units:Unit]
+    static embedded = ['gold']
 
     String toString(){
         return "${username}"
     }
-        
+    
     static constraints = {
         username blank: false, unique: true
         password blank: false
@@ -65,19 +66,7 @@ class User {
         def result = []
         units().each{if(!it.hashlm())result << it}
         return result
-    }
-
-    def getGold(){
-        return this.gold.collect{it}
-    }
-    def addGold(value){
-        System.out.println("is drinne mit this.gold:"+this.gold+"\n")
-        this.gold += value
-        System.out.println("danach:"+this.gold+"\n\n")
-    }
-    def subGold(value){
-        this.gold -= (int)value
-    }
+    } 
 
     def noamuunits(){
         def result = []

@@ -38,13 +38,13 @@ class BootStrap {
         /*ITEMS*/
 
         /*ADMIN*/
-        def testUser = new User(username: 'me', enabled: true, password: 'p')
+        def testUser = new User(username: 'me', enabled: true, password: 'p', gold:new Value())
         testUser.save(flush: true)
         /*ADMIN*/
 
         /*USER+Items+Units*/
         /*USER*/
-        def testUser2 = new User(username: 'xian', enabled: true, password: 'p').save()
+        def testUser2 = new User(username: 'xian', enabled: true, password: 'p', gold:new Value()).save()
         def xian = User.findByUsername('xian')
         /*Items*/
         def ua11 = new com.bgame.Usritm()
@@ -62,7 +62,7 @@ class BootStrap {
 
         /*USER+Items+Units*/
         /*USER*/
-        def testUser3 = new User(username: 'paco', enabled: true, password: 'p').save()
+        def testUser3 = new User(username: 'paco', enabled: true, password: 'p', gold:new Value()).save()
         def paco = User.findByUsername('paco')
         /*Items*/
 
@@ -90,7 +90,7 @@ class BootStrap {
 
         /*USER+Items+Units*/
         /*USER*/
-        def testUser4 = new User(username: 'janis', enabled: true, password: 'p').save()
+        def testUser4 = new User(username: 'janis', enabled: true, password: 'p', gold:new Value()).save()
         def janis = User.findByUsername('janis')
         /*Items*/
         def ua31 = new com.bgame.Usritm()

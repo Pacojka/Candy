@@ -7,7 +7,7 @@ class UnitController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def index = {
         def usrunits = lookupUser().units()
-        [userunits: usrunits,user:lookupUser()]
+        [userunits: usrunits,gold:lookupUser().gold.get()]
 
         //redirect(action: "userunits", params: params)
     }
@@ -15,14 +15,14 @@ class UnitController {
     def enemys = {
         def usrenemys = getEnemyUsers(lookupUser())
 
-        [userenemys: usrenemys]
+        [userenemys: usrenemys,gold:lookupUser().gold.get()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def fightquestion = {
         def usr = lookupUser()
         def enemy = User.get(params.enemyid)
-        [user: usr,enemy: enemy ]
+        [user: usr,enemy: enemy ,gold:lookupUser().gold.get()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -30,13 +30,13 @@ class UnitController {
         def usrunits = lookupUser().units()
         def enemyunits = User.get(params.enemyid).units()
         def result = fightsim(usrunits, enemyunits)
-        [result: result]
+        [result: result,gold:lookupUser().gold.get()]
 
     }
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def sellquestion = {
         def ui = Usritm.findById(params.useritemid)
-        [useritem: ui]
+        [useritem: ui,gold:lookupUser().gold.get()]
     }
     
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -45,7 +45,7 @@ class UnitController {
         def ui = new Usritm()
         ui.unlink(params.useritemid,usr)
         def g =Integer.parseInt(params.gold)
-        usr.addGold(g)
+        usr.gold.add(g)
         System.out.println(usr.gold)
         usr.save(flush: true)
         redirect(action: "items")
@@ -92,18 +92,21 @@ class UnitController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def shop = {
         def allitems = getShopItems()
-        [items: allitems ]
+        [items: allitems ,gold:lookupUser().gold.get()]
 
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def shopbuy = {
         def allitems = getShopItems()
-
         def usr = lookupUser()
         def i = Item.findById(params.itemid)
-        def ui = new Usritm()
-        ui.link(i,usr)
+        if(usr.gold.hasleft(i.gold) == true){
+            def ui = new Usritm()
+            ui.link(i,usr)
+            usr.gold.sub(i.gold)
+            }
+
         redirect(action: "shop")
 
     }
@@ -120,13 +123,13 @@ class UnitController {
     def unitview = {
         def thisunit = getUserUnit(params.unitid)
         def items = thisunit.useritems.collect{it}
-        [unit: thisunit,items: items]
+        [unit: thisunit,items: items,gold:lookupUser().gold.get()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def items = {
         def hisuseritems = lookupUser().items()
-        [useritems: hisuseritems]
+        [useritems: hisuseritems,gold:lookupUser().gold.get()]
     }
 
 
@@ -422,7 +425,7 @@ class UnitController {
     def createUnit = {
         def unitInstance = new Unit()
         unitInstance.properties = params
-        return [unitInstance: unitInstance]
+        return [unitInstance: unitInstance,gold:lookupUser().gold.get()]
     }
 
     def saveunit = {
