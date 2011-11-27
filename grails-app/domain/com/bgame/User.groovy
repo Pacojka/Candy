@@ -1,5 +1,6 @@
 package com.bgame
 
+
 class User {
 
     transient springSecurityService
@@ -11,7 +12,7 @@ class User {
     boolean accountLocked
     boolean passwordExpired
     int unitcount = 0
-    int gold = 100
+    int gold
     static hasMany = [useritems:Usritm, units:Unit]
 
     String toString(){
@@ -67,7 +68,15 @@ class User {
     }
 
     def getGold(){
-        this.gold
+        return this.gold.collect{it}
+    }
+    def addGold(value){
+        System.out.println("is drinne mit this.gold:"+this.gold+"\n")
+        this.gold += value
+        System.out.println("danach:"+this.gold+"\n\n")
+    }
+    def subGold(value){
+        this.gold -= (int)value
     }
 
     def noamuunits(){

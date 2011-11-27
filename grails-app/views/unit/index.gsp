@@ -5,33 +5,27 @@
 
   </head>
   <body>
-    
-     
-    
-    
     <div id="body1">
-      
-      
-      
+      <h2>Gold: ${user.gold}</h2>
       <table cellspacing="0">
         <tr>
           <td width="150px"><h2>Einheit</h2></td>
           <td width="80px">HP</td>
-          
-          
+
+
         </tr>
       </table>
-      
-      
+
+
       <g:render template="units" collection="${userunits}" var="unit"/>
       <g:link controller='unit' action='createUnit'>Neue Einheit</g:link>
       </br>
       <g:link controller='unit' action='heal'>Einheiten heilen</g:link>
-   </br>
-    </br>
-    </br>
-    </br>
+      </br>
+      </br>
+      </br>
+      </br>
     </div>
-    
+
   </body>
 </html>

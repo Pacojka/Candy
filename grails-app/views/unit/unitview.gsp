@@ -93,7 +93,7 @@ ${unit.curhp}/${unit.maxhp}
       <g:set var="uneqitems" value="${unit.notequipteditemtypes()}" />
  <g:form action="uvequipt">
         <g:hiddenField name="unitid" value="${unit.id}" />
-        <g:select name="useritemid" noSelection="${['null':'Select One...']}" from="${uneqitems}" optionKey="id" />
+        <g:select name="useritemid" noSelection="${['null':'auswählen...']}" from="${uneqitems}" optionKey="id" />
         <span class="button"><g:submitButton name="equipt" class="test" value="+" /></span>
       </g:form>
     </div>

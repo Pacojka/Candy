@@ -7,7 +7,7 @@ class UnitController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def index = {
         def usrunits = lookupUser().units()
-        [userunits: usrunits,usergold:lookupUser().getGold() ]
+        [userunits: usrunits,user:lookupUser()]
 
         //redirect(action: "userunits", params: params)
     }
@@ -35,19 +35,25 @@ class UnitController {
     }
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def sellquestion = {
-        def ui = Usritm.findById(params.usritemid)
-        [useritem: ui ]
+        def ui = Usritm.findById(params.useritemid)
+        [useritem: ui]
     }
+    
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def sell = {
         def usr = lookupUser()
         def ui = new Usritm()
-        ui.unlink(params.usritemid,usr)
+        ui.unlink(params.useritemid,usr)
+        def g =Integer.parseInt(params.gold)
+        usr.addGold(g)
+        System.out.println(usr.gold)
+        usr.save(flush: true)
         redirect(action: "items")
 
     }
 
     def uvequipt = {
+
         if (params.useritemid != "null"){
             def ui = new Usritm()
             def unit = Unit.get(params.unitid)
