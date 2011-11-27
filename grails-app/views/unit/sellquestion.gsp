@@ -13,9 +13,6 @@
         <g:hiddenField name="gold" value="${useritem.item.gold}" />
         <span class="button"><g:submitButton name="sellquestion" class="notest" value="verkaufen" /></span>
       </g:form>
-
-
-      <g:link action="sell" params="[usritemid:useritem.id, gold:useritem.item.gold]">verkaufen</g:link>
       <br>
     </div>
   </body>

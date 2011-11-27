@@ -46,7 +46,6 @@ class UnitController {
         ui.unlink(params.useritemid,usr)
         def g =Integer.parseInt(params.gold)
         usr.gold.add(g)
-        System.out.println(usr.gold)
         usr.save(flush: true)
         redirect(action: "items")
 
@@ -105,7 +104,7 @@ class UnitController {
             def ui = new Usritm()
             ui.link(i,usr)
             usr.gold.sub(i.gold)
-            }
+        }
 
         redirect(action: "shop")
 
@@ -153,6 +152,7 @@ class UnitController {
         if (t2count > unitcount) {
             unitcount = t2count
         }
+        def goldpool = 0
         def t1exppool = 1
         def t2exppool = 1
         def t1hppool = 1
@@ -178,6 +178,9 @@ class UnitController {
             result += "Round."+roundcount+" begins:<br>"
 
             for (int i = 0; i < unitcount;++i){
+
+                System.out.println("\ngoldpool: "+goldpool)
+
                 def rand = -1
                 if (userteam.size() >= i+1 && t2count > 0 && t1count > 0){
                     if(userteam[i].curhp >0){
@@ -242,6 +245,15 @@ class UnitController {
                         if (enemyteam[rand].curhp < 1){
                             result += enemyteam[rand].name +"["+enemyteam[rand].curhp+"/"+enemyteam[rand].maxhp+ "] died.<br><br>"
                             t2count--
+                            def money = enemyteam[rand].gold
+                            if(money >= 4){
+                                def unitmoney = (int)(money/4)
+                                userteam[i].gold += unitmoney
+                                money -= unitmoney
+
+                            }
+                            enemyteam[rand].gold = 0
+                            goldpool += money
                         }
                         else{
                             result += "<br><br>"
@@ -290,6 +302,19 @@ class UnitController {
                         if (userteam[rand].curhp < 1){
                             result += userteam[rand].name +"["+userteam[rand].curhp+"/"+userteam[rand].maxhp+ "] died.<br><br>"
                             t1count--
+                            def money = userteam[rand].gold
+                            if(money >= 4){
+                                def unitmoney = (int)(money/4)
+                                enemyteam[i].gold += unitmoney
+                                money -= unitmoney
+
+                            }
+                            userteam[rand].gold = 0
+                            goldpool += money
+
+
+
+
                         }
                         else{
                             result += "<br><br>"
@@ -300,6 +325,14 @@ class UnitController {
         }
         if (t2count < 1){
             result += "Attacker "+ userteam[0].user.username+ " wins.<br>"
+
+            if(goldpool > 0){
+                result += userteam[0].user.username+ " gets "+goldpool+" Gold."
+                userteam[0].user.gold.add(goldpool)
+            }
+
+
+
             if(t2exppool >= t1count){
                 def expgain =(int)(t2exppool/t1count)
                 userteam.each{
@@ -314,11 +347,17 @@ class UnitController {
                         //it.recalcUnit()
                     }
                 }
-                result += "All alive Units from "+ userteam[0].user.username+ " get "+expgain+"Exp"                
+                result += "All alive Units from "+ userteam[0].user.username+ " get "+expgain+"Exp.<br>"
+
             }
 
         }else if(t1count < 1){
             result += "Enemy "+ enemyteam[0].user.username+ " wins."
+            if(goldpool > 0){
+                result += enemyteam[0].user.username+ " gets "+goldpool+" Gold."
+                enemyteam[0].user.gold.add(goldpool)
+            }
+
             if(t1exppool >= t2count){
                 def expgain =(int)(t1exppool/t2count)
                 enemyteam.each{

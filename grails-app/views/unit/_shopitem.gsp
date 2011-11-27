@@ -9,7 +9,23 @@
       <td width="80px" bgcolor="#1C1C1C">${item.gold}</td>
  
   
-    <td bgcolor="#1C1C1C"><g:link actio<g:link action="shopbuy" params="[itemid:item.id]">kaufen</g:link></td>
+    <td width="60px" bgcolor="#1C1C1C">
+
+    <g:if test="${gold >= item.gold}">
+          <g:form action="shopbuy">
+        <g:hiddenField name="itemid" value="${item.id}" />
+        <span class="button"><g:submitButton name="shopbuy" class="test" value="kaufen" /></span>
+      </g:form>
+ </g:if>
+    <g:else>
+      -
+    </g:else>
+
+
+
+
+    
+    </td>
     </tr>
   </table>
   </br>

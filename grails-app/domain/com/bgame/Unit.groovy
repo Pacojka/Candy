@@ -122,7 +122,7 @@ class Unit {
         rueckgabe
     }
     def setwtype(newWtype){
-        System.out.println("\n so hier wegen setWtype\nnewWtype: "+newWtype+"\n gerade wtype: "+this.wtyp.getKey())
+    //    System.out.println("\n so hier wegen setWtype\nnewWtype: "+newWtype+"\n gerade wtype: "+this.wtyp.getKey())
         if (newWtype != this.wtyp.getKey()){
             this.wtyp = newWtype
         }
@@ -195,7 +195,7 @@ class Unit {
         for (i; exp > expToNextlvl;++i){
             expTocurrlvl = expToNextlvl
             expToNextlvl+=25*(i*i)
-            System.out.println("\nfolgendes:\n exptoCurr:"+expTocurrlvl+" \nexptoNext:"+expToNextlvl+" \nund exp:"+exp)
+           // System.out.println("\nfolgendes:\n exptoCurr:"+expTocurrlvl+" \nexptoNext:"+expToNextlvl+" \nund exp:"+exp)
         }
         ((1-(expToNextlvl-exp)/(expToNextlvl-expTocurrlvl))+(i-2))
     }
