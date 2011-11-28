@@ -1,7 +1,7 @@
 package com.bgame
 
 class Value {
-    int val = 50
+    int val = 1000
 
     def get(){
         this.val

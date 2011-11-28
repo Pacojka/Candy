@@ -53,6 +53,18 @@ class Unit {
         String getKey() { name() }
     }
 
+    def healcost(){
+        def cost
+        if(curhp == 0) cost = (int)(maxhp*0.2)
+        else cost = (int)(((maxhp-curhp)*0.1))
+        return cost
+    }
+
+        def heal(){
+        curhp = maxhp
+        this.calchppr()
+    }
+
     def dmg(){
         def dmg = this.str
         def min = 0

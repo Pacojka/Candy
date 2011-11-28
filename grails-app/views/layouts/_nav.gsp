@@ -7,7 +7,12 @@
     </br>
     <g:link controller='unit' action='items'>Items</g:link>
     </br>
+
+    <g:link controller='unit' action='healer'>Heiler</g:link>
+    </br>
     <g:link controller='unit' action='shop'>Shop</g:link>
+    </br>
+    <g:link controller='unit' action='createUnit'>Einheit anheuern</g:link>
 
 
   </div>

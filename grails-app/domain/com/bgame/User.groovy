@@ -50,12 +50,20 @@ class User {
     def units(){
         return this.units.collect{it}.sort {it.dateCreated}
     }
-
+    def nextunitcost(){
+        unitcount*unitcount*unitcount*100
+    }
 
     def items(){
         return this.useritems.collect{it}.sort{it.id}
     }
-    
+
+    def noMaxHpUnits(){
+        def result = []
+        units().each{if(it.curhp < it.maxhp)result << it}
+        return result
+    }
+
     def nowpnunits(){
         def result = []
         units().each{if(!it.haswpn())result << it}

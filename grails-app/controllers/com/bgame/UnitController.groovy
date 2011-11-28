@@ -110,13 +110,6 @@ class UnitController {
 
     }
 
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
-    def heal = {
-        def usrunits = lookupUser().units()
-        healteam(usrunits)
-        redirect(action: "index")
-    }
-
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def unitview = {
@@ -131,7 +124,19 @@ class UnitController {
         [useritems: hisuseritems,gold:lookupUser().gold.get()]
     }
 
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def healer = {
+        def usrunits = lookupUser().noMaxHpUnits()
+        [userunits: usrunits,gold:lookupUser().gold.get()]
+    }
 
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def healunit = {
+        def unit = Unit.get(params.unitid)
+        lookupUser().gold.sub(unit.healcost())
+        unit.heal()
+        redirect(action: "healer")
+    }
 
     def healteam (userteam) {
         userteam.each {
@@ -179,7 +184,7 @@ class UnitController {
 
             for (int i = 0; i < unitcount;++i){
 
-                System.out.println("\ngoldpool: "+goldpool)
+                //System.out.println("\ngoldpool: "+goldpool)
 
                 def rand = -1
                 if (userteam.size() >= i+1 && t2count > 0 && t1count > 0){
@@ -464,7 +469,7 @@ class UnitController {
     def createUnit = {
         def unitInstance = new Unit()
         unitInstance.properties = params
-        return [unitInstance: unitInstance,gold:lookupUser().gold.get()]
+        return [unitInstance: unitInstance,gold:lookupUser().gold.get(), costnext:lookupUser().nextunitcost()]
     }
 
     def saveunit = {
@@ -484,6 +489,7 @@ class UnitController {
         if (unitInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'unit.label', default: 'Unit'), unitInstance.id])}"
             redirect(action: "index")
+            loggeduser.gold.sub(loggeduser.nextunitcost())
             loggeduser.unitcount ++
         }
         else {
