@@ -1,8 +1,8 @@
 package com.bgame
 
 class Map {
-    int x
-    int y
+    int xaxis
+    int yaxis
     String typ = "Feld"
 
     static constraints = {
@@ -13,5 +13,5 @@ class Map {
             return "${typ}"
         }
         //allfields.sort(id)
-        allfields
+        //allfields
     }

@@ -6,37 +6,68 @@ class BootStrap {
         /*map erzeugen*/
         def random = new Random()
         def field
-        def fieldtext
-        for (int y = 0; y < 50;++y){
-            for (int x = 0; x < 50;++x){
-                rand = random.nextInt(5)
-                fieldtext = randomField()
-                field = new Map(x:x,y:y,typ:fieldtext).save()
-                //                System.out.println(fieldtext)
+        def zufall
+        def fieldtop
+        def fieldleft
+        def zufall_feld
+        def fieldtext = "penis"
+        def possible_fields=["Wald","Gebirge","Feld","Wueste","Dörfchen"]
+        for (int ycor = 0; ycor < 50;++ycor){
+            for (int xcor = 0; xcor < 50;++xcor){
+                fieldtop = Map.findByXaxisAndYaxis(xcor,ycor-1)
+                fieldleft = Map.findByXaxisAndYaxis(xcor-1,ycor)
+                zufall=random.nextInt(3)
+                if(fieldtop && fieldleft){
+                    switch(zufall){
+                        case 0:
+                        fieldtext=fieldleft.typ
+                        break
+                        case 1:
+                        fieldtext=fieldtop.typ
+                        break
+                        default:
+                        zufall_feld = random.nextInt(5)
+                        fieldtext = possible_fields[zufall_feld]
+                    }
+                }else if(fieldtop){
+                    switch(zufall){
+                        case 1:
+                        fieldtext=fieldtop.typ
+                        break
+                        default:
+                        zufall_feld = random.nextInt(5)
+                        fieldtext = possible_fields[zufall_feld]
+                    }
+                }
+                else if(fieldleft){
+                    switch(zufall){
+                        case 0:
+                        fieldtext=fieldleft.typ
+                        break
+                        default:
+                        zufall_feld = random.nextInt(5)
+                        fieldtext = possible_fields[zufall_feld]
+                    }
+                }else{
+                    zufall_feld = random.nextInt(5)
+                    fieldtext = possible_fields[zufall_feld]
+                }
+
+                field = new Map(xaxis:xcor,yaxis:ycor,typ:fieldtext).save()
             }
         }
-        /*randomField
-         *
-         *zufall=random(2)
-         *for zufall=1
-         *  fieldtext[this]=fieldtext[this(x-1)]
-         *for zufall=2
-         *  fieldtext[this]=fieldtext[this(y-1)]
-         *for zufall=3
-         *  zufall_feld = random(5)
-         *  string[]={Wald,Gebirge,Feld,Wueste,Dörfchen}
-         *        fieldtext[this]=string[zufalls_feld]
-         **/
+    
+        
 
-  /*
-   *            System.out.println("\n\n\n nun collection machen wa\n\n\n")
+        /*
+         *            System.out.println("\n\n\n nun collection machen wa\n\n\n")
 
         def allfields = Map.withCriteria {
-            ge("x",0)
+        ge("x",0)
         }
 
         allfields.each{System.out.println(it)}
-*/
+         */
 
         /*ROLES*/
         def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)

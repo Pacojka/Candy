@@ -490,9 +490,9 @@ class UnitController {
 def getfields(xcor,ycor,range){
 
         def allfields = Map.withCriteria {
-            between("x",xcor-range,xcor+range)
+            between("xaxis",xcor-range,xcor+range)
             and {
-                between("y", ycor-range, ycor+range)
+                between("yaxis", ycor-range, ycor+range)
             }
         }
         //System.out.println("nach raussuchen vor liste ausgeben")
