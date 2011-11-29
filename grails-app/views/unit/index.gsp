@@ -12,7 +12,7 @@
       <table cellspacing="0">
         <tr>
           <td width="150px"><h2>Einheit</h2></td>
-          <td width="80px">HP</td>
+          <td width="80px"><h2>HP</h2></td>
 
 
         </tr>
