@@ -15,13 +15,19 @@
        <table cellspacing="0">
         <tr>
           <td width="150px"><h2>Einheit</h2></td>
-          <td width="300px">HP</td>
-          <td width="10px">Kosten</td>
+          <td width="320px">HP</td>
+          <td width="50px">Kosten</td>
 
 
         </tr>
       </table>
         <g:render template="healunits" collection="${userunits}" var="unit"/>
+        
+        
+        
+        
+        
+        
     </g:if>
     <g:else>
       <h2>deinen Einheiten geht es gut!</h2>

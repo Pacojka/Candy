@@ -44,8 +44,8 @@ h1 {
 }
 
 h2 {
-    color: #D8D8D8;
-    font-weight: normal;
+    
+    font-weight: bold;
     font-size: 14px;
     color:#848484;
 
@@ -359,7 +359,7 @@ a.header-main:link, a.header-main:visited {
 }
 
 #table { 
-    width: 600px;
+    width: 650px;
     margin-top: 16px;
     margin-left: 0px;
     

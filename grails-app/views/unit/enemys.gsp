@@ -10,7 +10,7 @@
          <table cellspacing="0">
         <tr>
           <td width="150px"><h2>Gegner</h2></td>
-          <td width="80px">Einheiten</td>
+          <td width="80px"><h2>Einheiten</h2></td>
         </tr>
       </table>
       <g:render template="enemy" collection="${userenemys}" var="enemy"/> 

@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="body1">
-      Jojojo <sec:username/>! Your Team looks fine now. Hp full refreshed.
+      Jojojo <sec:username/>Team wieder am Start.
       <br>
     
     </div>

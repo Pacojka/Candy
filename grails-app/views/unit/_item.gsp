@@ -12,13 +12,13 @@
 
       <g:form action="unequipt">
         <p>
-        <g:hiddenField name="usritemid" value="${useritem.id}" style="position:fixed;"/>
-${useritem.unit.name}
+        <g:hiddenField name="usritemid" value="${useritem.id}" style="position:static;"/>
+
         
-        
+        <g:submitButton disabled="true" name="sellquestion" class="test" value="${useritem.unit.name}" style="width: 90px; cursor: default; font-weight: bold;  background-color: #000000; color: #606060; border: 1px solid #606060; " />
         
 
-        <g:submitButton name="unequipt" class="test" value="-" style="margin-top: 0px;margin-left:90px;cursor: pointer; font-weight: bold; width: 20px; background-color: #000000; color: #606060; border: 1px solid #606060; "/>
+        <g:submitButton name="unequipt" class="test" value="-" style="cursor: pointer; font-weight: bold; width: 20px; background-color: #000000; color: #606060; border: 1px solid #606060; "/>
         </p>
       </g:form>
 
