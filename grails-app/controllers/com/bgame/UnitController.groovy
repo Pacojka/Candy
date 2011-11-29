@@ -134,6 +134,7 @@ class UnitController {
     def healunit = {
         def unit = Unit.get(params.unitid)
         lookupUser().gold.sub(unit.healcost())
+        unit.addgold(unit.healcost())
         unit.heal()
         redirect(action: "healer")
     }
@@ -487,7 +488,7 @@ class UnitController {
         unitInstance.user = loggeduser
         unitInstance.recalcUnit()
         if (unitInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'unit.label', default: 'Unit'), unitInstance.id])}"
+            flash.message = "${message(code: 'unit.created.message', args: [message(code: 'unit.label', default: 'Unit'), unitInstance.id])}"
             redirect(action: "index")
             loggeduser.gold.sub(loggeduser.nextunitcost())
             loggeduser.unitcount ++

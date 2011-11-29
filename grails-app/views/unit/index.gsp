@@ -6,7 +6,10 @@
   </head>
   <body>
     <div id="body1">
-     <table cellspacing="0">
+      <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+      </g:if>
+      <table cellspacing="0">
         <tr>
           <td width="150px"><h2>Einheit</h2></td>
           <td width="80px">HP</td>

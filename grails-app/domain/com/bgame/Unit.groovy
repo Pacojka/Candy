@@ -86,6 +86,11 @@ class Unit {
     def items(){
         return this.useritems.collect{it}.sort{it.item.itemname}
     }
+
+    def addgold(value){
+       gold += value 
+    }
+
     def notequipteditemtypes(){
         def haswpn = haswpn()
         def hashlm = hashlm()

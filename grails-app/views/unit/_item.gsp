@@ -13,7 +13,9 @@
       <g:form action="unequipt">
         <g:hiddenField name="usritemid" value="${useritem.id}" />
 ${useritem.unit.name}
-        <span class="button"><g:submitButton name="unequipt" class="test" value="-" /></span>
+        <div class="equipbutton">
+        <g:submitButton name="unequipt" class="test" value="-" />
+        </div>
       </g:form>
 
     </g:if>
@@ -23,7 +25,9 @@ ${useritem.unit.name}
       <g:form action="equipt">
         <g:hiddenField name="useritemid" value="${useritem.id}" />
         <g:select name="unitid" noSelection="${['null':'auswählen...']}" from="${avunits}" optionKey="id" />
-        <span class="button"><g:submitButton name="equipt" class="test" value="+" /></span>
+      <div class="equipbutton">
+        <span class="style"><g:submitButton name="equipt" class="test" value="+" /></span>
+      </div>
       </g:form>
 
 
@@ -32,7 +36,9 @@ ${useritem.unit.name}
  <td bgcolor="#1C1C1C">
     <g:form action="sellquestion">
         <g:hiddenField name="useritemid" value="${useritem.id}" />
-        <span class="button"><g:submitButton name="sellquestion" class="test" value="verkaufen" /></span>
+         <div class="buttons">
+        <span class="jizzton"><g:submitButton name="sellquestion" class="test" value="verkaufen" /></span>
+         </div>
       </g:form>
 </td>
     </tr>

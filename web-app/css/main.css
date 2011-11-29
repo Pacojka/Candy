@@ -36,7 +36,7 @@ a:link, a:visited, a:hover {
 }
 
 h1 {
-    color: #FFFFFF;
+   
     font-weight: normal;
     font-size: 16px;
     margin: .8em 0 .3em 0;
@@ -111,36 +111,46 @@ input:focus, select:focus, textarea:focus {
     padding: 7px 12px;
 }
 
+.button {
+    color: #848484;
+    background-color: black;
+    padding: 4px 6px;
+    font-size: 100px;
+
+}
+
 .menuButton {
     font-size: 10px;
     padding: 0 5px;
 }
 .menuButton a {
-    color: #333;
+    color: #848484;
     padding: 4px 6px;
 }
 .menuButton a.home {
     background: url(../images/skin/house.png) center left no-repeat;
-    color: #333;
+    color: #848484;
     padding-left: 25px;
 }
 .menuButton a.list {
     background: url(../images/skin/database_table.png) center left no-repeat;
-    color: #333;
+    color: #848484;
     padding-left: 25px;
+
 }
+
 .menuButton a.create {
-    background: url(../images/skin/database_add.png) center left no-repeat;
-    color: #333;
+    background-color: url(../images/skin/database_add.png) center left no-repeat;
+    color: #848484;
     padding-left: 25px;
 }
 
 /* MESSAGES AND ERRORS */
 
 .message {
-    background: #f3f8fc url(../images/skin/information.png) 8px 50% no-repeat;
-    border: 1px solid #b2d1ff;
-    color: #006dba;
+    background: #440000;
+    border: 0px;
+    color: #848484;
     margin: 10px 0 5px 0;
     padding: 5px 5px 5px 30px
 }
@@ -227,22 +237,62 @@ td.errors textarea {
 }
 
 /* ACTION BUTTONS */
-
 .buttons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    color: #666;
+     border: 1px;
+    border-style: solid;
+    border-color: #606060;
+    background: #440000;
+    color: #848484;
+    cursor:default;
     font-size: 10px;
-    margin-top: 5px;
-    overflow: hidden;
-    padding: 0;
+    font-weight: bold;
+   
 }
 
+
+
+.equipbutton {
+     border: 1px;
+    border-style: solid;
+    border-color: #606060;
+    background: #440000;
+    color: #848484;
+    cursor:default;
+    font-size: 10px;
+    font-weight: bold;
+    width: 20px;   
+}
+.equipbutton style {
+    border: 1px;
+    border-style: solid;
+    border-color: #606060;
+    background: #440000;
+    color: #848484;
+    cursor:default;
+    font-size: 10px;
+    font-weight: bold;
+    width: 20px;
+}
+ 
+
+.buttons jizzton {
+    background: #440000;
+    color: #848484;
+    cursor:default;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 2px;
+    
+}
+
+.equipbutton:hover   { color:#ff0; background-color:#00f; }
+
+
 .buttons input {
-    background: #fff;
+    background: #440000;
     border: 0;
-    color: #333;
-    cursor: pointer;
+    color: #848484;
+    cursor:default;
     font-size: 10px;
     font-weight: bold;
     margin-left: 3px;

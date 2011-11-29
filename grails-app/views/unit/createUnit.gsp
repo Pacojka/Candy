@@ -40,8 +40,10 @@
         </tr>
         </tbody>
       </table>
-      <span class="button"><g:submitButton name="create" class="saveunit" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
+        <div class="buttons">
+      <span class="jizzton"><g:submitButton name="create" class="saveunit" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
     </div>
+        </div>
   </g:form>
     </g:if>
     <g:else>
