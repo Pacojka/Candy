@@ -11,36 +11,42 @@
     <g:if test="${useritem.unit != null}">
 
       <g:form action="unequipt">
-        <g:hiddenField name="usritemid" value="${useritem.id}" />
+        <p>
+        <g:hiddenField name="usritemid" value="${useritem.id}" style="position:fixed;"/>
 ${useritem.unit.name}
-        <div class="equipbutton">
-        <g:submitButton name="unequipt" class="test" value="-" />
-        </div>
+        
+        
+        
+
+        <g:submitButton name="unequipt" class="test" value="-" style="margin-top: 0px;margin-left:90px;cursor: pointer; font-weight: bold; width: 20px; background-color: #000000; color: #606060; border: 1px solid #606060; "/>
+        </p>
       </g:form>
 
     </g:if>
     <g:else>
-<g:set var="unittype" value="${useritem.item.item_type.getKey()}" />
-<g:set var="avunits" value="${useritem.user.getitemunits(unittype)}" />
+      <g:set var="unittype" value="${useritem.item.item_type.getKey()}" />
+      <g:set var="avunits" value="${useritem.user.getitemunits(unittype)}" />
       <g:form action="equipt">
         <g:hiddenField name="useritemid" value="${useritem.id}" />
-        <g:select name="unitid" noSelection="${['null':'auswählen...']}" from="${avunits}" optionKey="id" />
-      <div class="equipbutton">
-        <span class="style"><g:submitButton name="equipt" class="test" value="+" /></span>
-      </div>
+        <g:select name="unitid" noSelection="${['null':'auswählen...']}" from="${avunits}" optionKey="id"   style="width: 90px; background-color: #440000; color: black; border: 1px solid #606060; " />
+
+        
+        
+        <g:submitButton name="equipt" class="test" value="+" style="cursor: pointer; font-weight: bold; width: 20px; background-color: #000000; color: #606060; border: 1px solid #606060; " />
+
       </g:form>
 
 
 
     </g:else>
- <td bgcolor="#1C1C1C">
+    <td bgcolor="#1C1C1C">
     <g:form action="sellquestion">
-        <g:hiddenField name="useritemid" value="${useritem.id}" />
-         <div class="buttons">
-        <span class="jizzton"><g:submitButton name="sellquestion" class="test" value="verkaufen" /></span>
-         </div>
-      </g:form>
-</td>
+      <g:hiddenField name="useritemid" value="${useritem.id}" />
+
+      <g:submitButton name="sellquestion" class="test" value="verkaufen" style="cursor: pointer; font-weight: bold; width: 70px; background-color: #000000; color: #606060; border: 1px solid #606060; " />
+
+    </g:form>
+    </td>
     </tr>
   </table>
   </br>

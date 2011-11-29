@@ -12,8 +12,9 @@
     <g:form action="unequiptuv">
       <g:hiddenField name="usritemid" value="${useritem.id}" />
       <g:hiddenField name="unitid" value="${useritem.unit.id}" />
-      <span class="button"><g:submitButton name="unequiptuv" class="test" value="-" /></span>
-    </g:form></td>
+      <g:submitButton name="unequiptuv" class="test" value="-" style="cursor: pointer; font-weight: bold; width: 20px; background-color: #000000; color: #606060; border: 1px solid #606060; " />
+    </g:form>
+  </td>
 
     </tr>
   </table>
