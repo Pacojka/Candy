@@ -19,8 +19,8 @@ class UnitController {
         def y = 25
         def allfields = getfields(x,y,range)
         def nextcol = x + range
-        System.out.println("nach raussuchen")
-        allfields.each{System.out.println(it)}
+       // System.out.println("nach raussuchen")
+        //allfields.each{System.out.println(it)}
 
         [range:nextcol,fields: allfields,gold:lookupUser().gold.get()]
     }

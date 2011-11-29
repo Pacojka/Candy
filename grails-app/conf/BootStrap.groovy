@@ -11,7 +11,7 @@ class BootStrap {
         def fieldleft
         def zufall_feld
         def fieldtext = "penis"
-        def possible_fields=["Wald","Gebirge","Feld","Wueste","Dörfchen"]
+        def possible_fields=["wal","geb","fel","wue","doe"]
         for (int ycor = 0; ycor < 50;++ycor){
             for (int xcor = 0; xcor < 50;++xcor){
                 fieldtop = Map.findByXaxisAndYaxis(xcor,ycor-1)
@@ -20,10 +20,10 @@ class BootStrap {
                 if(fieldtop && fieldleft){
                     switch(zufall){
                         case 0:
-                        fieldtext=fieldleft.typ
+                        fieldtext=fieldleft.fieldtype.getKey()
                         break
                         case 1:
-                        fieldtext=fieldtop.typ
+                        fieldtext=fieldtop.fieldtype.getKey()
                         break
                         default:
                         zufall_feld = random.nextInt(5)
@@ -32,7 +32,7 @@ class BootStrap {
                 }else if(fieldtop){
                     switch(zufall){
                         case 1:
-                        fieldtext=fieldtop.typ
+                        fieldtext=fieldtop.fieldtype.getKey()
                         break
                         default:
                         zufall_feld = random.nextInt(5)
@@ -42,7 +42,7 @@ class BootStrap {
                 else if(fieldleft){
                     switch(zufall){
                         case 0:
-                        fieldtext=fieldleft.typ
+                        fieldtext=fieldleft.fieldtype.getKey()
                         break
                         default:
                         zufall_feld = random.nextInt(5)
@@ -53,7 +53,7 @@ class BootStrap {
                     fieldtext = possible_fields[zufall_feld]
                 }
 
-                field = new Map(xaxis:xcor,yaxis:ycor,typ:fieldtext).save()
+                field = new Map(xaxis:xcor,yaxis:ycor,fieldtype:fieldtext).save()
             }
         }
     
