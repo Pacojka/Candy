@@ -236,69 +236,36 @@ td.errors textarea {
     width: 85%;
 }
 
-/* ACTION BUTTONS */
-.buttons {
-     border: 1px;
+
+#buttontrue {
+      border: 1px;
     border-style: solid;
     border-color: #606060;
     background: #440000;
     color: #848484;
-    cursor:default;
     font-size: 10px;
     font-weight: bold;
-   
+    cursor:pointer;
+    
 }
-
-
-
-.equipbutton {
-     border: 1px;
-    border-style: solid;
-    border-color: #606060;
-    background: #440000;
-    color: #848484;
-    cursor:default;
-    font-size: 10px;
-    font-weight: bold;
-    width: 20px;   
-}
-.equipbutton style {
+#buttonfalse {
+    
     border: 1px;
     border-style: solid;
     border-color: #606060;
-    background: #440000;
-    color: #848484;
+    background: #202020;
+    color: #404040;
     cursor:default;
     font-size: 10px;
     font-weight: bold;
-    width: 20px;
-}
- 
-
-.buttons jizzton {
-    background: #440000;
-    color: #848484;
-    cursor:default;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 2px 2px;
+    width: 90px;
+    text-align: center;
+    height: 16px;
+    padding-top: 2px;
+    
     
 }
 
-.equipbutton:hover   { color:#ff0; background-color:#00f; }
-
-
-.buttons input {
-    background: #440000;
-    border: 0;
-    color: #848484;
-    cursor:default;
-    font-size: 10px;
-    font-weight: bold;
-    margin-left: 3px;
-    overflow: visible;
-    padding: 2px 6px;
-}
 .buttons input.delete {
     background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
     padding-left: 28px;
