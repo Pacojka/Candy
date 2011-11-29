@@ -5,12 +5,13 @@ class BootStrap {
 
         /*map erzeugen*/
         def random = new Random()
+        def rand
         def field
-        def fieldtext
+        def fieldtext = "x"
         for (int y = 0; y < 50;++y){
             for (int x = 0; x < 50;++x){
                 rand = random.nextInt(5)
-                fieldtext = randomField()
+                //fieldtext = randomField()
                 field = new Map(x:x,y:y,typ:fieldtext).save()
                 //                System.out.println(fieldtext)
             }

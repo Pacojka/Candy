@@ -14,7 +14,7 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def map = {
-        def range = 4
+        def range = 2
         def x = 25
         def y = 25
         def allfields = getfields(x,y,range)
