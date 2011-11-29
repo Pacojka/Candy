@@ -2,6 +2,42 @@ import com.bgame.*
 class BootStrap {
 
     def init = { servletContext ->
+
+        /*map erzeugen*/
+        def random = new Random()
+        def field
+        def fieldtext
+        for (int y = 0; y < 50;++y){
+            for (int x = 0; x < 50;++x){
+                rand = random.nextInt(5)
+                fieldtext = randomField()
+                field = new Map(x:x,y:y,typ:fieldtext).save()
+                //                System.out.println(fieldtext)
+            }
+        }
+        /*randomField
+         *
+         *zufall=random(2)
+         *for zufall=1
+         *  fieldtext[this]=fieldtext[this(x-1)]
+         *for zufall=2
+         *  fieldtext[this]=fieldtext[this(y-1)]
+         *for zufall=3
+         *  zufall_feld = random(5)
+         *  string[]={Wald,Gebirge,Feld,Wueste,Dörfchen}
+         *        fieldtext[this]=string[zufalls_feld]
+         **/
+
+  /*
+   *            System.out.println("\n\n\n nun collection machen wa\n\n\n")
+
+        def allfields = Map.withCriteria {
+            ge("x",0)
+        }
+
+        allfields.each{System.out.println(it)}
+*/
+
         /*ROLES*/
         def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
         def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
@@ -30,7 +66,7 @@ class BootStrap {
         def item10 = new Item(itemname: 'Hölzerne Schienbeinschoner',item_type: 'bns', dmgmin: 0,dmgmax:0,defens:3,gold:5).save()
         def item11 = new Item(itemname: 'Sneakers',item_type: 'stf', dmgmin: 0,dmgmax:0,defens:2,gold:4).save()
         def item12 = new Item(itemname: 'Stoffmantel',item_type: 'rust', dmgmin: 0,dmgmax:0,defens:3,gold:4).save()
-//mustr|def item99 = new Item(itemname: 'NAME',item_type: 'nah,fer,mag oder hlm,amu,rust,hnd,bns,stf', dmgmin: 0, dmgmax:0,str: 0, ges: 0, inz: 0,defens:0,gold:999).save()
+        //mustr|def item99 = new Item(itemname: 'NAME',item_type: 'nah,fer,mag oder hlm,amu,rust,hnd,bns,stf', dmgmin: 0, dmgmax:0,str: 0, ges: 0, inz: 0,defens:0,gold:999).save()
         
 
 

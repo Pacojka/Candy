@@ -13,6 +13,9 @@
     <g:link controller='unit' action='shop'>Shop</g:link>
     </br>
     <g:link controller='unit' action='createUnit'>Einheit anheuern</g:link>
+     </br>
+     </br>
+    <g:link controller='unit' action='map'>Karte</g:link>
 
 
   </div>

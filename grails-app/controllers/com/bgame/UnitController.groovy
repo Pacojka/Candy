@@ -11,6 +11,20 @@ class UnitController {
 
         //redirect(action: "userunits", params: params)
     }
+
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def map = {
+        def range = 4
+        def x = 25
+        def y = 25
+        def allfields = getfields(x,y,range)
+        def nextcol = x + range
+        System.out.println("nach raussuchen")
+        allfields.each{System.out.println(it)}
+
+        [range:nextcol,fields: allfields,gold:lookupUser().gold.get()]
+    }
+
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def enemys = {
         def usrenemys = getEnemyUsers(lookupUser())
@@ -471,6 +485,20 @@ class UnitController {
         def unitInstance = new Unit()
         unitInstance.properties = params
         return [unitInstance: unitInstance,gold:lookupUser().gold.get(), costnext:lookupUser().nextunitcost()]
+    }
+
+def getfields(xcor,ycor,range){
+
+        def allfields = Map.withCriteria {
+            between("x",xcor-range,xcor+range)
+            and {
+                between("y", ycor-range, ycor+range)
+            }
+        }
+        //System.out.println("nach raussuchen vor liste ausgeben")
+        //allfields.each{System.out.println(it)}
+        allfields.sort {it.id}
+        allfields
     }
 
     def saveunit = {
