@@ -1,10 +1,12 @@
-<td width="40" height="40" >
+<td id="maptd">
   <g:set var="img" value="${field.fieldtype.getKey()}.png" />
-<img src="${resource(dir:'images/map',file:img)}"/>
 <g:if test="${field.hasUser()}">
-<g:link action="fightquestion" params="[enemyid:field.user.id]"><h4>${field.user.username}</h4></g:link>
+<g:link action="fightquestion" params="[enemyid:field.user.id]"><img title="${field.user.username}" src="${resource(dir:'images/map',file:img)}"/></g:link>
 
 </g:if>
+<g:else>
+  <img src="${resource(dir:'images/map',file:img)}"/>
+</g:else>
 
 
 </td>

@@ -6,8 +6,9 @@
   </head>
   <body>
     <div id="body1">
-      <table cellspacing="0" border="0" cellpadding="0" >
+      <table id="maptable">
         <tr>
+
         <g:render template="map" collection="${fields}" var="field"/>
         </tr>
 

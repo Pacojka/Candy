@@ -377,10 +377,17 @@ a.header-main:link, a.header-main:visited {
     
 
 }
-
+#maptable {
+    background-color: #000;
+}
+#maptd {
+    line-height: 0px;
+    padding: 0px 0px;
+}
 tr {
     border: 0;
 }
+
 td, th {
     font: 11px verdana, arial, helvetica, sans-serif;
     line-height: 12px;
@@ -388,6 +395,7 @@ td, th {
     text-align: left;
     vertical-align: top;
 }
+
 th {
     background: #fff url(../images/skin/shadow.jpg);
     color: #666;
