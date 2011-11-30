@@ -117,8 +117,7 @@ class BootStrap {
         /*ITEMS*/
 
         /*ADMIN*/
-        def testUser = new User(username: 'me', enabled: true, password: 'p', gold:new Value())
-        testUser.save(flush: true)
+        def testUser = new User(username: 'me', enabled: true, password: 'p', gold:new Value()).save(flush: true)
         /*ADMIN*/
 
         /*USER+Items+Units*/

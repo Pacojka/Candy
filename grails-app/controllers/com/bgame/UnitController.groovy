@@ -14,9 +14,10 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def map = {
-        def range = 5
-        def x = 12
-        def y = 12
+        def field= lookupUser().fields()
+        def range = 2
+        def x = field[0].xaxis
+        def y = field[0].yaxis
         def allfields = getfields(x,y,range)
         def nextcol = x + range
        // System.out.println("nach raussuchen")

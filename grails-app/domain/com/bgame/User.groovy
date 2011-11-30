@@ -50,6 +50,10 @@ class User {
     def units(){
         return this.units.collect{it}.sort {it.dateCreated}
     }
+    
+    def fields(){
+        return this.fields.collect{it}
+    }
     def nextunitcost(){
         unitcount*unitcount*unitcount*100
     }
