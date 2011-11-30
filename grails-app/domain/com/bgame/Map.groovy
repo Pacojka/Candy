@@ -4,13 +4,20 @@ class Map {
     int xaxis
     int yaxis
     Feldtypenum fieldtype = "fel"
-
+    boolean main = false
+    User user = null
     static constraints = {
+        user(nullable:true)
     }
 
-    
+    def hasUser(){
+        def result = false
+        if(this.user) result = true
+        result
+    }
         String toString(){
-            return "${fieldtype} (${xaxis},${yaxis}))"
+            def add = ""            
+            return "${fieldtype} (${xaxis},${yaxis})"
         }
         //allfields.sort(id)
         //allfields

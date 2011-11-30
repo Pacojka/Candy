@@ -13,7 +13,7 @@ class User {
     boolean passwordExpired
     int unitcount = 0
     Value gold
-    static hasMany = [useritems:Usritm, units:Unit]
+    static hasMany = [useritems:Usritm, units:Unit,fields:Map]
     static embedded = ['gold']
 
     String toString(){

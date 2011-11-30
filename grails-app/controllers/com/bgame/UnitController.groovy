@@ -14,9 +14,9 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def map = {
-        def range = 4
-        def x = 25
-        def y = 25
+        def range = 5
+        def x = 12
+        def y = 12
         def allfields = getfields(x,y,range)
         def nextcol = x + range
        // System.out.println("nach raussuchen")
@@ -36,6 +36,7 @@ class UnitController {
     def fightquestion = {
         def usr = lookupUser()
         def enemy = User.get(params.enemyid)
+        if(usr==enemy)redirect(action: "index")
         [user: usr,enemy: enemy ,gold:lookupUser().gold.get()]
     }
 

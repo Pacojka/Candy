@@ -4,6 +4,9 @@ class BootStrap {
     def init = { servletContext ->
 
         /*map erzeugen*/
+        //feldgrösse vielfache 25 + x * 10 {x E N} :D(hoffentlich nicht falsch :D)
+        def fieldsize = 25
+
         def random = new Random()
         def field
         def zufall
@@ -12,8 +15,9 @@ class BootStrap {
         def zufall_feld
         def fieldtext = "penis"
         def possible_fields=["wal","geb","fel","wue","doe"]
-        for (int ycor = 0; ycor < 50;++ycor){
-            for (int xcor = 0; xcor < 50;++xcor){
+        
+        for (int ycor = 0; ycor < fieldsize;++ycor){
+            for (int xcor = 0; xcor < fieldsize;++xcor){
                 fieldtop = Map.findByXaxisAndYaxis(xcor,ycor-1)
                 fieldleft = Map.findByXaxisAndYaxis(xcor-1,ycor)
                 zufall=random.nextInt(3)
@@ -56,7 +60,15 @@ class BootStrap {
                 field = new Map(xaxis:xcor,yaxis:ycor,fieldtype:fieldtext).save()
             }
         }
-    
+        System.out.println("nun userfelder erstellen")
+        
+        for (int ycor = 3; ycor < fieldsize;ycor+=5){
+            for (int xcor = 3; xcor < fieldsize;xcor+=5){
+                field = Map.findByXaxisAndYaxis(xcor-1,ycor-1)
+                field.fieldtype = "user"
+            }
+        }
+        System.out.println("fertig")
         
 
         /*
@@ -113,6 +125,8 @@ class BootStrap {
         /*USER*/
         def testUser2 = new User(username: 'xian', enabled: true, password: 'p', gold:new Value()).save()
         def xian = User.findByUsername('xian')
+        /*Map zuweisen*/
+        if(freemapfields())usertomap(xian)
         /*Items*/
         def ua11 = new com.bgame.Usritm()
         ua11.link(i1,xian).save()
@@ -131,6 +145,8 @@ class BootStrap {
         /*USER*/
         def testUser3 = new User(username: 'paco', enabled: true, password: 'p', gold:new Value()).save()
         def paco = User.findByUsername('paco')
+        /*Map zuweisen*/
+        if(freemapfields())usertomap(paco)
         /*Items*/
 
         def ua21 = new com.bgame.Usritm()
@@ -159,6 +175,8 @@ class BootStrap {
         /*USER*/
         def testUser4 = new User(username: 'janis', enabled: true, password: 'p', gold:new Value()).save()
         def janis = User.findByUsername('janis')
+        /*Map zuweisen*/
+        if(freemapfields())usertomap(janis)
         /*Items*/
         def ua31 = new com.bgame.Usritm()
         ua31.link(i1,janis).save()
@@ -187,5 +205,66 @@ class BootStrap {
     def destroy = {
     }
 
+    def freemapfields(){
+        def result = true
+        def lastfield = Map.findByXaxisAndYaxis(2,2)
+        if(lastfield.user != null) result = false
+        result
+    }
+    // def (fieldsize-1)/2
+    def usertomap(user){
+        def startx = 12
+        def starty = 12
+        def field = Map.findByXaxisAndYaxis(startx,starty)
+        def done = false
+        def distance = 1
+        def distancecopy = distance
+        def times = 2
+        def richtungen = ["oben","rechts","unten","links"]
+        def richtunglauf = 0
+        def richtung = richtungen[richtunglauf]
+        while(!done){
+            if(!field.hasUser()){
+                user.addToFields(field)
+                done = true
+            }
+            if(!done){
+                if(distancecopy <= 0){
+                    times--
+                    distancecopy = distance
+                    if(richtunglauf < 3){
+                        richtunglauf++
+                        richtung = richtungen[richtunglauf]
+                    }else{
+                        richtunglauf = 0
+                        richtung = richtungen[richtunglauf]
+                    }
+                    if(times == 0){
+                        times = 2
+                        distance++
+                    }
+                }
+                distancecopy--
+                switch(richtung){
+                    case "oben":
+                    starty -= 5
+                    break
+                    case "rechts":
+                    startx += 5
+                    break
+                    case "unten":
+                    starty += 5
+                    break
+                    case "links":
+                    startx -= 5
+                    break
+                }
+                field = Map.findByXaxisAndYaxis(startx,starty)
+            }
+        }
+    }
+    // 1Ho 1Re 2Ru 2Li 3Ho 3Re 4 Ru 4 Li bis x =
+    // 5er sprünge bis x und y == 2 (oder y und x == 3 wenn index bei 1 beginnt (x-1 und y-1 beim zuweisen))
 }
+
 
