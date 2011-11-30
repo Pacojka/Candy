@@ -14,16 +14,25 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def map = {
-        def field= lookupUser().fields()
         def range = 2
-        def x = field[0].xaxis
-        def y = field[0].yaxis
+        def x
+        def y
+        if(!params.newx){
+
+            def field= lookupUser().fields()
+            x = field[0].xaxis
+            y = field[0].yaxis
+        }else{
+            x = Integer.parseInt(params.newx)
+            y = Integer.parseInt(params.newy)
+        }
+
         def allfields = getfields(x,y,range)
         def nextcol = x + range
-       // System.out.println("nach raussuchen")
+        // System.out.println("nach raussuchen")
         //allfields.each{System.out.println(it)}
 
-        [range:nextcol,fields: allfields,gold:lookupUser().gold.get()]
+        [xnow:x,ynow:y,range:nextcol,fields: allfields,gold:lookupUser().gold.get()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -489,7 +498,7 @@ class UnitController {
         return [unitInstance: unitInstance,gold:lookupUser().gold.get(), costnext:lookupUser().nextunitcost()]
     }
 
-def getfields(xcor,ycor,range){
+    def getfields(xcor,ycor,range){
 
         def allfields = Map.withCriteria {
             between("xaxis",xcor-range,xcor+range)
