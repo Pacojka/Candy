@@ -1,5 +1,4 @@
-<td width="40" height="40">
-${field}
+<td width="40" height="40" >
   <g:set var="img" value="${field.fieldtype.getKey()}.png" />
 <img src="${resource(dir:'images/map',file:img)}"/>
 <g:if test="${field.hasUser()}">

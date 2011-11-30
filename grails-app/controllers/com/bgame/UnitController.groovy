@@ -14,7 +14,7 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def map = {
-        def range = 2
+        def range = 5
         def x
         def y
         if(!params.newx){
