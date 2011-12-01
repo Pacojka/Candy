@@ -14,7 +14,7 @@ class BootStrap {
         def fieldleft
         def zufall_feld
         def fieldtext = "penis"
-        def possible_fields=["wal","geb","fel","wue","doe"]
+        def possible_fields=["wal","geb","fel","wue"] //,"doe"
         
         for (int ycor = 0; ycor < fieldsize;++ycor){
             for (int xcor = 0; xcor < fieldsize;++xcor){
@@ -30,7 +30,7 @@ class BootStrap {
                         fieldtext=fieldtop.fieldtype.getKey()
                         break
                         default:
-                        zufall_feld = random.nextInt(5)
+                        zufall_feld = random.nextInt(4)
                         fieldtext = possible_fields[zufall_feld]
                     }
                 }else if(fieldtop){
@@ -39,7 +39,7 @@ class BootStrap {
                         fieldtext=fieldtop.fieldtype.getKey()
                         break
                         default:
-                        zufall_feld = random.nextInt(5)
+                        zufall_feld = random.nextInt(4)
                         fieldtext = possible_fields[zufall_feld]
                     }
                 }
@@ -49,11 +49,11 @@ class BootStrap {
                         fieldtext=fieldleft.fieldtype.getKey()
                         break
                         default:
-                        zufall_feld = random.nextInt(5)
+                        zufall_feld = random.nextInt(4)
                         fieldtext = possible_fields[zufall_feld]
                     }
                 }else{
-                    zufall_feld = random.nextInt(5)
+                    zufall_feld = random.nextInt(4)
                     fieldtext = possible_fields[zufall_feld]
                 }
 

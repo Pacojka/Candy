@@ -69,6 +69,7 @@ h4 {
     font-weight: normal;
     font-size: 14px;
     background-color: #000000;
+   vertical-align:middle;
 
 }
 
@@ -310,7 +311,7 @@ td.errors textarea {
     padding: 2em 1em 2em 1em; 
     margin-bottom: 1em;
     margin-top: 0px;
-    height: 143px;
+    height: 100px;
     text-align: right;
     position:fixed;
     z-index: 10;
@@ -336,7 +337,7 @@ a.header-main:link, a.header-main:visited {
 
 
 #nav {
-    margin-top:190px;
+    margin-top:170px;
     margin-left:30px;
     width:150px;
     height:100px;
@@ -359,8 +360,8 @@ a.header-main:link, a.header-main:visited {
 }
 
 #body1 { 
-    margin-top: 190px;
-    margin-left: 245px;
+    margin-top: 165px;
+    margin-left: 180px;
     color: white;
     text-align: left;
     margin-bottom: 15px;
@@ -384,10 +385,14 @@ a.header-main:link, a.header-main:visited {
 }
 #maptable {
     background-color: #000;
+    border: 0;
+    
 }
 #maptd {
     line-height: 0px;
     padding: 0px 0px;
+    
+    vertical-align: middle;
 }
 tr {
     border: 0;

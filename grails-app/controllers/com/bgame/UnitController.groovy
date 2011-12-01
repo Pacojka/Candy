@@ -14,7 +14,7 @@ class UnitController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def map = {
-        def range = 5
+        def range 
         def x
         def y
         if(!params.newx){
@@ -22,7 +22,9 @@ class UnitController {
             def field= lookupUser().fields()
             x = field[0].xaxis
             y = field[0].yaxis
+            range = 3
         }else{
+            range = Integer.parseInt(params.newrange)
             x = Integer.parseInt(params.newx)
             y = Integer.parseInt(params.newy)
         }
@@ -32,7 +34,7 @@ class UnitController {
         // System.out.println("nach raussuchen")
         //allfields.each{System.out.println(it)}
 
-        [xnow:x,ynow:y,range:nextcol,fields: allfields,gold:lookupUser().gold.get()]
+        [rangenow:range,xnow:x,ynow:y,range:nextcol,fields: allfields,gold:lookupUser().gold.get()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
