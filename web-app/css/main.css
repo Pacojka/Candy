@@ -51,6 +51,11 @@ h2 {
 
 }
 
+#Span2 {
+    display: none
+    
+}
+
 h3 {
     color: #D8D8D8;
     font-weight: normal;

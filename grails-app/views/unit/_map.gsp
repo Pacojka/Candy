@@ -1,8 +1,12 @@
-<td id="maptd">
-  <g:set var="img" value="${field.fieldtype.getKey()}.png" />
 <g:if test="${field.hasUser()}">
-<g:link action="fightquestion" params="[enemyid:field.user.id]"><img title="${field.user.username}" src="${resource(dir:'images/map',file:img)}"/></g:link>
-
+<td id="maptd" onmouseover="Tip('<img src=&quot;/bgame/images/user/${field.user.username}.jpg&quot; width=&quot;48&quot;><br>${field.user.username}')" onmouseout="UnTip()">
+</g:if>
+<g:else>
+<td id="maptd">
+</g:else>
+<g:set var="img" value="${field.fieldtype.getKey()}.png" />
+<g:if test="${field.hasUser()}">
+  <g:link action="fightquestion" params="[enemyid:field.user.id]"><img title="${field.user.username}Fehler" src="${resource(dir:'images/map',file:img)}"/></g:link>
 </g:if>
 <g:else>
   <img src="${resource(dir:'images/map',file:img)}"/>

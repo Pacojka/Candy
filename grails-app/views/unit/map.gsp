@@ -5,8 +5,13 @@
 
   </head>
   <body>
+    <g:javascript src="wz_tooltip.js" />
+
+
+
+
     <div id="body1">
-      <table id="maptable">
+       <table id="maptable">
         <tr>
 
         <g:render template="map" collection="${fields}" var="field"/>
