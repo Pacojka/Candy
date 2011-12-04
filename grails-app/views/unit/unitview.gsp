@@ -1,6 +1,3 @@
-
-
-
 <html>
   <head>
     <title>Welcome to Xiconis da Game</title>

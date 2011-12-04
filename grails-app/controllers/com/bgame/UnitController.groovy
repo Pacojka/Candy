@@ -93,6 +93,7 @@ class UnitController {
         if (params.unitid != "null"){
             def ui = new Usritm()
             def unit = Unit.get(params.unitid)
+             System.out.println("vorm linken!")
             ui.linkunit(params.useritemid,unit).save()
         }
         redirect(action: "items")
