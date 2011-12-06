@@ -7,6 +7,7 @@ class Unit {
     Date dateCreated
     int gold = 25
     MyEnum wtyp = "nah"
+    boolean inbase = true
 
     int ferexp = 125
     int nahexp = 125
@@ -53,6 +54,12 @@ class Unit {
         String getKey() { name() }
     }
 
+    def isinbase(){
+        inbase
+    }
+    def toggleinbase(){
+        inbase = !inbase
+    }
     def healcost(){
         def cost
         if(curhp == 0) cost = (int)(maxhp*0.2)
@@ -60,7 +67,12 @@ class Unit {
         return cost
     }
 
-        def heal(){
+    def heal(){
+        curhp = maxhp
+        this.calchppr()
+    }
+
+    def healx(value){
         curhp = maxhp
         this.calchppr()
     }
@@ -88,7 +100,7 @@ class Unit {
     }
 
     def addgold(value){
-       gold += value 
+        gold += value
     }
 
     def notequipteditemtypes(){
@@ -139,7 +151,7 @@ class Unit {
         rueckgabe
     }
     def setwtype(newWtype){
-    //    System.out.println("\n so hier wegen setWtype\nnewWtype: "+newWtype+"\n gerade wtype: "+this.wtyp.getKey())
+        //    System.out.println("\n so hier wegen setWtype\nnewWtype: "+newWtype+"\n gerade wtype: "+this.wtyp.getKey())
         if (newWtype != this.wtyp.getKey()){
             this.wtyp = newWtype
         }
@@ -212,7 +224,7 @@ class Unit {
         for (i; exp > expToNextlvl;++i){
             expTocurrlvl = expToNextlvl
             expToNextlvl+=25*(i*i)
-           // System.out.println("\nfolgendes:\n exptoCurr:"+expTocurrlvl+" \nexptoNext:"+expToNextlvl+" \nund exp:"+exp)
+            // System.out.println("\nfolgendes:\n exptoCurr:"+expTocurrlvl+" \nexptoNext:"+expToNextlvl+" \nund exp:"+exp)
         }
         ((1-(expToNextlvl-exp)/(expToNextlvl-expTocurrlvl))+(i-2))
     }
@@ -274,10 +286,13 @@ class Unit {
         if (this.curhp <= 0){
             this.curhppr = 0
         }
-        else{
+        else if(this.curhp == this.maxhp){
+            this.curhppr = 100
+        }else{
             this.curhppr = this.curhp/(this.maxhp /100)
         }
     }
+
     String toString(){
         return "${name}"
     }

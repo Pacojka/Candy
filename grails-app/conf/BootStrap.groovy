@@ -5,7 +5,7 @@ class BootStrap {
 
         /*map erzeugen*/
         //feldgrösse vielfache 25 + x * 10 {x E N} :D(hoffentlich nicht falsch :D)
-        def fieldsize = 25
+        def fieldsize = 45
 
         def random = new Random()
         def field
@@ -62,9 +62,9 @@ class BootStrap {
         }
         System.out.println("nun userfelder erstellen")
         
-        for (int ycor = 3; ycor < fieldsize;ycor+=5){
-            for (int xcor = 3; xcor < fieldsize;xcor+=5){
-                field = Map.findByXaxisAndYaxis(xcor-1,ycor-1)
+        for (int ycor = 4; ycor < fieldsize;ycor+=9){
+            for (int xcor = 4; xcor < fieldsize;xcor+=9){
+                field = Map.findByXaxisAndYaxis(xcor,ycor)
                 field.fieldtype = "user"
             }
         }
@@ -212,8 +212,8 @@ class BootStrap {
     }
     // def (fieldsize-1)/2
     def usertomap(user){
-        def startx = 12
-        def starty = 12
+        def startx = 22
+        def starty = 22
         def field = Map.findByXaxisAndYaxis(startx,starty)
         def done = false
         def distance = 1
@@ -246,16 +246,16 @@ class BootStrap {
                 distancecopy--
                 switch(richtung){
                     case "oben":
-                    starty -= 5
+                    starty -= 9
                     break
                     case "rechts":
-                    startx += 5
+                    startx += 9
                     break
                     case "unten":
-                    starty += 5
+                    starty += 9
                     break
                     case "links":
-                    startx -= 5
+                    startx -= 9
                     break
                 }
                 field = Map.findByXaxisAndYaxis(startx,starty)

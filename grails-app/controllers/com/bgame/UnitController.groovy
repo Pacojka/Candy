@@ -22,7 +22,7 @@ class UnitController {
             def field= lookupUser().fields()
             x = field[0].xaxis
             y = field[0].yaxis
-            range = 3
+            range = 5
         }else{
             range = Integer.parseInt(params.newrange)
             x = Integer.parseInt(params.newx)
@@ -48,13 +48,25 @@ class UnitController {
     def fightquestion = {
         def usr = lookupUser()
         def enemy = User.get(params.enemyid)
+        def usrfield = usr.fields()
+        def destfield = enemy.fields()
+        def distance = usrfield[0].distance(destfield[0])
+        System.out.println(distance+" Meter")
         if(usr==enemy)redirect(action: "index")
-        [user: usr,enemy: enemy ,gold:lookupUser().gold.get()]
+         def userUnits = lookupUser().units()
+        [distance:distance,units:userUnits,user: usr,enemy: enemy ,gold:lookupUser().gold.get()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def fight = {
-        def usrunits = lookupUser().units()
+
+        params.each{System.out.println(it)}
+        def usrunits = []
+        if(params.selectedUnits)params.selectedUnits.each{
+            System.out.println("luuuuul\n\n\n")
+            def daunit = Unit.get(it)
+            if(daunit)if(daunit.user == lookupUser()) usrunits << daunit
+        }
         def enemyunits = User.get(params.enemyid).units()
         def result = fightsim(usrunits, enemyunits)
         [result: result,gold:lookupUser().gold.get()]

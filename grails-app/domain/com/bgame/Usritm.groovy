@@ -25,28 +25,29 @@ class Usritm {
     }
 
     static Usritm linkunit(id,giveunit) {
-         System.out.println("drinne")
+//         System.out.println("drinne")
         def u = Usritm.findById(id)
         if (u)
         {           
             if (u.unit != null) {
-                System.out.println("alter geht garnicht!")
+         //       System.out.println("alter geht garnicht!")
               //  u.unit?.removeFromUseritems(u)
 
               //  u.unit.setwtype("nah")
             }
             
             giveunit?.addToUseritems(u)
-            System.out.println("\n\n\njojojojojojojojo addtouseritemgingklar!")
-            System.out.println("\n nun setwtype")
+         //   System.out.println("\n\n\njojojojojojojojo addtouseritemgingklar!")
+         //   System.out.println("\n nun setwtype")
             if((u.item.item_type.getKey()== "nah") || (u.item.item_type.getKey()== "fer") || (u.item.item_type.getKey()== "mag")){
-            System.out.println("\n is waffe!!!!!!!!!!!!")
+         //   System.out.println("\n is waffe!!!!!!!!!!!!")
                 giveunit.setwtype(u.item.item_type.getKey())
-            System.out.println("jojojojojojojojo addtouseritemgingklar!")
+         //   System.out.println("jojojojojojojojo addtouseritemgingklar!")
             
-            }else{
-                System.out.println("\n keine waffe!!!!!!!!!!!!!")
             }
+            //else{
+            //    System.out.println("\n keine waffe!!!!!!!!!!!!!")
+            //}
             u.save()
 
         }

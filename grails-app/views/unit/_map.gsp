@@ -6,7 +6,7 @@
 </g:else>
 <g:set var="img" value="${field.fieldtype.getKey()}${rangenow}.png" />
 <g:if test="${field.hasUser()}">
-  <g:link action="fightquestion" params="[enemyid:field.user.id]"><img title="${field.user.username}Fehler" src="${resource(dir:'images/map',file:img)}"/></g:link>
+  <g:link action="fightquestion" params="[enemyid:field.user.id,x:field.xaxis,y:field.yaxis]"><img title="${field.user.username}Fehler" src="${resource(dir:'images/map',file:img)}"/></g:link>
 </g:if>
 <g:else>
   <img src="${resource(dir:'images/map',file:img)}"/>

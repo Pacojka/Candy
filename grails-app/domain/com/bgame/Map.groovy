@@ -10,6 +10,14 @@ class Map {
         user(nullable:true)
     }
 
+    def distance(destField){
+        def scale = 12 //1227.89 ist cool! ca 83 min zu gegner
+        def movespeed = 2.2
+        def result = (int)((scale*Math.sqrt(((this.xaxis - destField.xaxis)*(this.xaxis - destField.xaxis))+ ((this.yaxis - destField.yaxis)*(this.yaxis - destField.yaxis))))/movespeed)
+        
+        result
+    }
+
     def hasUser(){
         def result = false
         if(this.user) result = true
