@@ -1,4 +1,4 @@
-
+<g:if test="${!unit.away()}">
 <div id="table">  
   <table cellspacing="0">
     <tr>
@@ -21,7 +21,7 @@ ${unit.curhp}/${unit.maxhp}
   </table>
 
 </div>
-
+</g:if>
 
 
 

@@ -13,7 +13,7 @@ class User {
     boolean passwordExpired
     int unitcount = 0
     Value gold
-    static hasMany = [useritems:Usritm, units:Unit,fields:Map]
+    static hasMany = [useritems:Usritm, units:Unit,fields:Map, actions:Actionstack]
     static embedded = ['gold']
 
     String toString(){
@@ -49,6 +49,9 @@ class User {
 
     def units(){
         return this.units.collect{it}.sort {it.dateCreated}
+    }
+    def actions(){
+        return this.actions.collect{it}.sort {it.starttime}
     }
     
     def fields(){

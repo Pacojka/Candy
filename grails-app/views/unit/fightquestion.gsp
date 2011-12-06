@@ -9,10 +9,10 @@
       Hey ${user.username}, willst du wirklich ${enemy.username} auf den Sack geben?<br>
       er ist ${distance}sec entfernt. also ${(int)(distance/60)}min
 
-      <g:form name="form" action="fight">
+      <g:form name="form" action="travel">
         <g:render template="fightunits" collection="${units}" var="unit"/>
         <g:hiddenField name="enemyid" value="${enemy.id}" />
-        <g:submitButton name="fightenemy" class="test" value="Fight!" style="cursor: pointer; font-weight: bold; width: 90px; background-color: #000000; color: #606060; border: 1px solid #606060; "/>
+        <g:submitButton name="travel" class="test" value="Abreisen" style="cursor: pointer; font-weight: bold; width: 90px; background-color: #000000; color: #606060; border: 1px solid #606060; "/>
       </g:form>
     </div>
   </body>

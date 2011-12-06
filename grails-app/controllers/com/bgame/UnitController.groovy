@@ -6,8 +6,9 @@ class UnitController {
     def springSecurityService
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def index = {
-        def usrunits = lookupUser().units()
-        [userunits: usrunits,gold:lookupUser().gold.get()]
+        def usrunits = lookupUser().units
+        def useractions = lookupUser().actions()
+        [useractions:useractions,userunits: usrunits,gold:lookupUser().gold.get()]
 
         //redirect(action: "userunits", params: params)
     }
@@ -22,7 +23,7 @@ class UnitController {
             def field= lookupUser().fields()
             x = field[0].xaxis
             y = field[0].yaxis
-            range = 5
+            range = 6
         }else{
             range = Integer.parseInt(params.newrange)
             x = Integer.parseInt(params.newx)
@@ -56,6 +57,37 @@ class UnitController {
          def userUnits = lookupUser().units()
         [distance:distance,units:userUnits,user: usr,enemy: enemy ,gold:lookupUser().gold.get()]
     }
+
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+        def travel = {
+// user enemy und die felder raussuchen
+        def usr = lookupUser()
+        def enemy = User.get(params.enemyid)
+        def usrfield = usr.fields()
+        def destfield = enemy.fields()
+//weg berechnen und die Action erzeugen und finden ende berechnen
+        def distance = usrfield[0].distance(destfield[0])
+        def now = new Date()
+        System.out.println("lul?\n\n\n")
+        System.out.println(now)
+        def disAction = new Actionstack(starttime:now,destinationmap:destfield[0])
+        usr.addToActions(disAction)
+        System.out.println(now)
+        disAction.travelSetTime(distance)
+
+        def usrunits = []
+        if(params.selectedUnits)params.selectedUnits.each{
+            System.out.println("luuuuul\n\n\n")
+            def daunit = Unit.get(it)
+            if(daunit)if(daunit.user == lookupUser()){
+             disAction.addToUnits(daunit)
+             daunit.toggleinbase()
+            } 
+        }
+        //maybe message aber brauch nciht wir ja angezeigt
+        redirect(action: "index")
+
+}
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def fight = {

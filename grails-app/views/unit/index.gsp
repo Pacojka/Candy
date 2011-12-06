@@ -9,6 +9,7 @@
       <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
       </g:if>
+      <g:render template="actions" collection="${useractions}" var="action"/>
       <table cellspacing="0">
         <tr>
           <td width="150px"><h2>Einheit</h2></td>

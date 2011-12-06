@@ -22,7 +22,7 @@ class GlobalhealJob {
        def S = cal.get(Calendar.SECOND)
 
         
-        System.out.println("HEAL ALL TEH UNITS!!!!!!!! ${H}:${M}:${S}")
+        System.out.println("HEAL ALL THE UNITS!!!!!!!! ${H}:${M}:${S}")
         healthisunits.each{
             it.curhp ++
             it.calchppr()

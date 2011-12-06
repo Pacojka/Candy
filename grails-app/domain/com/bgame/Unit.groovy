@@ -7,7 +7,7 @@ class Unit {
     Date dateCreated
     int gold = 25
     MyEnum wtyp = "nah"
-    boolean inbase = true
+    boolean away = false
 
     int ferexp = 125
     int nahexp = 125
@@ -54,11 +54,11 @@ class Unit {
         String getKey() { name() }
     }
 
-    def isinbase(){
-        inbase
+    def away(){
+        away
     }
     def toggleinbase(){
-        inbase = !inbase
+        away = !away
     }
     def healcost(){
         def cost
