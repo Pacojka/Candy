@@ -13,6 +13,20 @@ class UnitController {
         //redirect(action: "userunits", params: params)
     }
 
+    def messages = {
+        def messages = lookupUser().messages()
+        [messages: messages,gold:lookupUser().gold.get()]
+    }
+
+    def messageview = {
+        def damessage = Message.get(params.messageid)
+        if(damessage.user != lookupUser()){
+            redirect(action: "messages")
+
+        }
+        [message: damessage,gold:lookupUser().gold.get()]
+    }
+
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def map = {
         def range 
@@ -52,7 +66,6 @@ class UnitController {
         def usrfield = usr.fields()
         def destfield = enemy.fields()
         def distance = usrfield[0].distance(destfield[0])
-        System.out.println(distance+" Meter")
         if(usr==enemy)redirect(action: "index")
          def userUnits = lookupUser().units()
         [distance:distance,units:userUnits,user: usr,enemy: enemy ,gold:lookupUser().gold.get()]
@@ -68,20 +81,16 @@ class UnitController {
 //weg berechnen und die Action erzeugen und finden ende berechnen
         def distance = usrfield[0].distance(destfield[0])
         def now = new Date()
-        System.out.println("lul?\n\n\n")
-        System.out.println(now)
         def disAction = new Actionstack(starttime:now,destinationmap:destfield[0])
         usr.addToActions(disAction)
-        System.out.println(now)
         disAction.travelSetTime(distance)
 
         def usrunits = []
         if(params.selectedUnits)params.selectedUnits.each{
-            System.out.println("luuuuul\n\n\n")
             def daunit = Unit.get(it)
             if(daunit)if(daunit.user == lookupUser()){
              disAction.addToUnits(daunit)
-             daunit.toggleinbase()
+             daunit.setAway()
             } 
         }
         //maybe message aber brauch nciht wir ja angezeigt
@@ -217,7 +226,7 @@ class UnitController {
             it.calchppr()
         }
     }
-
+//KANN WEG WENNS IM ACTIONSTACK LÄUFT!!!!!!!!!!!!!!!!!!!!!!
     def fightsim(userteam, enemyteam) {
         def result = "" //rueckgabewert
         def roundcount = 0

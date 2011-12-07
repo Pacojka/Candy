@@ -1,0 +1,1 @@
+<g:link action="messageview" params="[messageid:message.id]">|${message.titel}| </g:link>

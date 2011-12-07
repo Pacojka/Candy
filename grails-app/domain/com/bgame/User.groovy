@@ -13,7 +13,7 @@ class User {
     boolean passwordExpired
     int unitcount = 0
     Value gold
-    static hasMany = [useritems:Usritm, units:Unit,fields:Map, actions:Actionstack]
+    static hasMany = [useritems:Usritm, units:Unit,fields:Map, actions:Actionstack, messages:Message]
     static embedded = ['gold']
 
     String toString(){
@@ -47,8 +47,14 @@ class User {
         password = springSecurityService.encodePassword(password)
     }
 
+def messages(){
+    return this.messages.collect{it}.sort {it.dateCreated}
+}
     def units(){
         return this.units.collect{it}.sort {it.dateCreated}
+    }
+        def availableUnits(){
+        return this.units.collect{if(!it.away())it}.sort {it.dateCreated}
     }
     def actions(){
         return this.actions.collect{it}.sort {it.starttime}

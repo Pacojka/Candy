@@ -54,8 +54,15 @@ class Unit {
         String getKey() { name() }
     }
 
+    //in isAway umbenennnnen! :D
     def away(){
         away
+    }
+        def setAway(){
+        away = true
+    }
+    def setBack(){
+        away = false
     }
     def toggleinbase(){
         away = !away
@@ -73,7 +80,8 @@ class Unit {
     }
 
     def healx(value){
-        curhp = maxhp
+        curhp += value
+        if (curhp > maxhp)curhp = maxhp
         this.calchppr()
     }
 
