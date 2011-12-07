@@ -20,10 +20,10 @@ class UnitController {
 
     def messageview = {
         def damessage = Message.get(params.messageid)
-        if(damessage.user != lookupUser()){
-            redirect(action: "messages")
+        //if(damessage.user != lookupUser()){
+           // redirect(action: "messages")
 
-        }
+        //}else
         [message: damessage,gold:lookupUser().gold.get()]
     }
 

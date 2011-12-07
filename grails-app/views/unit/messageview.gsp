@@ -1,12 +1,13 @@
 <html>
   <head>
-    <title>Welcome to Xiconis da Game CheckCheck</title>
+    <title>Welcome to Xiconis da Game</title>
     <meta name="layout" content="main" />
-
   </head>
   <body>
-    <h2>${message.titel}</h2>
-    <br><br><br>
-    <h2>${message.text}</h2>
+    <div id="body1">
+      <h2>${message.titel}</h2>
+      <br><br><br>
+      <h1>${message.text}</h1>
+    </div>
   </body>
 </html>
