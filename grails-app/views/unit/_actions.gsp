@@ -1,6 +1,6 @@
-
-<h1>
-${action}<br>
-  Units:<g:render template="actionunits" collection="${action.units()}" var="unit"/>
-</h1>
+<div id="clock${action.id}">[${action.id}]</div>
+<div>${action}</div>
+<script language="javascript">
+var clock${action.id} = new StartCountDown("clock${action.id}","${action.timeleft()}");
+</script>
 <br>

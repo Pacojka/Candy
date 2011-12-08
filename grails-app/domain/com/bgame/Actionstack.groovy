@@ -17,11 +17,11 @@ class Actionstack {
     String toString(){
         def result = ""
         if(actiontype.getKey() == "hin"){
-            result += "${timeleft()} Sec bis zum Angriff auf ${destinationmap.user.username}(${destinationmap.xaxis}/${destinationmap.yaxis})"
+            result += "bis zum Angriff auf ${destinationmap.user.username}(${destinationmap.xaxis}/${destinationmap.yaxis})"
         }else if(actiontype.getKey() == "kam"){
-            result += "Kampf gegen ${destinationmap.user.username}(${destinationmap.xaxis}/${destinationmap.yaxis})"
+            result += "Kampf gegen ${destinationmap.user.username}(${destinationmap.xaxis}/${destinationmap.yaxis})."
         }else{
-            result += "${timeleft()} Sec bis zur Ankunft im Heimatdorf"
+            result += "bis zur Ankunft im Heimatdorf."
         }
         result
     }
