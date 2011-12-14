@@ -50,6 +50,6 @@ class Monster {
         }
     }
     String toString(){
-        return "${name}"
+        return "${name} (${curhp}/${maxhp})"
     }
 }

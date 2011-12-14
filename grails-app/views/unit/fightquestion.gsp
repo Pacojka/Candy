@@ -6,12 +6,19 @@
   <body>
     <div id="body1">
 
-      Hey ${user.username}, willst du wirklich ${enemy.username} auf den Sack geben?<br>
-      er ist ${distance}sec entfernt. also ${(int)(distance/60)}min
+      Hey ${user.username},
+<g:if test="${field.hasUser()}">
+ willst du wirklich ${field.user.username} auf den Sack geben?<br>
+</g:if>
+<g:else>
+ willst du wirklich zum ${field.fieldtype} reisen um Monster auf zu mischen?<br>
+</g:else>
 
+      er ist ${distance}sec entfernt. also ${(int)(distance/60)}min
       <g:form name="form" action="travel">
         <g:render template="fightunits" collection="${units}" var="unit"/>
-        <g:hiddenField name="enemyid" value="${enemy.id}" />
+        <g:hiddenField name="x" value="${field.xaxis}" />
+        <g:hiddenField name="y" value="${field.yaxis}" />
         <g:submitButton name="travel" class="test" value="Abreisen" style="cursor: pointer; font-weight: bold; width: 90px; background-color: #000000; color: #606060; border: 1px solid #606060; "/>
       </g:form>
     </div>

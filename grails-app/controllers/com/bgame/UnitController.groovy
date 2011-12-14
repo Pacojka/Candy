@@ -21,7 +21,7 @@ class UnitController {
     def messageview = {
         def damessage = Message.get(params.messageid)
         //if(damessage.user != lookupUser()){
-           // redirect(action: "messages")
+        // redirect(action: "messages")
 
         //}else
         [message: damessage,gold:lookupUser().gold.get()]
@@ -62,26 +62,24 @@ class UnitController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def fightquestion = {
         def usr = lookupUser()
-        def enemy = User.get(params.enemyid)
         def usrfield = usr.fields()
-        def destfield = enemy.fields()
-        def distance = usrfield[0].distance(destfield[0])
-        if(usr==enemy)redirect(action: "index")
-         def userUnits = lookupUser().units()
-        [distance:distance,units:userUnits,user: usr,enemy: enemy ,gold:lookupUser().gold.get()]
+        def destfield = Map.findByXaxisAndYaxis(params.x,params.y)
+        def distance = usrfield[0].distance(destfield)
+        if(usr==destfield.user)redirect(action: "index")
+        def userUnits = lookupUser().units()
+        [distance:distance,units:userUnits,user: usr,field:destfield ,gold:lookupUser().gold.get()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
-        def travel = {
-// user enemy und die felder raussuchen
+    def travel = {
+        // user enemy und die felder raussuchen
         def usr = lookupUser()
-        def enemy = User.get(params.enemyid)
         def usrfield = usr.fields()
-        def destfield = enemy.fields()
-//weg berechnen und die Action erzeugen und finden ende berechnen
-        def distance = usrfield[0].distance(destfield[0])
+        def destfield = Map.findByXaxisAndYaxis(params.x,params.y)
+        //weg berechnen und die Action erzeugen und finden ende berechnen
+        def distance = usrfield[0].distance(destfield)
         def now = new Date()
-        def disAction = new Actionstack(starttime:now,destinationmap:destfield[0])
+        def disAction = new Actionstack(starttime:now,destinationmap:destfield)
         usr.addToActions(disAction)
         disAction.travelSetTime(distance)
 
@@ -89,14 +87,14 @@ class UnitController {
         if(params.selectedUnits)params.selectedUnits.each{
             def daunit = Unit.get(it)
             if(daunit)if(daunit.user == lookupUser()){
-             disAction.addToUnits(daunit)
-             daunit.setAway()
+                disAction.addToUnits(daunit)
+                daunit.setAway()
             } 
         }
         //maybe message aber brauch nciht wir ja angezeigt
         redirect(action: "index")
 
-}
+    }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def fight = {
@@ -146,7 +144,7 @@ class UnitController {
         if (params.unitid != "null"){
             def ui = new Usritm()
             def unit = Unit.get(params.unitid)
-             System.out.println("vorm linken!")
+            System.out.println("vorm linken!")
             ui.linkunit(params.useritemid,unit).save()
         }
         redirect(action: "items")
@@ -226,7 +224,7 @@ class UnitController {
             it.calchppr()
         }
     }
-//KANN WEG WENNS IM ACTIONSTACK LÄUFT!!!!!!!!!!!!!!!!!!!!!!
+    //KANN WEG WENNS IM ACTIONSTACK LÄUFT!!!!!!!!!!!!!!!!!!!!!!
     def fightsim(userteam, enemyteam) {
         def result = "" //rueckgabewert
         def roundcount = 0

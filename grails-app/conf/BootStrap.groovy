@@ -64,7 +64,9 @@ class BootStrap {
         
         for (int ycor = 4; ycor < fieldsize;ycor+=9){
             for (int xcor = 4; xcor < fieldsize;xcor+=9){
-                field = Map.findByXaxisAndYaxis(xcor,ycor)
+                int randomex = random.nextInt(5)-2
+                int randomey = random.nextInt(5)-2
+                field = Map.findByXaxisAndYaxis(xcor+randomex,ycor+randomey)
                 field.fieldtype = "user"
             }
         }
@@ -109,10 +111,11 @@ class BootStrap {
         def item10 = new Item(itemname: 'Hölzerne Schienbeinschoner',item_type: 'bns', dmgmin: 0,dmgmax:0,defens:3,gold:5).save()
         def item11 = new Item(itemname: 'Sneakers',item_type: 'stf', dmgmin: 0,dmgmax:0,defens:2,gold:4).save()
         def item12 = new Item(itemname: 'Stoffmantel',item_type: 'rust', dmgmin: 0,dmgmax:0,defens:3,gold:4).save()
-        //mustr|def item99 = new Item(itemname: 'NAME',item_type: 'nah,fer,mag oder hlm,amu,rust,hnd,bns,stf', dmgmin: 0, dmgmax:0,str: 0, ges: 0, inz: 0,defens:0,gold:999).save()
+        //muster|def item99 = new Item(itemname: 'NAME',item_type: 'nah,fer,mag oder hlm,amu,rust,hnd,bns,stf', dmgmin: 0, dmgmax:0,str: 0, ges: 0, inz: 0,defens:0,gold:999).save()
         
-
-
+/*MONSTER*/
+def monster01 = new Monster(name:'Ratte',gold:2,wtyp: 'nah', str:1, ges:1, inz:1, exp:10, curhp:30, maxhp:30).save()
+def monster02 = new Monster(name:'Wolf',gold:4,wtyp: 'nah', str:3, ges:2, inz:2, exp:20, curhp:100, maxhp:100).save()
         
         /*ITEMS*/
 
@@ -210,11 +213,29 @@ class BootStrap {
         if(lastfield.user != null) result = false
         result
     }
+
+    def getUserfield(dafieldx,dafieldy){
+        def field
+        def xstart = dafieldx-2
+        def ystart = dafieldy-2
+        for (int ycor = ystart; ycor < ystart+5;ycor++){
+            for (int xcor = xstart; xcor < xstart+5;xcor++){
+                field = Map.findByXaxisAndYaxis(xcor,ycor)
+                if(field.fieldtype.getKey() == "user"){
+                    System.out.println("hab!!!!!!!!!!!")
+                    return field
+                }
+                else{
+                    System.out.println("nopedipope:(${xcor}/${ycor}) ")
+                }
+            }
+        }
+    }
     // def (fieldsize-1)/2
     def usertomap(user){
         def startx = 22
         def starty = 22
-        def field = Map.findByXaxisAndYaxis(startx,starty)
+        def field = getUserfield(startx,starty)
         def done = false
         def distance = 1
         def distancecopy = distance
@@ -258,7 +279,8 @@ class BootStrap {
                     startx -= 9
                     break
                 }
-                field = Map.findByXaxisAndYaxis(startx,starty)
+
+                field = getUserfield(startx,starty)
             }
         }
     }

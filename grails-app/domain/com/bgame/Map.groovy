@@ -6,8 +6,18 @@ class Map {
     Feldtypenum fieldtype = "fel"
     boolean main = false
     User user = null
+    int monsterexp = 250 //anfangswert für alllle felder
+    // int maxMonsterCount = 5 // 10/staerkefaktor oda so?
+    // int curMonstercount = 2
+    double staerkefaktor = 2.0
+
     static constraints = {
         user(nullable:true)
+    }
+
+    def getMonsterteam(){
+        def Monsterteam = []
+        
     }
 
     def distance(destField){
