@@ -83,23 +83,33 @@ class Actionstack {
     }
 
     def getMonsterTeam(){
+        def exp = (int)(destinationmap.monsterexp * destinationmap.staerkefaktor)
+        System.out.println("\n\n\n jojojo exp: ${exp}")
         def result = []
         def random = new Random()
-        //def monsterid = random.nextInt(2)+1
         def anzmonster= 1 + random.nextInt(3)
         def enemy = new Monster()
-        //def namechunk = "ba"
-        //def randname = namechunk
         for(int i = 1; i<=anzmonster;i++){
-            //randname += namechunk
             enemy = new Monster()
             enemy.createcopy(Monster.read(random.nextInt(6)+1))
-            enemy.name = enemy.name+i
+            enemy.name = "(${i})"+enemy.name
             result << enemy
         }
+        System.out.println("\n\n\nbis hier alles clat! monster erstellt")
+        if(exp >10){
+            exp = (int)(exp/10)
+        }else{
+            exp = 1
+        }
+        System.out.println("\n\n\n nun exp verteilen")
+
+        for(int i = 1;i<=10;i++){
+            result[random.nextInt(anzmonster)].addmonsterexp(exp)
+        }
+        result.each{println "jojojo "+it+":Monsterexp "+it.monsterexp}
         result
     }
-
+        
 
     def fightsim() {
         def userteam = units()
@@ -181,7 +191,7 @@ class Actionstack {
             }
         }
         def t1dpexp = (int)(t1hppool/t1exppool)
-                    if(t1dpexp < 1){t1dpexp = 1}//FEEEEEEEEEEEEEEEEHLER GLAUB ICH! UNTEN AUCH!
+        if(t1dpexp < 1){t1dpexp = 1}//FEEEEEEEEEEEEEEEEHLER GLAUB ICH! UNTEN AUCH!
         enemyteam.each {
             if (it.curhp > 0){
                 t2exppool += (int)(it.exp/(it.maxhp/it.curhp))
@@ -189,7 +199,7 @@ class Actionstack {
             }
         }
         def t2dpexp = (int)(t2hppool/t2exppool)
-            if(t2dpexp < 1){t2dpexp = 1}
+        if(t2dpexp < 1){t2dpexp = 1}
         while (t1count > 0 && t2count > 0){
             roundcount++
             result += "Round."+roundcount+" begins:<br>"

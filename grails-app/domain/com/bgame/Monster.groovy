@@ -8,7 +8,7 @@ class Monster {
     int ges = 1
     int inz = 1
     int exp = 15
-
+    int monsterexp = 125
     int curhp = 999
     int maxhp = 999
 
@@ -30,7 +30,10 @@ class Monster {
         String getKey() { name() }
     }
 
+def addmonsterexp(davalue){
+    this.monsterexp += (int)davalue
 
+}
     def dmg(){
         def dmg = this.str
         def min = 0

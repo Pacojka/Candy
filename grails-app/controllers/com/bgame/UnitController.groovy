@@ -12,7 +12,8 @@ class UnitController {
 
         //redirect(action: "userunits", params: params)
     }
-
+    
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def messages = {
         def messages = lookupUser().messages()
         [messages: messages,gold:lookupUser().gold.get()]

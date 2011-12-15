@@ -8,6 +8,10 @@
       <h2>${message.titel}</h2>
       <br><br><br>
       <h1>${message.text}</h1>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
   </body>
 </html>
