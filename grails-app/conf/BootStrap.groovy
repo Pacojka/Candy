@@ -114,9 +114,13 @@ class BootStrap {
         //muster|def item99 = new Item(itemname: 'NAME',item_type: 'nah,fer,mag oder hlm,amu,rust,hnd,bns,stf', dmgmin: 0, dmgmax:0,str: 0, ges: 0, inz: 0,defens:0,gold:999).save()
         
 /*MONSTER*/
-def monster01 = new Monster(name:'Ratte',gold:2,wtyp: 'nah', str:1, ges:1, inz:1, exp:10, curhp:30, maxhp:30).save()
-def monster02 = new Monster(name:'Wolf',gold:4,wtyp: 'nah', str:3, ges:2, inz:2, exp:20, curhp:100, maxhp:100).save()
-        
+def monster01 = new Monster(name:'Ratte',gold:20,wtyp: 'nah', str:1, ges:1, inz:1, exp:10, curhp:30, maxhp:30).save()
+def monster02 = new Monster(name:'Wolf',gold:40,wtyp: 'nah', str:3, ges:2, inz:2, exp:20, curhp:100, maxhp:100).save()
+def monster03 = new Monster(name:'Ork',gold:50,wtyp: 'fer', str:25, ges:5, inz:5, exp:50, curhp:400, maxhp:400).save()
+def monster04 = new Monster(name:'Schwein',gold:30,wtyp: 'nah', str:20, ges:20, inz:100, exp:50, curhp:250, maxhp:250).save()
+def monster05 = new Monster(name:'Jude',gold:5000,wtyp: 'fer', str:1, ges:1, inz:1, exp:1000, curhp:10, maxhp:19).save()
+def monster06 = new Monster(name:'Peter Lustig',gold:60,wtyp: 'nah', str:40, ges:30, inz:100, exp:50, curhp:250, maxhp:250).save()
+
         /*ITEMS*/
 
         /*ADMIN*/

@@ -42,7 +42,18 @@ class Monster {
         }
         return dmg
     }
+def createcopy(monster){
+    this.name = monster.name
+    this.gold = monster.gold
+    this.wtyp = monster.wtyp.getKey()
+    this.str = monster.str
+    this.ges = monster.ges
+    this.inz = monster.inz
+    this.exp = monster.exp
 
+    this.curhp = monster.curhp
+    this.maxhp = monster.maxhp
+}
     def setwtype(newWtype){
     //    System.out.println("\n so hier wegen setWtype\nnewWtype: "+newWtype+"\n gerade wtype: "+this.wtyp.getKey())
         if (newWtype != this.wtyp.getKey()){
