@@ -18,6 +18,9 @@ class UnitController {
         def messages = lookupUser().messages()
         [messages: messages,gold:lookupUser().gold.get()]
     }
+	
+	def gb = {
+	}
 
     def messageview = {
         def damessage = Message.get(params.messageid)
@@ -51,13 +54,6 @@ class UnitController {
         //allfields.each{System.out.println(it)}
 
         [rangenow:range,xnow:x,ynow:y,range:nextcol,fields: allfields,gold:lookupUser().gold.get()]
-    }
-
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
-    def enemys = {
-        def usrenemys = getEnemyUsers(lookupUser())
-
-        [userenemys: usrenemys,gold:lookupUser().gold.get()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -568,7 +564,8 @@ class UnitController {
     }
 
     def saveunit = {
-        def unitInstance = new Unit(params)
+		System.out.println("is im saveunit also kommt der error hier irgendwo :)")
+		def unitInstance = new Unit(params)
         def loggeduser = lookupUser()
         //if(loggeduser.unitcount == 0)
         //überlegen wies beim usererstellen ausgelöst werden kann
@@ -582,12 +579,14 @@ class UnitController {
         unitInstance.user = loggeduser
         unitInstance.recalcUnit()
         if (unitInstance.save(flush: true)) {
+			System.out.println("blap")
             flash.message = "${message(code: 'unit.created.message', args: [message(code: 'unit.label', default: 'Unit'), unitInstance.id])}"
             redirect(action: "index")
             loggeduser.gold.sub(loggeduser.nextunitcost())
             loggeduser.unitcount ++
         }
         else {
+			System.out.println("blup")
             render(view: "createUnit", model: [unitInstance: unitInstance])
         }
     }

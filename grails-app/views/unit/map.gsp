@@ -13,11 +13,11 @@
         <g:link action="map" params="[newx:xnow,newy:ynow,newrange:rangenow+1]"><h4>-</h4></g:link>
       </g:if>
       </td>
-      <td><g:link action="map" params="[newx:xnow,newy:ynow-3,newrange:rangenow]"><h4><img src="/bgame/images/map/mapup.png"/></h4></g:link></td>
+      <td><g:link action="map" params="[newx:xnow,newy:ynow-3,newrange:rangenow]"><h4><img title="Up" src="${resource(dir:'images/map',file:'mapup.png')}"/></h4></g:link></td>
       <td></td>
       </tr>
       <tr width="380px">
-        <td id="maptd"><g:link action="map" params="[newx:xnow-3,newy:ynow,newrange:rangenow]"><h4><img src="/bgame/images/map/mapleft.png"/></h4></g:link></td>
+        <td id="maptd"><g:link action="map" params="[newx:xnow-3,newy:ynow,newrange:rangenow]"><h4><img title="Up" src="${resource(dir:'images/map',file:'mapleft.png')}"/></h4></g:link></td>
       <td width="380px">
         <table id="maptable" cellspacing="1" >
           <tr>
@@ -25,11 +25,11 @@
           </tr>
         </table>
       </td>
-      <td id="maptd"><g:link  action="map" params="[newx:xnow+3,newy:ynow,newrange:rangenow]"><h4><img src="/bgame/images/map/mapright.png"/></h4></g:link></td>
+      <td id="maptd"><g:link  action="map" params="[newx:xnow+3,newy:ynow,newrange:rangenow]"><h4><img title="Up" src="${resource(dir:'images/map',file:'mapright.png')}"/></h4></g:link></td>
       </tr>
       <tr>
         <td></td>
-        <td><g:link action="map" params="[newx:xnow,newy:ynow+3,newrange:rangenow]"><h4><img src="/bgame/images/map/mapdown.png"/></h4></g:link></td>
+        <td><g:link action="map" params="[newx:xnow,newy:ynow+3,newrange:rangenow]"><h4><img title="Up" src="${resource(dir:'images/map',file:'mapdown.png')}"/></h4></g:link></td>
       <td>
       <g:if test="${rangenow>=4}">
         <g:link action="map" params="[newx:xnow,newy:ynow,newrange:rangenow-1]"><h4>+</h4></g:link>

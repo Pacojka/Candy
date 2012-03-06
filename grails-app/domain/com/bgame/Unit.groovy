@@ -34,11 +34,12 @@ class Unit {
     static hasMany = [useritems:Usritm]
     static belongsTo = User
     static constraints = {
-        name blank: false, unique: true
+		
+        name  unique: 'user', validator: {
+				return it.length() != 0
+			}
 
     }
-
-
 
     public enum MyEnum {
 
@@ -225,18 +226,6 @@ class Unit {
         rueckgabe
     }
 
-    def getlvl(exp){
-        def expToNextlvl = 100
-        def expTocurrlvl = 0
-        def i = 1
-        for (i; exp > expToNextlvl;++i){
-            expTocurrlvl = expToNextlvl
-            expToNextlvl+=25*(i*i)
-            // System.out.println("\nfolgendes:\n exptoCurr:"+expTocurrlvl+" \nexptoNext:"+expToNextlvl+" \nund exp:"+exp)
-        }
-        ((1-(expToNextlvl-exp)/(expToNextlvl-expTocurrlvl))+(i-2))
-    }
-
     def recalcwpntype(){
         def rueckgabe = null
         this.items().each{
@@ -248,8 +237,21 @@ class Unit {
         if(wtyp != rueckgabe)wtyp = rueckgabe
 
     }
+	
+	def getlvl(exp){
+		def expToNextlvl = 100
+		def expTocurrlvl = 0
+		def i = 1
+		for (i; exp > expToNextlvl;++i){
+			expTocurrlvl = expToNextlvl
+			expToNextlvl+=25*(i*i)
+			// System.out.println("\nfolgendes:\n exptoCurr:"+expTocurrlvl+" \nexptoNext:"+expToNextlvl+" \nund exp:"+exp)
+		}
+		((1-(expToNextlvl-exp)/(expToNextlvl-expTocurrlvl))+(i-2))
+	}
 
     def recalcUnit() {
+		if (this.curhp <= 0 && this.main)this.curhp = 1
         def number = getlvl(this.ferexp)
         if((int)number != this.ferlvl)this.ferlvl = (int)number
         if(this.ferToNext != (int)(100*(number - this.ferlvl)))this.ferToNext = (int)(100*(number - this.ferlvl))
@@ -278,7 +280,7 @@ class Unit {
         if(this.inz != 9 + (int)number)this.inz =9 + (int)number
         this.inzToNext = (int)(100*(number-(int)number))
         //exp für den exppool im kampf
-        this.exp = this.str+this.ges+this.inz*2
+        this.exp = (this.str+this.ges+this.inz)*2
 
         def maxihp = this.str*20+this.ges*10+this.inz*5
         if (maxihp != this.curhp){
@@ -301,6 +303,15 @@ class Unit {
         }
     }
 
+	def getmapexp(){
+		def mapexp = 0
+		if((magexp <= ferexp) && (magexp <= nahexp)){
+			mapexp = (ferexp + nahexp)
+			}else if((ferexp <= magexp) && (ferexp <= nahexp)){
+			mapexp = (magexp + nahexp)
+			}else{mapexp = (magexp + ferexp)}
+		}
+	
     String toString(){
         return "${name}"
     }

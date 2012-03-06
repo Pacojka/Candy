@@ -78,7 +78,7 @@
         }
       }
     function redirect(){
-      window.location.href = "/bgame/unit/index";
+      window.location.href = "javascript:location.reload(true)";
     }
 
     </script>

@@ -86,6 +86,7 @@ ${unit.curhp}/${unit.maxhp}
       <g:render template="unititem" collection="${items}" var="useritem"/>
       <br>
 
+<g:if test="${unit.away() == false}">
       Ausrüsten:
       <g:set var="uneqitems" value="${unit.notequipteditemtypes()}" />
         <g:form action="uvequipt">
@@ -93,6 +94,8 @@ ${unit.curhp}/${unit.maxhp}
         <g:select name="useritemid" noSelection="${['null':'auswählen...']}" from="${uneqitems}" optionKey="id" style="width: 90px; background-color: #440000; color: black; border: 1px solid #606060; " />
        <g:submitButton name="equipt" class="test" value="+" style="cursor: pointer; font-weight: bold; width: 20px; background-color: #000000; color: #606060; border: 1px solid #606060; " />
       </g:form>
+</g:if>
+
     </div>
   </body>
 </html>

@@ -16,7 +16,7 @@
 ${unit.curhp}/${unit.maxhp}
         </div>
       </td>
-      <td width="40px" bgcolor="#1C1C1C">${unit.healcost()}</td>
+      <td width="40px" bgcolor="#1C1C1C">  ${unit.healcost()}</td>
       <td width="30px" bgcolor="#1C1C1C">
 
     <g:if test="${(unit.curhp > 0) &&(unit.healcost() <= gold)}">

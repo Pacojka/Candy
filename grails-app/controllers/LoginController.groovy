@@ -40,14 +40,15 @@ class LoginController {
 	 * Show the login page.
 	 */
 	def auth = {
-
+		
 		def config = SpringSecurityUtils.securityConfig
-
+		System.out.println("is im auth\n\n")
 		if (springSecurityService.isLoggedIn()) {
+			System.out.println("is loggedin\n\n")
 			redirect uri: config.successHandler.defaultTargetUrl
 			return
 		}
-
+		System.out.println("is vorm String view\n\n")
 		String view = 'auth'
 		String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
 		render view: view, model: [postUrl: postUrl,
@@ -58,6 +59,7 @@ class LoginController {
 	 * The redirect action for Ajax requests.
 	 */
 	def authAjax = {
+		System.out.println("er versucht den authAjax kram\n\n")
 		response.setHeader 'Location', SpringSecurityUtils.securityConfig.auth.ajaxLoginFormUrl
 		response.sendError HttpServletResponse.SC_UNAUTHORIZED
 	}
@@ -66,6 +68,7 @@ class LoginController {
 	 * Show denied page.
 	 */
 	def denied = {
+		System.out.println("is im denied\n\n")
 		if (springSecurityService.isLoggedIn() &&
 				authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
 			// have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
@@ -87,6 +90,7 @@ class LoginController {
 	 * Callback after a failed login. Redirects to the auth page with a warning message.
 	 */
 	def authfail = {
+		System.out.println("is im authfail\n\n")
 
 		def username = session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]
 		String msg = ''
@@ -113,6 +117,7 @@ class LoginController {
 			render([error: msg] as JSON)
 		}
 		else {
+			
 			flash.message = msg
 			redirect action: 'auth', params: params
 		}

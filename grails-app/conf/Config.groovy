@@ -93,3 +93,17 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.bgame.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.bgame.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.bgame.Role'
+
+//test alles ab hier kann fehler verursachen :D
+grails {
+	mail {
+	  host = "smtp.gmail.com"
+	  port = 465
+	  username = "xiconftw@gmail.com"
+	  password = "xicon123456"
+	  props = ["mail.smtp.auth":"true",
+			   "mail.smtp.socketFactory.port":"465",
+			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			   "mail.smtp.socketFactory.fallback":"false"]
+	}
+ }
