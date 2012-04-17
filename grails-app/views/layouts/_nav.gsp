@@ -15,12 +15,10 @@
      </br>
     <g:link controller='unit' action='map'>Karte</g:link>     </br>
      </br>
-    <g:link controller='unit' action='messages'>Nachrichten</g:link>
+    
      </br>
      </br>
-     </br>
-     </br>
-    <g:link controller='unit' action='gb'>Bug/Kritik?</g:link>
+     
 
 
   </div>
