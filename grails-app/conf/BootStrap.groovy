@@ -130,11 +130,19 @@ class BootStrap {
 
         /*USER+Items+Units*/
         /*USER*/
+<<<<<<< HEAD
 		
         def testUser2 = new User(username: 'xian', email: 'xian@gmail.com', enabled: true, password: 'p', gold:new Value()).save()
         def xian = User.findByUsername('xian')
         /*Map zuweisen*/
         
+=======
+	
+        def testUser2 = new User(username: 'xian', email: 'xian@gmail.com', enabled: true, password: 'p', gold:new Value()).save()
+        def xian = User.findByUsername('xian')
+        /*Map zuweisen*/
+    
+>>>>>>> 0521a0ab8724d5c324ce5fd98d06bdda14920226
 		if(freemapfields())usertomap(xian)
 		
         /*Items*/
@@ -237,8 +245,12 @@ class BootStrap {
         /*User Role zuweisung*/
         
 		UserRole.create testUser, adminRole, true
+<<<<<<< HEAD
         
+=======
+>>>>>>> 0521a0ab8724d5c324ce5fd98d06bdda14920226
 		UserRole.create testUser2, userRole, true
+		/*
         UserRole.create testUser3, userRole, true
         UserRole.create testUser4, userRole, true
 		
