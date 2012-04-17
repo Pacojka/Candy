@@ -1,23 +1,34 @@
 <html>
   <div id="nav">
-
+    </br>
+    
     <g:link controller='unit' action='index'>Bande</g:link>
-    </br>
+    &nbsp;&nbsp;&nbsp;
     <g:link controller='unit' action='items'>Kiste</g:link>
-    </br>
+   &nbsp;&nbsp;&nbsp;
 
     <g:link controller='unit' action='healer'>Heiler</g:link>
-    </br>
+   &nbsp;&nbsp;&nbsp;
     <g:link controller='unit' action='createUnit'>Kinder Knechten</g:link>
-     </br>
-     </br>
-    <g:link controller='unit' action='map'>Karte</g:link>     </br>
-     </br>
+    &nbsp;&nbsp;&nbsp;
+    <g:link controller='unit' action='map'>Karte</g:link>     
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     
-     </br>
-     </br>
-     
-
-
+    
+  
   </div>
+  
+  
+  
+  
+  
+  <div id="login">
+    <sec:ifLoggedIn>
+
+    Candy:  ${gold}  <g:link controller='logout' action='index'>(Logout)</g:link>
+      </sec:ifLoggedIn>
+      <sec:ifNotLoggedIn>
+        <g:link controller='unit' action='index'>Login</g:link>
+    </sec:ifNotLoggedIn>
+    </div>
 </html>

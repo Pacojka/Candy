@@ -1,16 +1,42 @@
 <html>
   <div id="header">
-
-    <div id="loginheader">
-      <sec:ifLoggedIn>
-
-<h2>Jo <sec:loggedInUserInfo field="username"/> dein gold  ${gold}  <g:link controller='logout' action='index'>(Logout)</g:link></h2>
-      </sec:ifLoggedIn>
-      <sec:ifNotLoggedIn>
-        <h2><g:link controller='unit' action='index'>Login</g:link></h2>
-      </sec:ifNotLoggedIn>
-    </div>
-
+   
+    <img src="../images/bannerTest.png" alt="Tanzmaus">
 
   </div>
+  
+  
+  <div id="char">
+    <img src="../images/chars/char.png" alt="Tanzmaus">
+    <img src="../images/chars/char.png" alt="Tanzmaus">
+    <img src="../images/chars/char.png" alt="Tanzmaus">
+    <img src="../images/chars/char.png" alt="Tanzmaus">
+    
+  </div>
+  
+  <div id="kleidung">
+    <img src="../images/chars/empty.png" alt="Tanzmaus">
+    <img src="../images/chars/kleidung.png" alt="Tanzmaus">
+    <img src="../images/chars/kleidung.png" alt="Tanzmaus">
+    <img src="../images/chars/empty.png" alt="Tanzmaus">
+    
+    
+  </div>
+  <div id="accessoire">
+    <img src="../images/chars/empty.png" alt="Tanzmaus">
+    <img src="../images/chars/empty.png" alt="Tanzmaus">
+    <img src="../images/chars/accessoire.png" alt="Tanzmaus">
+    <img src="../images/chars/accessoire.png" alt="Tanzmaus">
+    
+  </div>
+  <div id="waffe">
+    <img src="../images/chars/empty.png" alt="Tanzmaus">
+    <img src="../images/chars/empty.png" alt="Tanzmaus">
+    <img src="../images/chars/empty.png" alt="Tanzmaus">
+    <img src="../images/chars/waffe.png" alt="Tanzmaus">
+    
+  </div>
+ 
+  
+  
 </html> 

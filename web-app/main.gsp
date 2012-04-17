@@ -11,10 +11,12 @@
 
 <body>
 
-  <div id="spinner" class="spinner" style="display:none;">
-    <img src="${resource(dir:'images',file:'spinner.gif')}" alt="${message(code:'spinner.alt',default:'Loading...')}" />
+  
+  <div id="header">
+   </br>
+    <h2>banner</h2>
+    
   </div>
-  <div id="banner"><a href="http://pr0gramm.com"><img src="${resource(dir:'images',file:'banner.jpg')}" alt="Grails" border="0" /></a></div>
 
   <div id="nav">
     <div class="homePagePanel">
