@@ -409,8 +409,9 @@ td.errors textarea {
 
 #body1 { 
     margin-top: 350px;
-    margin-left: 180px;
+    margin-left: 100px;
     color: white;
+    width: 700px;
     text-align: left;
     margin-bottom: 15px;
     position: absolute;
@@ -422,7 +423,7 @@ td.errors textarea {
 
 #table { 
     width: 650px;
-    margin-top: 16px;
+    margin-top: 0px;
     margin-left: 0px;
     
     text-align: left;

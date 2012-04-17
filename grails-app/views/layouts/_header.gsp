@@ -7,33 +7,33 @@
   
   
   <div id="char">
-    <img src="../images/chars/char.png" alt="Tanzmaus">
-    <img src="../images/chars/char.png" alt="Tanzmaus">
-    <img src="../images/chars/char.png" alt="Tanzmaus">
-    <img src="../images/chars/char.png" alt="Tanzmaus">
+    <img src="../images/chars/Chars/c1.png" alt="Tanzmaus">
+    <img src="../images/chars/Chars/c1.png" alt="Tanzmaus">
+    <img src="../images/chars/Chars/c1.png" alt="Tanzmaus">
+    <img src="../images/chars/Chars/c1.png" alt="Tanzmaus">
     
   </div>
   
   <div id="kleidung">
     <img src="../images/chars/empty.png" alt="Tanzmaus">
-    <img src="../images/chars/kleidung.png" alt="Tanzmaus">
-    <img src="../images/chars/kleidung.png" alt="Tanzmaus">
+    <img src="../images/chars/Kopfbedeckung/k1.png" alt="Tanzmaus">
     <img src="../images/chars/empty.png" alt="Tanzmaus">
+    <img src="../images/chars/Kopfbedeckung/k1.png" alt="Tanzmaus">
     
     
   </div>
   <div id="accessoire">
     <img src="../images/chars/empty.png" alt="Tanzmaus">
     <img src="../images/chars/empty.png" alt="Tanzmaus">
-    <img src="../images/chars/accessoire.png" alt="Tanzmaus">
-    <img src="../images/chars/accessoire.png" alt="Tanzmaus">
+    <img src="../images/chars/Accessoire/a2.png" alt="Tanzmaus">
+    <img src="../images/chars/Accessoire/a1.png" alt="Tanzmaus">
     
   </div>
   <div id="waffe">
+    <img src="../images/chars/Waffe/w1.png" alt="Tanzmaus">
     <img src="../images/chars/empty.png" alt="Tanzmaus">
     <img src="../images/chars/empty.png" alt="Tanzmaus">
     <img src="../images/chars/empty.png" alt="Tanzmaus">
-    <img src="../images/chars/waffe.png" alt="Tanzmaus">
     
   </div>
  

@@ -9,7 +9,7 @@
           
           <h2><g:link action="unitview" params="[unitid:unit.id]">${unit.name}</g:link></h2>
           
-          <img src="../images/chars/char.png" alt="Tanzmaus">
+          <img src="../images/chars/Chars/c1.png" alt="Tanzmaus">
           
         </td>
         <td width="340px" bgcolor="#969696">
@@ -55,7 +55,9 @@
       <div id="hp">
         ${unit.curhp}/${unit.maxhp}
       </div>
-
+          </br>
+          </br>
+          </br>
       <div id="table" >
         <table cellspacing="0">
 
