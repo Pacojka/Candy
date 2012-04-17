@@ -130,21 +130,21 @@ class BootStrap {
 
         /*USER+Items+Units*/
         /*USER*/
-		/*XX
+	
         def testUser2 = new User(username: 'xian', email: 'xian@gmail.com', enabled: true, password: 'p', gold:new Value()).save()
         def xian = User.findByUsername('xian')
         /*Map zuweisen*/
-        /*XX
+    
 		if(freemapfields())usertomap(xian)
 		
         /*Items*/
-        /*XX
+        
 		def ua11 = new com.bgame.Usritm()
         ua11.link(i1,xian).save()
         //def ua12 = new com.bgame.Usritm()
         //ua12.link(i3,xian).save()
         /*Units*/
-		/*XX
+		
 		System.out.println("hiers noch ok aaaaaaaaaaber")
         testUser2.addToUnits(new Unit(name: 'Xian', main: true, nahexp: 9000, magexp : 150,wtyp: 'nah'))
 		System.out.println("hier gehts doch weiter! :D")
@@ -237,8 +237,8 @@ class BootStrap {
         /*User Role zuweisung*/
         
 		UserRole.create testUser, adminRole, true
-        /*XX
 		UserRole.create testUser2, userRole, true
+		/*
         UserRole.create testUser3, userRole, true
         UserRole.create testUser4, userRole, true
 		*/
