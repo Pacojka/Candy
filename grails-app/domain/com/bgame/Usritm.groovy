@@ -8,10 +8,10 @@ class Usritm {
 
     //static belongsTo = [user:User,item:Item]
     String toString(){
-        def ergebnis = item.itemname+": Dmg:"+item.dmgmin+"-"+item.dmgmax+",Vert.:"+item.defens
+        def ergebnis = item.itemName+": Str.:"+item.staerke+", Int.:"+item.intelligenz+", Cns.:"+item.coolness+", Gesw.:"+item.geschwindigkeit
         return ergebnis
     }
-    
+	
     static constraints = {
         unit(nullable: true)
     }
@@ -30,24 +30,23 @@ class Usritm {
         if (u)
         {           
             if (u.unit != null) {
-         //       System.out.println("alter geht garnicht!")
-              //  u.unit?.removeFromUseritems(u)
-
-              //  u.unit.setwtype("nah")
             }
             
             giveunit?.addToUseritems(u)
-         //   System.out.println("\n\n\njojojojojojojojo addtouseritemgingklar!")
-         //   System.out.println("\n nun setwtype")
-            if((u.item.item_type.getKey()== "nah") || (u.item.item_type.getKey()== "fer") || (u.item.item_type.getKey()== "mag")){
-         //   System.out.println("\n is waffe!!!!!!!!!!!!")
-                giveunit.setwtype(u.item.item_type.getKey())
-         //   System.out.println("jojojojojojojojo addtouseritemgingklar!")
-            
-            }
-            //else{
-            //    System.out.println("\n keine waffe!!!!!!!!!!!!!")
-            //}
+			switch ( u.item.item_type.getKey()) {				
+								case "acc":
+								giveunit.setAccessoire(u.item.getDateiName())
+								break
+								case "kpf":
+								giveunit.setKopfbedeckung(u.item.getDateiName())
+								break
+								case "rus":
+								giveunit.setRuestung(u.item.getDateiName())
+								break
+								case "waf":
+								giveunit.setWaffe(u.item.getDateiName())
+								break
+							}
             u.save()
 
         }
@@ -60,8 +59,24 @@ class Usritm {
         if (u)
         {
             if (u.unit != null) {
-                u.unit.setwtype("nah")
-                u.unit?.removeFromUseritems(u)
+				
+				
+				switch ( u.item.item_type.getKey()) {
+					case "acc":
+					u.unit.setAccessoire("empty.png")
+					break
+					case "kpf":
+					u.unit.setKopfbedeckung("empty.png")
+					break
+					case "rus":
+					u.unit.setRuestung("empty.png")
+					break
+					case "waf":
+					u.unit.setWaffe("empty.png")
+					break
+				}
+				
+				u.unit?.removeFromUseritems(u)
                 u.save()
             }
         }
@@ -71,9 +86,12 @@ class Usritm {
         def u = Usritm.findByIdAndUser(id,user)
         if (u)
         {
-            u.item?.removeFromUseritems(u)
+			if (u.unit != null){
+				u.unlinkunit(u.id)
+			}
+			u.item?.removeFromUseritems(u)
             user?.removeFromUseritems(u)
-            if (u.unit != null) u.unit?.removeFromUseritems(u)
+
             u.delete()
         }
     }

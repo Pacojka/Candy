@@ -2,10 +2,13 @@ import com.bgame.*
 class BootStrap {
 
     def init = { servletContext ->
-
+		System.out.println("BootStrap GO!!!")
+	
+/*XYZ
         /*map erzeugen*/
         //feldgrösse vielfache 25 + x * 10 {x E N} :D(hoffentlich nicht falsch :D)
-        def fieldsize = 45
+/*XYZ
+		def fieldsize = 45
 
         def random = new Random()
         def field
@@ -84,37 +87,23 @@ class BootStrap {
          */
 
         /*ROLES*/
-        def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+ 
+		def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
         def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
         /*ITEMS*/
-        def item01 = new Item(itemname: 'Stumpfer Dolch',item_type: 'nah', dmgmin: 8,dmgmax:12,defens:0,gold:5).save()
-        def i1 = Item.findByItemname('Stumpfer Dolch')
-
-        def item02 = new Item(itemname: 'Spielzeugbogen',item_type: 'fer', dmgmin: 6,dmgmax:14,defens:0,gold:5).save()
-        def i2 = Item.findByItemname('Spielzeugbogen')
-/*
-        def item03 = new Item(itemname: 'Damenhandtasche',item_type: 'nah', dmgmin: 2,dmgmax:2,defens:0,gold:15).save()
-        def i3 = Item.findByItemname('Damenhandtasche')
-
-        def item04 = new Item(itemname: 'Holzbein',item_type: 'nah', dmgmin: 2,dmgmax:2,defens:0,gold:1).save()
-        def i4 = Item.findByItemname('Holzbein')
-  */      
-        def item05 = new Item(itemname: 'Doppelrammler',item_type: 'nah', dmgmin: 14,dmgmax:22,defens:0,gold:20).save()
-        def i5 = Item.findByItemname('Doppelrammler')
         
-        def item06 = new Item(itemname: 'Periode',item_type: 'nah', dmgmin: 70,dmgmax:100,defens:0,gold:999).save()
-        def i6 = Item.findByItemname('Periode')
+		def item01 = new Item(itemName: 'Monokel',dateiName: 'Monokel.png',itemType: 'acc', staerke: 0,intelligenz:3,coolness:1,geschwindigkeit:0,candy:10).save()
+        def i1 = Item.findByItemName('Monokel')
 
-        def item07 = new Item(itemname: 'Amulett der Stärke',item_type: 'amu', dmgmin: 5,dmgmax:5,defens:0,gold:7).save()
-    /*
-		def item08 = new Item(itemname: 'Blechhelm',item_type: 'hlm', dmgmin: 0,dmgmax:0,defens:3,gold:4).save()
-        def item09 = new Item(itemname: 'Jute Handschuh',item_type: 'hnd', dmgmin: 0,dmgmax:0,defens:2,gold:3).save()
-        def item10 = new Item(itemname: 'Hölzerne Schienbeinschoner',item_type: 'bns', dmgmin: 0,dmgmax:0,defens:3,gold:5).save()
-        def item11 = new Item(itemname: 'Sneakers',item_type: 'stf', dmgmin: 0,dmgmax:0,defens:2,gold:4).save()
-        def item12 = new Item(itemname: 'Stoffmantel',item_type: 'rust', dmgmin: 0,dmgmax:0,defens:3,gold:4).save()
-        //muster|def item99 = new Item(itemname: 'NAME',item_type: 'nah,fer,mag oder hlm,amu,rust,hnd,bns,stf', dmgmin: 0, dmgmax:0,str: 0, ges: 0, inz: 0,defens:0,gold:999).save()
-      */  
-/*MONSTER*/
+		def item02 = new Item(itemName: 'Propellerhut',dateiName: 'Propellerhut.png',itemType: 'kpf', staerke: 1,intelligenz:1,coolness:3,geschwindigkeit:10,candy:15).save()
+		def i2 = Item.findByItemName('Propellerhut')
+		
+		def item03 = new Item(itemName: 'Blinkeschuhe',dateiName: 'Blinkeschuhe.png',itemType: 'rus', staerke: 4,intelligenz:0,coolness:2,geschwindigkeit:20,candy:20).save()
+		def i3 = Item.findByItemName('Blinkeschuhe')
+		
+		def item04 = new Item(itemName: 'Schleuder',dateiName: 'Schleuder.png',itemType: 'waf', staerke: 10,intelligenz:0,coolness:2,geschwindigkeit:0,candy:25).save()
+		def i4 = Item.findByItemName('Schleuder')
+/*MONSTER*//*XYZ
 		def monster001 = new Monster(name:'Ratte', wtyp: 'nah', goldmult:1, strmult:0.8, gesmult:0.5, inzmult:0.1, hpmult:0.7, expmult:1.2).save()
 		def monster002 = new Monster(name:'Wolf', wtyp: 'nah', goldmult:1.2, strmult:1.2, gesmult:0.8, inzmult:0.3, hpmult:0.7, expmult:1.4).save()
 		def monster003 = new Monster(name:'Ork', wtyp: 'nah', goldmult:1.4, strmult:2.0, gesmult:0.8, inzmult:0.1, hpmult:1.1, expmult:1.8).save()
@@ -126,29 +115,48 @@ class BootStrap {
 
         /*ADMIN*/
         def testUser = new User(username: 'me', enabled: true, password: 'p', gold:new Value()).save(flush: true)
-        /*ADMIN*/
+		/*User Role zuweisung*/
+		UserRole.create testUser, adminRole, true
+
+		 /*ADMIN*/
 
         /*USER+Items+Units*/
         /*USER*/
 
 		
-        def testUser2 = new User(username: 'xian', email: 'xian@gmail.com', enabled: true, password: 'p', gold:new Value()).save()
+        def testUser2 = new User(username: 'xian', email: 'xian@gmail.com', enabled: true, password: 'p', candy:new Value()).save()
         def xian = User.findByUsername('xian')
-        /*Map zuweisen*/
+		/*User Role zuweisung*/
+		UserRole.create testUser2, userRole, true
+		/*Map zuweisen*/
         
-
+/*XYZ
 		if(freemapfields())usertomap(xian)
 		
-        /*Items*/
-        
+        /*Items*/  
 		def ua11 = new com.bgame.Usritm()
         ua11.link(i1,xian).save()
-        //def ua12 = new com.bgame.Usritm()
-        //ua12.link(i3,xian).save()
+        
+		def ua12 = new com.bgame.Usritm()
+        ua12.link(i2,xian).save()
+		
+		def ua13 = new com.bgame.Usritm()
+		ua13.link(i3,xian).save()
+		
+		def ua14 = new com.bgame.Usritm()
+		ua14.link(i4,xian).save()
         /*Units*/
 		
-		System.out.println("hiers noch ok aaaaaaaaaaber")
-        testUser2.addToUnits(new Unit(name: 'Xian', main: true, nahexp: 9000, magexp : 150,wtyp: 'nah'))
+		//System.out.println("hiers noch ok aaaaaaaaaaber")
+        testUser2.addToUnits(new Unit(name: 'Xian', main: true)).save()
+		testUser2.addToUnits(new Unit(name: 'Robert', main: false))
+		def xianUnit1 = Unit.findByName('Xian')
+		
+		ua11.linkunit(ua11.id, xianUnit1)
+		//ua12.linkunit(ua12.id, xianUnit1)
+		//ua13.linkunit(ua13.id, xianUnit1)
+		//ua14.linkunit(ua14.id, xianUnit1)
+		/*XYZ
 		System.out.println("hier gehts doch weiter! :D")
 		testUser2.addToUnits(new Unit(name: 'mongo', main: false,ferexp: 6523, nahexp: 150, magexp : 150,wtyp: 'fer'))
         testUser2.unitcount = 2
@@ -160,15 +168,15 @@ class BootStrap {
 
         /*USER+Items+Units*/
         /*USER*/
-        
+        /*XYZ
 		def testUser3 = new User(username: 'paco', email: 'paco@gmail.com', enabled: true, password: 'p', gold:new Value()).save()
         def paco = User.findByUsername('paco')
         /*Map zuweisen*/
-        
+        /*XYZ
 		if(freemapfields())usertomap(paco)
         /*Items*/
 
-		
+		/*XYZ
         def ua21 = new com.bgame.Usritm()
         ua21.link(i2,paco).save()
         def ua22 = new com.bgame.Usritm()//UNITS MIT EINBEZIEHEN!!!!!
@@ -177,7 +185,7 @@ class BootStrap {
         def ua23 = new com.bgame.Usritm()
         ua23 = ua23.link(i6,paco).save()
         /*Units*/
-        
+        /*XYZ
 		testUser3.addToUnits(new Unit(name: 'Paco', main: true, ferexp: 12000, nahexp: 800, magexp : 150,wtyp: 'fer'))
         testUser3.addToUnits(new Unit(name: 'Cora', main: false,ferexp: 150, nahexp: 150, magexp : 13000,wtyp: 'mag'))
         testUser3.unitcount = 2
@@ -194,20 +202,20 @@ class BootStrap {
 
         /*USER+Items+Units*/
         /*USER*/
-        
+        /*XYZ
 		def testUser4 = new User(username: 'janis', email: 'janis@gmail.com', enabled: true, password: 'p', gold:new Value()).save()
         def janis = User.findByUsername('janis')
         /*Map zuweisen*/
-        
+        /*XYZ
 		if(freemapfields())usertomap(janis)
         /*Items*/
-        
+        /*XYZ
 		def ua31 = new com.bgame.Usritm()
         ua31.link(i1,janis).save()
         //def ua32 = new com.bgame.Usritm()
         //ua32.link(i4,janis).save()
         /*Units*/
-        
+        /*XYZ
 		testUser4.addToUnits(new Unit(name: 'Janis', main: true, ferexp: 750, nahexp: 9000, magexp : 150,wtyp: 'nah'))
         testUser4.addToUnits(new Unit(name: 'Jizzalot', main: false,ferexp: 8000, nahexp: 150, magexp : 150,wtyp: 'fer'))
         testUser4.unitcount = 2
@@ -221,13 +229,13 @@ class BootStrap {
 		
 		/*USER+Items+Units*/
 		/*USER*/
-
+/*XYZ
 		def testUser5 = new User(username: 'testo', email: 'testo@gmail.com',enabled: true, password: 'qwert123$', gold:new Value()).save()
 		def testo = User.findByUsername('testo')
-		/*Map zuweisen*/
+		/*Map zuweisen*//*XYZ
 		if(freemapfields())usertomap(testo)
 		/*Items*/
-		/*Units*/
+		/*Units*//*XYZ
 		testUser5.addToUnits(new Unit(name: 'Testo', main: true, ferexp: 150, nahexp: 150, magexp : 150,wtyp: 'nah'))
 		testUser5.unitcount = 1
 		testUser5.save(flush: true)
@@ -236,35 +244,23 @@ class BootStrap {
 		/*User Role zuweisung UNTEN!*/		
 		
 		
-        /*User Role zuweisung*/
-        
-		UserRole.create testUser, adminRole, true
-
-		UserRole.create testUser2, userRole, true
-		
-        UserRole.create testUser3, userRole, true
-        UserRole.create testUser4, userRole, true
-		
-		UserRole.create testUser5, userRole, true
-		
-		//weiter USER
 		/*USER+Items+Units*/
 		/*USER*/
-
+/*XYZ
 		def testUserjoe = new User(username: 'joe', email: 'joe@gmail.com', enabled: true, password: 'qwert123$', gold:new Value()).save()
 		def joe = User.findByUsername('joe')
 		/*Map zuweisen*/
-
+/*XYZ
 		if(freemapfields())usertomap(joe)
 		/*Items*/
 		/*Units*/
-
+/*XYZ
 		testUserjoe.addToUnits(new Unit(name: 'joe', main: true, ferexp: 150, nahexp: 150, magexp : 150,wtyp: 'nah'))
 		testUserjoe.unitcount = 1
 		testUserjoe.save(flush: true)
 		testUserjoe.units.each { it.recalcUnit() }
 		setMonsterArroundUser(joe)
-		/*User Role zuweisung*/
+		/*User Role zuweisung*//*XYZ
 		UserRole.create testUserjoe, userRole, true
 		/*next user*/
 		
@@ -272,51 +268,51 @@ class BootStrap {
 		
 		/*USER+Items+Units*/
 		/*USER*/
-		
+		/*XYZ
 		def testUserbubi = new User(username: 'bubi', email: 'bubi@gmail.com', enabled: true, password: 'p', gold:new Value()).save()
 		def bubi = User.findByUsername('bubi')
 		/*Map zuweisen*/
-		
+		/*XYZ
 		if(freemapfields())usertomap(bubi)
 		/*Items*/
 		/*Units*/
-		
+		/*XYZ
 		testUserbubi.addToUnits(new Unit(name: 'bubi', main: true, ferexp: 150, nahexp: 150, magexp : 150,wtyp: 'nah'))
 		testUserbubi.unitcount = 1
 		testUserbubi.save(flush: true)
 		testUserbubi.units.each { it.recalcUnit() }
 		setMonsterArroundUser(bubi)
 		/*User Role zuweisung*/
-		
+		/*XYZ
 		UserRole.create testUserbubi, userRole, true
 		/*next user*/
 		
 		
 		/*USER+Items+Units*/
 		/*USER*/
-		
+		/*XYZ
 		def testUserhans = new User(username: 'hans', email: 'hans@gmail.com', enabled: true, password: 'p', gold:new Value()).save()
 		def hans = User.findByUsername('hans')
 		/*Map zuweisen*/
-		
+		/*XYZ
 		if(freemapfields())usertomap(hans)
 		/*Items*/
 		/*Units*/
-		
+		/*XYZ
 		testUserhans.addToUnits(new Unit(name: 'hans', main: true, ferexp: 150, nahexp: 150, magexp : 150,wtyp: 'nah'))
 		testUserhans.unitcount = 1
 		testUserhans.save(flush: true)
 		testUserhans.units.each { it.recalcUnit() }
 		setMonsterArroundUser(hans)
 		/*User Role zuweisung*/
-		
+		/*XYZ
 		UserRole.create testUserhans, userRole, true
 		/*next user*/
 		//ende weitere USER
 		
 		
       //  assert User.count() == 5      
-		  assert Role.count() == 2
+	 //	  assert Role.count() == 2
       //  assert UserRole.count() == 5
 
     }

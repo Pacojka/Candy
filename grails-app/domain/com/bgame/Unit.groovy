@@ -1,36 +1,46 @@
 package com.bgame
 
 class Unit {
+	static final float ZUFRIEDENHEITS_KOSTEN_MULTIPLIKATOR = 0.2f
+	static final int BASIS_GESCHWINDIGKEIT = 20
+	static final int MAX_ZUFRIEDENHEIT = 1000
+	static final int MAX_WACHHEIT = 1000
+	
     String name
-    User user
+    
+	//aussehen
+	String teint ="empty.png"
+	String kleidung ="empty.png"
+	String variation ="empty.png"
+	
+	String ruestung ="empty.png"
+	String accessoire ="empty.png"
+	String kopfbedeckung ="empty.png"
+	String waffe ="empty.png"
+	
+	User user
     boolean main = false
     Date dateCreated
-    int gold = 25
-    MyEnum wtyp = "nah"
-    boolean away = false
-
-    int ferexp = 125
-    int nahexp = 125
-    int magexp = 125
-    int exp = 1
-    int ferlvl = 1
-    int ferToNext = 0
-    int nahlvl = 1
-    int nahToNext = 0
-    int maglvl = 1
-    int magToNext = 0
-    
-    int str = 1
-    int strToNext = 1
-    int ges = 1
-    int gesToNext = 1
-    int inz = 1
-    int inzToNext = 1
-
-    int curhp = 999
-    int curhppr = 100
-    int maxhp = 999
-    
+    int candy = 25
+    boolean unterwegs = false
+	boolean wach = true
+	
+	int staerke = 1
+	int intelligenz = 1
+	int coolness = 1
+	
+	int geschwindigkeit = BASIS_GESCHWINDIGKEIT
+	
+	int schaden = 1 			//staerke
+	int ausweichchance = 1		//intelligenz
+	int schdensReduktion = 1	//coolness
+	
+    int zufriedenheit = MAX_ZUFRIEDENHEIT
+    int zufriedenheitPr = 100
+  
+	int wachheit = MAX_WACHHEIT
+	int wachheitPr = 100
+  
     static hasMany = [useritems:Usritm]
     static belongsTo = User
     static constraints = {
@@ -41,66 +51,112 @@ class Unit {
 
     }
 
-    public enum MyEnum {
+	def getTeint(){
+		this.teint
+	}
 
-        nah("Nahkampf"),
-        fer("Fernkampf"),
-        mag("Magie")
+	def setTeint(wert){
+		this.teint = wert
+	}
+		
+	def getKleidung(){
+		this.kleidung
+	}
 
-        final String value
-        MyEnum (String value) {
-            this.value = value
-        }
-        String toString() { value }
-        String getKey() { name() }
+	def setKleidung(wert){
+		this.kleidung = wert
+	}
+	
+	def getVariation(){
+		this.variation
+	}
+
+	def setVariation(wert){
+		this.variation = wert
+	}
+	
+	def getRuestung(){
+		this.ruestung
+	}
+
+	def setRuestung(wert){
+		this.ruestung = wert
+	}
+		
+	def getAccessoire(){
+		this.accessoire
+	}
+
+	def setAccessoire(wert){
+		this.accessoire = wert
+	}
+	
+	def getKopfbedeckung(){
+		this.kopfbedeckung
+	}
+
+	def setKopfbedeckung(wert){
+		this.kopfbedeckung = wert
+	}
+		
+	def getWaffe(){
+		this.waffe
+	}	
+	
+	def setWaffe(wert){
+		this.waffe = wert
+	}
+	//SETTER FUER ALLE
+	
+	
+    def getUnterwegs(){
+        unterwegs
+    }
+        def setUnterwegs(){
+        unterwegs = true
+    }
+    def setZurueck(){
+        unterwegs = false
+    }
+    def toggleUnterwegs(){
+        unterwegs = !unterwegs
+    }
+    def zufriedenheitsKosten(){
+        def kosten
+        if(zufriedenheit == 0) kosten = (int)(zufriedenheitMax*ZUFRIEDENHEITS_KOSTEN_MULTIPLIKATOR)
+        else kosten = (int)(((maxhp-curhp)*ZUFRIEDENHEITS_KOSTEN_MULTIPLIKATOR/2))
+        return kosten
     }
 
-    //in isAway umbenennnnen! :D
-    def away(){
-        away
-    }
-        def setAway(){
-        away = true
-    }
-    def setBack(){
-        away = false
-    }
-    def toggleinbase(){
-        away = !away
-    }
-    def healcost(){
-        def cost
-        if(curhp == 0) cost = (int)(maxhp*0.2)
-        else cost = (int)(((maxhp-curhp)*0.1))
-        return cost
-    }
-
-    def heal(){
-        curhp = maxhp
+    def zufriedenheitMaxFuellen(){
+        zufriedenheit = zufriedenheitMax
         this.calchppr()
     }
 
-    def healx(value){
-        curhp += value
-        if (curhp > maxhp)curhp = maxhp
-        this.calchppr()
+	def zufriedenheitPrBerechnen(){
+		if (this.zufriedenheit <= 0){
+			this.zufriedenheitPr = 0
+		}
+		else if(this.zufriedenheit == this.zufriedenheitMax){
+			this.zufriedenheitPr = 100
+		}else{
+			this.zufriedenheitPr = this.zufriedenheit/(this.zufriedenheitMax /100)
+		}
+	}
+	
+    def zufriedenheitXFuellen(value){
+        zufriedenheit += value
+        if (zufriedenheit > zufriedenheitMax)zufriedenheit = zufriedenheitMax
+        this.zufriedenheitPrBerechnen()
     }
 
-    def dmg(){
-        def dmg = this.str
-        def min = 0
-        def max = 0
-        def random = new Random()
+    def berechneSchaden(){
+        def schaden = this.staerke
 
         items().each{
-            min += it.item.dmgmin
-            max += it.item.dmgmax
+            schaden += it.item.staerke
         }
-        if ((min+max)>0){
-            dmg += min
-            dmg += random.nextInt((max-min))
-        }
-        return dmg
+        return schaden
     }
 
 
@@ -108,149 +164,85 @@ class Unit {
         return this.useritems.collect{it}.sort{it.item.itemname}
     }
 
-    def addgold(value){
-        gold += value
+    def addCandy(value){
+        this.candy += value
     }
 
-    def notequipteditemtypes(){
-        def haswpn = haswpn()
-        def hashlm = hashlm()
-        def hasamu = hasamu()
-        def hasrust = hasrust()
-        def hashnd = hashnd()
-        def hasbns = hasbns()
-        def hasstf = hasstf()
+    def verfuegbareItems(){
+        def hasAcc = hasAcc()
+        def hasKpf = hasKpf()
+        def hasRus = hasRus()
+        def hasSpc = hasSpc()
+        def hasWaf = hasWaf()
         def result = []
         user.uneqitems().each{
             switch ( it.item.item_type.getKey() ) {
 
-                case "hlm":
-                if(!hashlm)result << it
+                case "acc":
+                if(!hasAcc)result << it
                 break
-                case "amu":
-                if(!hasamu)result << it
+                case "kpf":
+                if(!hasKpf)result << it
                 break
-                case "rust":
-                if(!hasrust)result << it
+                case "rus":
+                if(!hasRus)result << it
                 break
-                case "hnd":
-                if(!hashnd)result << it
+                case "waf":
+                if(!hasWaf)result << it
                 break
-                case "bns":
-                if(!hasbns)result << it
-                break
-                case "stf":
-                if(!hasstf)result << it
-                break
-
-                default:
-                if(!haswpn)result << it
             }
         }
         result
     }
-  
-    def haswpn(){
-        def rueckgabe = false
-        this.items().each{
-            if ((it.item.item_type.getKey() == "nah") || (it.item.item_type.getKey() == "fer")|| (it.item.item_type.getKey() == "mag")){
-                rueckgabe = true
-            }
-        }
-        rueckgabe
-    }
-    def setwtype(newWtype){
-        //    System.out.println("\n so hier wegen setWtype\nnewWtype: "+newWtype+"\n gerade wtype: "+this.wtyp.getKey())
-        if (newWtype != this.wtyp.getKey()){
-            this.wtyp = newWtype
-        }
-    }
 
-    def hashlm(){
+	
+    def hasAcc(){
         def rueckgabe = false
         this.items().each{
-            if (it.item.item_type.getKey() == "hlm"){
+            if (it.item.item_type.getKey() == "acc"){
                 rueckgabe = true
             }
         }
         rueckgabe
     }
 
-    def hasamu(){
+    def hasKpf(){
         def rueckgabe = false
         this.items().each{
-            if (it.item.item_type.getKey() == "amu"){
+            if (it.item.item_type.getKey() == "kpf"){
                 rueckgabe = true
             }
         }
         rueckgabe
     }
 
-    def hasrust(){
+    def hasRus(){
         def rueckgabe = false
         this.items().each{
-            if (it.item.item_type.getKey() == "rust"){
+            if (it.item.item_type.getKey() == "rus"){
                 rueckgabe = true
             }
         }
         rueckgabe
     }
 
-    def hashnd(){
+    def hasWaf(){
         def rueckgabe = false
         this.items().each{
-            if (it.item.item_type.getKey() == "hnd"){
+            if (it.item.item_type.getKey() == "waf"){
                 rueckgabe = true
             }
         }
         rueckgabe
-    }
-
-    def hasbns(){
-        def rueckgabe = false
-        this.items().each{
-            if (it.item.item_type.getKey() == "bns"){
-                rueckgabe = true
-            }
-        }
-        rueckgabe
-    }
-
-    def hasstf(){
-        def rueckgabe = false
-        this.items().each{
-            if (it.item.item_type.getKey() == "stf"){
-                rueckgabe = true
-            }
-        }
-        rueckgabe
-    }
-
-    def recalcwpntype(){
-        def rueckgabe = null
-        this.items().each{
-            if ((it.item.item_type.getKey() == "nah") || (it.item.item_type.getKey() == "fer")|| (it.item.item_type.getKey() == "mag")){
-                rueckgabe = it.item.item_type.getKey()
-            }
-        }
-        if(!rueckgabe){rueckgabe = "nah"}
-        if(wtyp != rueckgabe)wtyp = rueckgabe
-
     }
 	
-	def getlvl(exp){
-		def expToNextlvl = 100
-		def expTocurrlvl = 0
-		def i = 1
-		for (i; exp > expToNextlvl;++i){
-			expTocurrlvl = expToNextlvl
-			expToNextlvl+=25*(i*i)
-			// System.out.println("\nfolgendes:\n exptoCurr:"+expTocurrlvl+" \nexptoNext:"+expToNextlvl+" \nund exp:"+exp)
-		}
-		((1-(expToNextlvl-exp)/(expToNextlvl-expTocurrlvl))+(i-2))
-	}
-
+	
     def recalcUnit() {
+		
+		this.schaden = 1 			//staerke
+		this.ausweichchance = 1		//intelligenz
+		this.schdensReduktion = 1	//coolness
+		/*
 		if (this.curhp <= 0 && this.main)this.curhp = 1
         def number = getlvl(this.ferexp)
         if((int)number != this.ferlvl)this.ferlvl = (int)number
@@ -289,20 +281,11 @@ class Unit {
             if (this.curhp < 0) this.curhp = 0
             this.calchppr()
         }
-        
+        */
 
     }
-    def calchppr(){
-        if (this.curhp <= 0){
-            this.curhppr = 0
-        }
-        else if(this.curhp == this.maxhp){
-            this.curhppr = 100
-        }else{
-            this.curhppr = this.curhp/(this.maxhp /100)
-        }
-    }
 
+/*
 	def getmapexp(){
 		def mapexp = 0
 		if((magexp <= ferexp) && (magexp <= nahexp)){
@@ -311,7 +294,7 @@ class Unit {
 			mapexp = (magexp + nahexp)
 			}else{mapexp = (magexp + ferexp)}
 		}
-	
+	*/
     String toString(){
         return "${name}"
     }

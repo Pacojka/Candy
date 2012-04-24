@@ -12,9 +12,9 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
 	int unitcount = 0
-	Value gold
+	Value candy
 	static hasMany = [useritems:Usritm, units:Unit,fields:Map, actions:Actionstack, messages:Message]
-	static embedded = ['gold']
+	static embedded = ['candy']
 
 	String toString(){
 		return "${username}"

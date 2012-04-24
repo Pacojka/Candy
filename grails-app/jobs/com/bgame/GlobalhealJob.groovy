@@ -9,13 +9,15 @@ class GlobalhealJob {
     }
 
     def execute() {
+		/*
         def healthisunits = Unit.withCriteria {
             lt("curhppr", 100)
             and{
                 gt("curhp",0)
             }
+            
         }
-
+*/
        def cal = Calendar.instance
        def H = cal.get(Calendar.HOUR)
        def M = cal.get(Calendar.MINUTE)
@@ -23,9 +25,11 @@ class GlobalhealJob {
 
         
         //System.out.println("HEAL ALL THE UNITS!!!!!!!! ${H}:${M}:${S}")
-        healthisunits.each{
+       /* 
+	   healthisunits.each{
             it.curhp ++
             it.calchppr()
         }
+        */
     }
 }
